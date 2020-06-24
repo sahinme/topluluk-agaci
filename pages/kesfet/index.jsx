@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import { connect } from "react-redux";
 import CommunityList from "../../components/List";
+import MainLayout from "../../components/mainLayout";
 import {
   getCategoriesRequest,
   getComsByCategoryRequest,
 } from "../../lib/category/actions";
 import Categories from "../../components/Categories";
 import { getAllCommunitiesRequest } from "../../lib/community/actions";
-import { Helmet } from "react-helmet";
 
 function Explore(props) {
   const [category, setCategory] = useState(null);
@@ -26,15 +26,7 @@ function Explore(props) {
 
   const { categories, communities } = props;
   return (
-    <div>
-      <Helmet>
-        <title>Keşfet | Saalla </title>
-        <meta charSet="utf-8" />
-        <meta
-          name="description"
-          content="Saalla, insanların ilgi alanlarına göre sallayabildikleri topluluk ağıdır. İlgilendiğiniz toplulukları bulun ve çevrimiçi bir topluluğun parçası olun!"
-        />
-      </Helmet>
+    <MainLayout>
       <Container style={{ marginTop: "6rem" }}>
         <Row style={{ marginTop: "1rem", flexWrap: "wrap-reverse" }}>
           <Col style={{ paddingBottom: "10px" }} xs={12} md={8}>
@@ -53,7 +45,7 @@ function Explore(props) {
           </Col>
         </Row>
       </Container>
-    </div>
+    </MainLayout>
   );
 }
 

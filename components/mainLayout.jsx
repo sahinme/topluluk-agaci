@@ -32,11 +32,7 @@ function MainLayout(props) {
       {loader.loading && <Loader />}
       {props.children}
       <div className="icon-bar">
-        <a
-          onClick={() => setOpen(!open)}
-          href="javascript:void(0)"
-          className="facebook"
-        >
+        <a onClick={() => setOpen(!open)} className="facebook">
           <EmailIcon />
         </a>
       </div>

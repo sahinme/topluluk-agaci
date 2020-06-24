@@ -162,7 +162,10 @@ function PrimarySearchAppBar(props) {
   const classes = useStyles();
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
-
+  const [auth, setAuth] = React.useState({
+    data: { token: null, user: null },
+    error: null,
+  });
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [user, setUser] = React.useState(false);
@@ -170,20 +173,24 @@ function PrimarySearchAppBar(props) {
 
   useEffect(() => {
     const user = readLocalStorage("user");
+    const token = readLocalStorage("token");
     if (user) {
       setUser(user);
+    }
+    if (user && token) {
+      const payload = { data: { user, token }, error: null };
+      setAuth(payload);
     }
     const {
       getUserCommunities,
       getUnReads,
       ofModerators,
-      auth,
       getUnReadMessages,
     } = props;
     getUserCommunities({});
     getUnReads();
     getUnReadMessages();
-    auth.data.user && auth.data.user.isModerator && ofModerators();
+    user && user.isModerator && ofModerators();
   }, []);
 
   const handleDrawerOpen = () => {
@@ -264,7 +271,7 @@ function PrimarySearchAppBar(props) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      {props.auth.data.token ? (
+      {auth.data.token ? (
         <span>
           {" "}
           <MenuItem onClick={() => router.push("/chat")}>
@@ -367,7 +374,7 @@ function PrimarySearchAppBar(props) {
               labelField="name"
             />
           </div>
-          {props.auth.data.token && (
+          {auth.data.token && (
             <ComboBox
               style={{ width: "50%" }}
               onChange={handleSelectChange}
@@ -379,7 +386,7 @@ function PrimarySearchAppBar(props) {
           <div className={classes.grow} />
 
           <div className={classes.sectionDesktop}>
-            {props.auth.data.token ? (
+            {auth.data.token ? (
               <React.Fragment>
                 <IconButton
                   onClick={() => router.push("/chat")}
@@ -467,13 +474,16 @@ function PrimarySearchAppBar(props) {
 }
 
 PrimarySearchAppBar.getInitialProps = async ({ isServer, store }) => {
+  if (localStorage) {
+    console.log("local storage", localStorage);
+  }
+  console.log("header");
   await store.execSagaTasks(isServer, (dispatch) => {
     dispatch(getUserCommunitiesRequest());
     dispatch(getCountRequest());
     dispatch(getUnreadsRequest());
     //store.getState(). dispatch(ofModeratorsRequest());
   });
-  return { auth: store.getState().auth };
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -486,7 +496,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+  //auth: state.auth,
   userCommunities: state.userCommunities.data,
   ownCommunities: state.ofModerators.data,
   unReads: state.unReads.data,

@@ -135,27 +135,6 @@ function Home(props) {
   );
 }
 
-/* Home.getInitialProps = async ({ isServer, store }) => {
-  await store.execSagaTasks(isServer, (dispatch) => {
-    const auth = store.getState().auth;
-    if (auth.data.token) {
-      dispatch(
-        getHomePostsRequest({ pageNumber: 1, pageSize: 6, loderStart: true })
-      );
-    } else {
-      console.log("home burasi");
-      dispatch(
-        getUnauthorizedPostsRequest({
-          pageNumber: 1,
-          pageSize: 6,
-          loderStart: true,
-        })
-      );
-    }
-  });
-  return {};
-}; */
-
 const mapDispatchToProps = (dispatch) => ({
   getPopularsCommunity: () => dispatch(getPopularCommnityListRequest({})),
   clearStore: (name) => dispatch(clearStoreRequest(name)),

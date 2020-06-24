@@ -89,10 +89,10 @@ const renderBars = (classes, slug, name, memberCount, logoPath) => {
 function PopularTags(props) {
   const classes = useStyles();
   const { communities } = props;
-  useEffect(() => {
+  /*  useEffect(() => {
     const { getPopularsCom } = props;
     getPopularsCom();
-  }, []);
+  }, []); */
   return (
     <div className={classes.root}>
       <Paper className={classes.tag_card}>
@@ -119,14 +119,6 @@ function PopularTags(props) {
     </div>
   );
 }
-
-/* PopularTags.getInitialProps = async ({ isServer, store }) => {
-  console.log("popular tags");
-  await store.execSagaTasks(isServer, (dispatch) => {
-    dispatch(getPopularCommnityListRequest());
-  });
-  return {};
-}; */
 
 const mapDispatchToProps = (dispatch) => ({
   getPopularsCom: () => dispatch(getPopularCommnityListRequest({})),

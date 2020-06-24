@@ -5,6 +5,7 @@ import { Row, Col, Container } from "react-bootstrap";
 import PopularTags from "../components/PopularTags";
 import TabPanelList from "../components/tabPanel";
 import ComboBox from "../components/AutoComplete";
+import MainLayout from "../components/mainLayout";
 import { getUserCommunitiesRequest } from "../lib/community/actions";
 import { createPostRequest } from "../lib/posts/actions";
 import { getParameterByName } from "../lib/helpers";
@@ -39,7 +40,7 @@ function CreatePost(props) {
   } = props;
   console.log(props);
   return (
-    <div>
+    <MainLayout>
       <Container style={{ marginTop: "6rem" }}>
         <Row style={{ marginTop: "1rem" }}>
           <Col
@@ -71,7 +72,7 @@ function CreatePost(props) {
           </Col>
         </Row>
       </Container>
-    </div>
+    </MainLayout>
   );
 }
 

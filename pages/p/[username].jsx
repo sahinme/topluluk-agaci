@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { Row, Col, Container } from "react-bootstrap";
 import ProfileCard from "../../components/ProfileCard";
 import SocialCard from "../../components/SocialCard";
+import MainLayout from "../../components/mainLayout";
 import { getUserProfile } from "../../lib/users/actions";
 import { connect } from "react-redux";
 import {
@@ -36,7 +37,7 @@ function Profile(props) {
   };
 
   return (
-    <div>
+    <MainLayout>
       {profile && <Helmet title={profile.username} />}
       <Container style={{ marginTop: "8rem" }}>
         <Row style={{ flexWrap: "wrap-reverse" }}>
@@ -94,7 +95,7 @@ function Profile(props) {
           </Col>
         </Row>
       </Container>
-    </div>
+    </MainLayout>
   );
 }
 

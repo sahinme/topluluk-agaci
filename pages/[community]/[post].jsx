@@ -2,6 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { Row, Col, Container } from "react-bootstrap";
 import PopularTags from "../../components/PopularTags";
+import MainLayout from "../../components/mainLayout";
 import { getPostDetailRequest, votePostRequest } from "../../lib/posts/actions";
 import { connect } from "react-redux";
 import { Helmet } from "react-helmet";
@@ -25,7 +26,7 @@ function PostDetail(props) {
 
   const { post } = props;
   return (
-    <div>
+    <MainLayout>
       {/*  {post && post.community && (
         <Helmet>
           <title>
@@ -81,7 +82,7 @@ function PostDetail(props) {
           </Col>
         </Row>
       </Container>
-    </div>
+    </MainLayout>
   );
 }
 

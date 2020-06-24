@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-next-router'
 import withRedux from 'next-redux-wrapper';
 import makeStore from '../lib/store';
-import MainLayout from '../components/mainLayout';
 
 import "react-image-lightbox/style.css";
 import "../components/Loader/index.css";
@@ -28,9 +27,7 @@ class MyApp extends App {
     return (
       <Provider store={store}>
         <ConnectedRouter>
-          <MainLayout>
-            <Component {...pageProps} />
-          </MainLayout>
+          <Component {...pageProps} />
         </ConnectedRouter>
       </Provider>
     );

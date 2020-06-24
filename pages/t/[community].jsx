@@ -4,6 +4,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { connect } from "react-redux";
 import { Paper } from "@material-ui/core";
 import InfoCard from "../../components/InfoCard";
+import MainLayout from "../../components/mainLayout";
 import {
   getCommunityRequest,
   getCommunityPostsRequest,
@@ -67,20 +68,7 @@ function CommunityPage(props) {
   const { community, posts, auth } = props;
   return (
     community && (
-      <div>
-        <Helmet>
-          <title>{community.name + " topluluğu | Saalla "}</title>
-          <meta charSet="utf-8" />
-          <meta
-            name="description"
-            content={
-              community.description !== "" &&
-              community.description !== null &&
-              community.description.slice(0, 100)
-            }
-          />
-          <link href={`https://saalla.com/t/${community.slug}`} />
-        </Helmet>
+      <MainLayout>
         <Row style={{ marginTop: "4rem", height: "240px" }}>
           <img
             className="com_cover_image"
@@ -164,7 +152,7 @@ function CommunityPage(props) {
             </Col>
           </Row>
         </Container>
-      </div>
+      </MainLayout>
     )
   );
 }

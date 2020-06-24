@@ -6,6 +6,7 @@ import { Row, Col, Container } from "react-bootstrap";
 import SocialCard from "../../components/SocialCard";
 import { getUserByUsername } from "../../lib/users/actions";
 import UserCard from "../../components/User/userCard";
+import MainLayout from "../../components/mainLayout";
 import { getUserPostsRequest, votePostRequest } from "../../lib/posts/actions";
 import {
   getConversationsRequest,
@@ -68,17 +69,12 @@ function User(props) {
   };
 
   return (
-    <div>
+    <MainLayout>
       {user && (
         <Helmet>
           <title>{user.username + " | Saalla"}</title>
           <meta charSet="utf-8" />
-          <meta
-            name="description"
-            content={
-              user.bio !== "" && user.bio !== null && user.bio.slice(0, 100)
-            }
-          />
+          <meta name="description" content={user.bio} />
           <link href={`https://saalla.com/${user.username}`} />
         </Helmet>
       )}
@@ -140,7 +136,7 @@ function User(props) {
           onClose={() => setOpen(false)}
         />
       </Container>
-    </div>
+    </MainLayout>
   );
 }
 
