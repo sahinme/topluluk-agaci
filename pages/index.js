@@ -15,19 +15,19 @@ const mapDispatchToProps = dispatch => ({
 
 class Index extends React.Component {
   static async getInitialProps({ isServer, store }) {
-    await store.execSagaTasks(isServer, (dispatch) => {
-      dispatch(getCategoriesRequest())
-      const auth = store.getState().auth;
-      if (auth.data.token) {
-        dispatch(getHomePostsRequest({ pageNumber: 1, pageSize: 6, loderStart: true }));
-      } else {
-        dispatch(getUnauthorizedPostsRequest({
-          pageNumber: 1,
-          pageSize: 6,
-          loderStart: true,
-        }))
-      }
-    });
+    /*  await store.execSagaTasks(isServer, (dispatch) => {
+       dispatch(getCategoriesRequest())
+       const auth = store.getState().auth;
+       if (auth.data.token) {
+         dispatch(getHomePostsRequest({ pageNumber: 1, pageSize: 6, loderStart: true }));
+       } else {
+         dispatch(getUnauthorizedPostsRequest({
+           pageNumber: 1,
+           pageSize: 6,
+           loderStart: true,
+         }))
+       }
+     }); */
     return {};
   }
 
