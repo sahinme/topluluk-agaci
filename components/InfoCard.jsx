@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import Link from "next/Link";
+import Link from "next/link";
 import { Row, Col } from "react-bootstrap";
 
 import { Divider, Icon, Button } from "@material-ui/core";
