@@ -16,6 +16,7 @@ import SocialCard from "../SocialCard";
 import PopularTags from "../PopularTags";
 import CreatePostTab from "../CreatePostTab";
 import CustomizedSnackbars from "../Snackbar";
+import { readLocalStorage } from "../../lib/helpers";
 
 function Home(props) {
   const [pageNumber, setNumber] = useState(1);
@@ -35,7 +36,12 @@ function Home(props) {
     const newNumber = pageNumber + 1;
     const { getUnauthorizedPosts, getHomePosts } = props;
     props.auth && props.auth.token
-      ? getHomePosts({ pageNumber: newNumber, pageSize: 6, loderStart: false })
+      ? getHomePosts({
+          pageNumber: newNumber,
+          pageSize: 6,
+          loderStart: false,
+          token: readLocalStorage("token"),
+        })
       : getUnauthorizedPosts({
           pageNumber: newNumber,
           pageSize: 6,

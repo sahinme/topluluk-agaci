@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { Helmet } from "react-helmet";
 /* import { htmlToText } from "../../lib/helpers";
  */ import PostDetailCard from "../../components/PostDetailCard";
+import { parseCookies } from "nookies";
 
 function PostDetail(props) {
   /* useEffect(() => {
@@ -62,7 +63,7 @@ function PostDetail(props) {
                 img={post.contentPath}
                 createdDate={post.createdDateTime}
                 content={post.content}
-                // contentType={post.contentType}
+                contentType={post.contentType}
                 community={post.community}
                 comments={post.comments}
                 user={post.userInfo}
@@ -86,10 +87,16 @@ function PostDetail(props) {
   );
 }
 
-PostDetail.getInitialProps = async ({ isServer, store, query }) => {
-  await store.execSagaTasks(isServer, (dispatch) => {
-    const { community, post } = query;
-    dispatch(getPostDetailRequest({ slug: post, loaderStart: true }));
+PostDetail.getInitialProps = async (ctx) => {
+  await ctx.store.execSagaTasks(ctx.isServer, (dispatch) => {
+    const { post } = ctx.query;
+    dispatch(
+      getPostDetailRequest({
+        slug: post,
+        loaderStart: true,
+        token: parseCookies(ctx).token,
+      })
+    );
   });
   return {};
 };

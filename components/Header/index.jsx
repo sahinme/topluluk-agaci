@@ -181,7 +181,7 @@ function PrimarySearchAppBar(props) {
       const payload = { data: { user, token }, error: null };
       setAuth(payload);
     }
-    const {
+    /*  const {
       getUserCommunities,
       getUnReads,
       ofModerators,
@@ -189,8 +189,8 @@ function PrimarySearchAppBar(props) {
     } = props;
     getUserCommunities({});
     getUnReads();
-    getUnReadMessages();
-    user && user.isModerator && ofModerators();
+    getUnReadMessages(); */
+    //user && user.isModerator && ofModerators();
   }, []);
 
   const handleDrawerOpen = () => {
@@ -472,19 +472,6 @@ function PrimarySearchAppBar(props) {
     </div>
   );
 }
-
-PrimarySearchAppBar.getInitialProps = async ({ isServer, store }) => {
-  if (localStorage) {
-    console.log("local storage", localStorage);
-  }
-  console.log("header");
-  await store.execSagaTasks(isServer, (dispatch) => {
-    dispatch(getUserCommunitiesRequest());
-    dispatch(getCountRequest());
-    dispatch(getUnreadsRequest());
-    //store.getState(). dispatch(ofModeratorsRequest());
-  });
-};
 
 const mapDispatchToProps = (dispatch) => ({
   logOut: () => dispatch(logOut()),

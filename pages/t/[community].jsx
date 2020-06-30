@@ -17,6 +17,7 @@ import { clearStoreRequest } from "../../lib/commonActions";
 import CreatePostTab from "../../components/CreatePostTab";
 import { Helmet } from "react-helmet";
 import SocialCard from "../../components/SocialCard";
+import { parseCookies } from "nookies";
 
 function CommunityPage(props) {
   const [pageNumber, setNumber] = useState(1);
@@ -157,17 +158,17 @@ function CommunityPage(props) {
   );
 }
 
-CommunityPage.getInitialProps = async ({ isServer, store, query }) => {
-  await store.execSagaTasks(isServer, (dispatch) => {
-    const { community } = query;
-    console.log("query bu:", community);
-    dispatch(getCommunityRequest({ slug: community, loaderStart: true }));
+CommunityPage.getInitialProps = async (ctx) => {
+  await ctx.store.execSagaTasks(ctx.isServer, (dispatch) => {
+    const { community } = ctx.query;
+    dispatch(getCommunityRequest({ slug: community, loaderStart: true,token:parseCookies(ctx).token }));
     dispatch(
       getCommunityPostsRequest({
         pageNumber: 1,
         pageSize: 6,
         slug: community,
         loaderStart: true,
+        token:parseCookies(ctx).token
       })
     );
   });
