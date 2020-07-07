@@ -8,7 +8,6 @@ import { connect } from "react-redux";
 import { Helmet } from "react-helmet";
 /* import { htmlToText } from "../../lib/helpers";
  */ import PostDetailCard from "../../components/PostDetailCard";
-import { parseCookies } from "nookies";
 
 function PostDetail(props) {
   const router = useRouter();
