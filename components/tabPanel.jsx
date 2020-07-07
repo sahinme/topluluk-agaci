@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import "core-js-pure/stable";
+import "regenerator-runtime/runtime";
 import { DropzoneArea } from "material-ui-dropzone";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -179,8 +181,6 @@ export default function TabPanelList(props) {
       >
         <Editor
           init={{
-            language: "tr_TR",
-            language_url: "/langs/tr_TR.js",
             height: 300,
             menubar: true,
             plugins: [
@@ -205,8 +205,6 @@ export default function TabPanelList(props) {
       >
         <Editor
           init={{
-            language: "tr_TR",
-            language_url: "/langs/tr_TR.js",
             height: 250,
             menubar: true,
             plugins: [
@@ -243,8 +241,6 @@ export default function TabPanelList(props) {
       >
         <Editor
           init={{
-            language: "tr_TR",
-            language_url: "/langs/tr_TR.js",
             height: 250,
             menubar: true,
             plugins: [

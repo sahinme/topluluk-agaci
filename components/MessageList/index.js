@@ -4,9 +4,6 @@ import ToolbarButton from '../ToolbarButton';
 import Message from '../Message';
 import moment from 'moment';
 
-import './MessageList.css';
-
-
 export default function MessageList(props) {
   const { messages, user, conversation } = props;
 

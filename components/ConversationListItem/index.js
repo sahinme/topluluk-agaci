@@ -2,7 +2,6 @@ import React from 'react';
 import moment from "moment";
 import imgIcon from "../ProfileCard/images/user.png"
 
-import './ConversationListItem.css';
 
 export default function ConversationListItem(props) {
 

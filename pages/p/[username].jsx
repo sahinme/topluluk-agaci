@@ -18,6 +18,12 @@ import { Helmet } from "react-helmet";
 function Profile(props) {
   const { profile, profilePosts } = props;
 
+  useEffect(() => {
+    const { getProfile, getProfilePosts } = props;
+    getProfile({});
+    getProfilePosts();
+  }, []);
+
   const router = useRouter();
 
   const handleSubmit = (values) => {
@@ -68,6 +74,7 @@ function Profile(props) {
                   linkUrl={item.linkUrl}
                   voteCount={item.voteCount}
                   comments={item.comments}
+                  userPostVote={item.userPostVote}
                   user={
                     profile && {
                       profileImagePath: profile.profileImagePath,
@@ -98,14 +105,6 @@ function Profile(props) {
     </MainLayout>
   );
 }
-
-Profile.getInitialProps = async ({ isServer, store, query }) => {
-  await store.execSagaTasks(isServer, (dispatch) => {
-    dispatch(getProfilePostsRequest());
-    dispatch(getProfileRequest());
-  });
-  return {};
-};
 
 const mapDispatchToProps = (dispatch) => ({
   getProfile: () => dispatch(getProfileRequest({})),

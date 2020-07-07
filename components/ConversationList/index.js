@@ -3,12 +3,15 @@ import ConversationSearch from '../ConversationSearch';
 import ConversationListItem from '../ConversationListItem';
 import Toolbar from '../Toolbar';
 import ToolbarButton from '../ToolbarButton';
-import './ConversationList.css';
 import { getConversationsRequest, getConversationDetailRequest } from '../../lib/conversation/actions';
 import { connect } from 'react-redux';
 
 function ConversationList(props) {
-  const { conversations, auth, getConversationDetail, selectedConversation } = props;
+  const { conversations, auth, getConversationDetail, selectedConversation, getConversations } = props;
+
+  useEffect(() => {
+    getConversations();
+  }, [])
 
   const onSelect = (id) => {
     getConversationDetail({ id })
@@ -42,15 +45,10 @@ function ConversationList(props) {
   );
 }
 
-ConversationList.getInitialProps = async ({ isServer, store }) => {
-  await store.execSagaTasks(isServer, (dispatch) => {
-    dispatch(getConversationsRequest());
-  });
-  return {};
-};
-
 const mapDispatchToProps = (dispatch) => ({
+  getConversations: () => dispatch(getConversationsRequest({})),
   getConversationDetail: payload => dispatch(getConversationDetailRequest(payload)),
+  markAsRead: payload => dispatch(markAsReadRequest(payload))
 });
 
 const mapStateToProps = (state) => ({

@@ -4,6 +4,7 @@ import { getCategoriesRequest } from '../lib/category/actions';
 import Home from "../components/Layout"
 import MainLayout from "../components/mainLayout";
 
+
 const mapStateToProps = state => ({
   categories: state.categories,
 });

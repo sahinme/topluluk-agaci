@@ -120,29 +120,26 @@ function Home(props) {
               hasMore={home && home.hasNext}
               loader={<Loader overlay={false} />}
             >
-              {home &&
-                home.results &&
-                home.results.length > 0 &&
-                home.results.map((item) => (
-                  <SocialCard
-                    key={item.id}
-                    pSlug={item.slug}
-                    id={item.id}
-                    img={item.mediaContentPath}
-                    createdDate={item.createdDateTime}
-                    content={item.content}
-                    contentType={item.contentType}
-                    community={item.community}
-                    pageNumber={item.pageNumber}
-                    comments={item.comments}
-                    user={item.user}
-                    linkUrl={item.linkUrl}
-                    voteCount={item.voteCount}
-                    userPostVote={item.userPostVote}
-                    onVote={onVote}
-                    profilePosts={false}
-                  />
-                ))}
+              {home.results.map((item) => (
+                <SocialCard
+                  key={item.id}
+                  pSlug={item.slug}
+                  id={item.id}
+                  img={item.mediaContentPath}
+                  createdDate={item.createdDateTime}
+                  content={item.content}
+                  contentType={item.contentType}
+                  community={item.community}
+                  pageNumber={item.pageNumber}
+                  comments={item.comments}
+                  user={item.user}
+                  linkUrl={item.linkUrl}
+                  voteCount={item.voteCount}
+                  userPostVote={item.userPostVote}
+                  onVote={onVote}
+                  profilePosts={false}
+                />
+              ))}
             </InfiniteScroll>
           </Col>
           <Col style={{ paddingBottom: "10px" }} xs={12} md={4}>

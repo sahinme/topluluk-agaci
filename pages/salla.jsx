@@ -14,14 +14,16 @@ function CreatePost(props) {
   const [community, setCommunity] = useState(null);
   useEffect(() => {
     const {
+      getUserCommunities,
       communities,
       router: { query },
     } = props;
-    /*  if (query && query.is) {
+    getUserCommunities({});
+    if (query && query.is) {
       setCommunity(
         communities.find((x) => x.slug === getParameterByName("is", query.is))
       );
-    } */
+    }
   }, []);
 
   const handleChange = (option) => {

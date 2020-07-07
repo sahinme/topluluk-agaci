@@ -190,7 +190,6 @@ function PrimarySearchAppBar(props) {
     getUserCommunities();
     getUnReads();
     getUnReadMessages();
-    debugger;
     user && user.isModerator && ofModerators();
   }, []);
 

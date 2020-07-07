@@ -15,6 +15,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './custom.css';
 import './profile.css'
 import './candles.scss'
+import '../components/Compose/Compose.css';
+import '../components/ConversationList/ConversationList.css';
+import '../components/ConversationListItem/ConversationListItem.css';
+import '../components/ConversationSearch/ConversationSearch.css'
+import '../components/Message/Message.css'
+import '../components/MessageList/MessageList.css'
+import '../components/Messenger/Messenger.css'
+import '../components/Toolbar/Toolbar.css'
+import '../components/ToolbarButton/ToolbarButton.css'
+
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {

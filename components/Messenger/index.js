@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ConversationList from '../ConversationList';
 import MessageList from '../MessageList';
-import { compose } from "lodash/fp";
 import { Row, Col, Container } from "react-bootstrap";
-import './Messenger.css';
 import SendIcon from '@material-ui/icons/Send';
 import PrimarySearchAppBar from "../Header"
 import { connect } from 'react-redux';
 import { TextField, IconButton } from '@material-ui/core';
-import { sendMessageRequest } from '../../redux/conversation/actions';
-import { withRouter } from 'react-router-dom';
+import { sendMessageRequest } from '../../lib/conversation/actions';
 
 function Messenger(props) {
   const { conversation, auth } = props;
@@ -87,7 +84,5 @@ const mapStateToProps = (state) => ({
   auth: state.auth.data
 });
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withRouter
-)(Messenger);
+export default
+  connect(mapStateToProps, mapDispatchToProps)(Messenger);

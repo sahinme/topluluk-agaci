@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Helmet } from "react-helmet";
-import { withRouter, useRouter } from "next/router";
+import Router, { withRouter } from "next/router";
 import { Row, Col, Container } from "react-bootstrap";
 import SocialCard from "../../components/SocialCard";
 import { getUserByUsername } from "../../lib/users/actions";
@@ -17,22 +17,21 @@ import { isLogged } from "../../lib/helpers";
 
 function User(props) {
   const { user, posts, conversations } = props;
-  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [text, setText] = useState(null);
   const [newMessageUser, setUser] = useState({});
 
   const onSendMessage = () => {
     if (!isLogged()) {
-      router.push("/giris-yap");
+      Router.push("/giris-yap");
       return;
     }
     let isExist = false;
     conversations.map((item) => {
       if (item.receiver.id == user.id || item.sender.id == user.id) {
-        router.push({
+        Router.push({
           pathname: "/chat",
-          state: {
+          query: {
             userId: user.id,
             conversationId: item.id,
             username: user.username,

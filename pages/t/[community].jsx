@@ -18,6 +18,7 @@ import CreatePostTab from "../../components/CreatePostTab";
 import { Helmet } from "react-helmet";
 import SocialCard from "../../components/SocialCard";
 import { parseCookies } from "nookies";
+import { readLocalStorage } from "../../lib/helpers";
 
 function CommunityPage(props) {
   const [pageNumber, setNumber] = useState(1);
@@ -28,14 +29,16 @@ function CommunityPage(props) {
   }, []);
 
   const element = () => {
-    const { community, auth } = props;
-    if (!auth.token) return <ActionButton isLogged={false} />;
+    const { community } = props;
+    const token = readLocalStorage("token");
+    const user = readLocalStorage("user");
+    if (!token) return <ActionButton isLogged={false} />;
     let isJoined = false;
     community &&
       community.members &&
       community.members.length > 0 &&
       community.members.map((member) => {
-        if (member.username == auth.user.username) {
+        if (member.username == user.username) {
           isJoined = true;
         }
       });
@@ -66,7 +69,7 @@ function CommunityPage(props) {
     setNumber(newNumber);
   };
 
-  const { community, posts, auth } = props;
+  const { community, posts } = props;
   return (
     community && (
       <MainLayout>
@@ -100,7 +103,10 @@ function CommunityPage(props) {
         <Container style={{ marginTop: "1rem" }}>
           <Row>
             <Col xs={12} md={12}>
-              <CreatePostTab slug={community.slug} user={auth.user} />
+              <CreatePostTab
+                slug={community.slug}
+                user={readLocalStorage("user")}
+              />
             </Col>
           </Row>
           <Row style={{ marginTop: "1rem" }}>
@@ -161,14 +167,20 @@ function CommunityPage(props) {
 CommunityPage.getInitialProps = async (ctx) => {
   await ctx.store.execSagaTasks(ctx.isServer, (dispatch) => {
     const { community } = ctx.query;
-    dispatch(getCommunityRequest({ slug: community, loaderStart: true,token:parseCookies(ctx).token }));
+    dispatch(
+      getCommunityRequest({
+        slug: community,
+        loaderStart: true,
+        token: parseCookies(ctx).token,
+      })
+    );
     dispatch(
       getCommunityPostsRequest({
         pageNumber: 1,
         pageSize: 6,
         slug: community,
         loaderStart: true,
-        token:parseCookies(ctx).token
+        token: parseCookies(ctx).token,
       })
     );
   });
@@ -186,7 +198,7 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = (state) => ({
   community: state.community.data,
   posts: state.community.pagedData,
-  auth: state.auth.data,
+  //auth: state.auth.data,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommunityPage);

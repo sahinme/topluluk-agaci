@@ -46,7 +46,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => ({
   community: state.community.data,
-  auth: state.auth.data,
+  //auth: state.auth.data,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActionButton);

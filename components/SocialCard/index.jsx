@@ -14,6 +14,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Divider } from "@material-ui/core";
 import { MDBIcon } from "mdbreact";
+import Skeleton from "@material-ui/lab/Skeleton";
 import LinkPreview from "../LinkPreview";
 import { readLocalStorage } from "../../lib/helpers";
 import PostMenu from "../postMenu";
@@ -176,74 +177,90 @@ function SocialCard(props) {
   };
 
   return (
-    id && (
-      <Card className="post_card">
-        <div className={classes.leftSide}>
-          <div className="vote_cont">
-            <MDBIcon
-              className={
-                userPostVote && userPostVote.value == 1
-                  ? "angle-double-up_checked"
-                  : "angle-double-up"
-              }
-              icon="angle-double-up"
-              onClick={() => {
-                const token = readLocalStorage("token");
-                token
-                  ? handleVote(userPostVote && userPostVote.value == 1 ? 0 : 1)
-                  : router.push("/giris-yap");
-              }}
-            />
-            <p className="vote">{voteCount}</p>
-            <MDBIcon
-              className={
-                userPostVote && userPostVote.value == -1
-                  ? "angle-double-down_checked"
-                  : "angle-double-down"
-              }
-              icon="angle-double-down"
-              onClick={() =>
-                handleVote(userPostVote && userPostVote.value == -1 ? 0 : -1)
-              }
-            />
-          </div>
+    <Card className="post_card">
+      <div className={classes.leftSide}>
+        <div className="vote_cont">
+          <MDBIcon
+            className={
+              userPostVote && userPostVote.value == 1
+                ? "angle-double-up_checked"
+                : "angle-double-up"
+            }
+            icon="angle-double-up"
+            onClick={() => {
+              const token = readLocalStorage("token");
+              token
+                ? handleVote(userPostVote && userPostVote.value == 1 ? 0 : 1)
+                : router.push("/giris-yap");
+            }}
+          />
+          <p className="vote">{voteCount}</p>
+          <MDBIcon
+            className={
+              userPostVote && userPostVote.value == -1
+                ? "angle-double-down_checked"
+                : "angle-double-down"
+            }
+            icon="angle-double-down"
+            onClick={() =>
+              handleVote(userPostVote && userPostVote.value == -1 ? 0 : -1)
+            }
+          />
         </div>
-        <div style={{ width: "100%", overflow: "hidden" }}>
-          <CardHeader
-            className="post_card_header"
-            style={{ padding: "16px 16px 0 16px" }}
-            avatar={
+      </div>
+      <div style={{ width: "100%", overflow: "hidden" }}>
+        <CardHeader
+          className="post_card_header"
+          style={{ padding: "16px 16px 0 16px" }}
+          avatar={
+            !id ? (
+              <Skeleton
+                animation="wave"
+                variant="circle"
+                width={40}
+                height={40}
+              />
+            ) : (
               <Avatar
                 aria-label="recipe"
                 src={community.logoPath}
                 className={classes.avatar}
               ></Avatar>
-            }
-            action={
-              <div>
-                <IconButton
-                  aria-controls="simple-menu"
-                  aria-haspopup="true"
-                  onClick={handleClick}
-                  aria-label="settings"
-                >
-                  <MoreVertIcon />
-                </IconButton>
-                <PostMenu
-                  open={Boolean(anchorEl)}
-                  onClose={handleClose}
-                  anchorEl={anchorEl}
-                  onClose={handleClose}
-                  menuItems={isModerator ? moderatorItems : menuItems}
-                />
-                <DeleteCommentPop
-                  onSubmit={isModerator ? onDeleteModerator : onDeletePost}
-                  onClose={handleClosePopup}
-                  anchorEl={popupAnchor}
-                />
-              </div>
-            }
-            title={
+            )
+          }
+          action={
+            <div>
+              <IconButton
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                onClick={handleClick}
+                aria-label="settings"
+              >
+                <MoreVertIcon />
+              </IconButton>
+              <PostMenu
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                menuItems={isModerator ? moderatorItems : menuItems}
+              />
+              <DeleteCommentPop
+                onSubmit={isModerator ? onDeleteModerator : onDeletePost}
+                onClose={handleClosePopup}
+                anchorEl={popupAnchor}
+              />
+            </div>
+          }
+          title={
+            !id ? (
+              <Skeleton
+                animation="wave"
+                height={10}
+                width="80%"
+                style={{ marginBottom: 6 }}
+              />
+            ) : (
               <div>
                 <Link href={`/t/${community.slug}`}>
                   <a>{community.name}</a>
@@ -274,51 +291,56 @@ function SocialCard(props) {
                   </Link>
                 )}
               </div>
-            }
-            subheader={createdDate && moment(createdDate).fromNow()}
-          />
-          <div
-            className="content_container"
-            onClick={() =>
-              router.push({
-                pathname: `/${community.slug}/${pSlug}`,
-              })
-            }
+            )
+          }
+          subheader={createdDate && moment(createdDate).fromNow()}
+        />
+        <div
+          className="content_container"
+          onClick={() =>
+            router.push({
+              pathname: `/${community.slug}/${pSlug}`,
+            })
+          }
+        >
+          <CardContent
+            className="post_content_area"
+            style={{ padding: "5px 16px 16px 25px" }}
           >
-            <CardContent
-              className="post_content_area"
-              style={{ padding: "5px 16px 16px 25px" }}
-            >
+            {!id ? (
+              <Skeleton
+                animation="wave"
+                variant="rect"
+                className={classes.media}
+              />
+            ) : (
               <div
                 className="card_post_content"
                 dangerouslySetInnerHTML={{ __html: content }}
               />
-            </CardContent>
-            {renderMedia()}
-          </div>
-          <Divider style={{ margin: "15px 0px 0px 0px" }} />
-
-          <CardActions
-            style={{ padding: "0px", paddingLeft: "3.5rem" }}
-            disableSpacing
-          >
-            <MDBIcon
-              style={{ margin: "0.5rem" }}
-              size="lg"
-              far
-              icon="comment-dots"
-            />
-            <small style={{ marginLeft: "-5px" }}>
-              {comments && calculateSallamaCount(comments)} sallama
-            </small>
-            <ShareButton />
-            {/* <IconButton aria-label="share">
-              <ShareIcon style={{ padding: "3px" }}></ShareIcon>
-            </IconButton> */}
-          </CardActions>
+            )}
+          </CardContent>
+          {renderMedia()}
         </div>
-      </Card>
-    )
+        <Divider style={{ margin: "15px 0px 0px 0px" }} />
+
+        <CardActions
+          style={{ padding: "0px", paddingLeft: "3.5rem" }}
+          disableSpacing
+        >
+          <MDBIcon
+            style={{ margin: "0.5rem" }}
+            size="lg"
+            far
+            icon="comment-dots"
+          />
+          <small style={{ marginLeft: "-5px" }}>
+            {comments && calculateSallamaCount(comments)} sallama
+          </small>
+          <ShareButton />
+        </CardActions>
+      </div>
+    </Card>
   );
 }
 
