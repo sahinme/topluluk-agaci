@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Head from "next/head";
 import { Row, Col, Container } from "react-bootstrap";
 import { connect } from "react-redux";
 import { getPopularCommnityListRequest } from "../../lib/community/actions";
@@ -70,14 +71,15 @@ function Home(props) {
   const { home, userCommunities } = props;
   return (
     <div>
-      <Helmet>
+      <Head>
         <title>Hep Beraber Sallıyoruz | Saalla</title>
-        <meta charSet="utf-8" />
         <meta
           name="description"
           content="Saalla, insanların ilgi alanlarına göre sallayabildikleri topluluk ağıdır. İlgilendiğiniz toplulukları bulun ve çevrimiçi bir topluluğun parçası olun!"
         />
-      </Helmet>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Container style={{ marginTop: "6rem" }}>
         <Row>
           <Col xs={12} md={12}>

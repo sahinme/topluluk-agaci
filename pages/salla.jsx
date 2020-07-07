@@ -20,9 +20,7 @@ function CreatePost(props) {
     } = props;
     getUserCommunities({});
     if (query && query.is) {
-      setCommunity(
-        communities.find((x) => x.slug === getParameterByName("is", query.is))
-      );
+      setCommunity(communities.find((x) => x.slug === query.is));
     }
   }, []);
 
@@ -53,9 +51,7 @@ function CreatePost(props) {
             <ComboBox
               defaultValue={
                 communities && communities.length > 0
-                  ? communities.find(
-                      (x) => x.slug === getParameterByName("is", query.is)
-                    )
+                  ? communities.find((x) => x.slug === query.is)
                   : null
               }
               onChange={handleChange}
@@ -77,13 +73,6 @@ function CreatePost(props) {
     </MainLayout>
   );
 }
-
-CreatePost.getInitialProps = async ({ isServer, store, query }) => {
-  await store.execSagaTasks(isServer, (dispatch) => {
-    dispatch(getUserCommunitiesRequest());
-  });
-  return {};
-};
 
 const mapDispatchToProps = (dispatch) => ({
   getUserCommunities: (payload) => dispatch(getUserCommunitiesRequest(payload)),

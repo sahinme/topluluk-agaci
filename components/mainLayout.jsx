@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Head from "next/head";
+
 import EmailIcon from "@material-ui/icons/Email";
 import Loader from "./Loader";
 import PrimarySearchAppBar from "./Header";
@@ -28,6 +30,15 @@ function MainLayout(props) {
 
   return (
     <div>
+      <Head>
+        <title>Hep Beraber Sallıyoruz | Saalla</title>
+        <meta
+          name="description"
+          content="Saalla, insanların ilgi alanlarına göre sallayabildikleri topluluk ağıdır. İlgilendiğiniz toplulukları bulun ve çevrimiçi bir topluluğun parçası olun!"
+        />
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <PrimarySearchAppBar />
       {loader.loading && <Loader />}
       {props.children}

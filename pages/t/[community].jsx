@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Head from "next/head";
 import { Row, Col, Container } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { connect } from "react-redux";
@@ -73,6 +74,17 @@ function CommunityPage(props) {
   return (
     community && (
       <MainLayout>
+        <Head>
+          <title>{community.name + " topluluğu | Saalla "}</title>
+          <meta
+            name="description"
+            content={
+              community.description !== "" &&
+              community.description !== null &&
+              community.description.slice(0, 100)
+            }
+          />
+        </Head>
         <Row style={{ marginTop: "4rem", height: "240px" }}>
           <img
             className="com_cover_image"

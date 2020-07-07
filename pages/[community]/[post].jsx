@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 import { Row, Col, Container } from "react-bootstrap";
 import PopularTags from "../../components/PopularTags";
 import MainLayout from "../../components/mainLayout";
 import { getPostDetailRequest, votePostRequest } from "../../lib/posts/actions";
 import { connect } from "react-redux";
 import { Helmet } from "react-helmet";
-/* import { htmlToText } from "../../lib/helpers";
- */ import PostDetailCard from "../../components/PostDetailCard";
+import { htmlToText } from "../../lib/helpers";
+import PostDetailCard from "../../components/PostDetailCard";
 
 function PostDetail(props) {
   const router = useRouter();
@@ -26,28 +27,22 @@ function PostDetail(props) {
   const { post } = props;
   return (
     <MainLayout>
-      {/*  {post && post.community && (
-        <Helmet>
-          <title>
-            {post.community.name +
+      <Head>
+        <title>
+          {post.community.name +
+            " salladı: " +
+            htmlToText(post.content) +
+            " | Saalla" || ""}
+        </title>
+        <meta
+          name="description"
+          content={
+            post.community.name +
               " salladı: " +
-              htmlToText(post.content) +
-              " | Saalla"}
-          </title>
-          <meta charSet="utf-8" />
-          <meta
-            name="description"
-            content={
-              post.community.name +
-              " salladı: " +
-              htmlToText(post.content).slice(0, 100)
-            }
-          />
-          <link
-            href={`https://saalla.com/${post.community.slug}/${post.slug}`}
-          />
-        </Helmet>
-      )} */}
+              htmlToText(post.content).slice(0, 100) || ""
+          }
+        />
+      </Head>
       <Container style={{ marginTop: "6rem" }}>
         <Row style={{ marginTop: "1rem" }}>
           <Col
