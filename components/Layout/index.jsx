@@ -17,10 +17,27 @@ import PopularTags from "../PopularTags";
 import CreatePostTab from "../CreatePostTab";
 import CustomizedSnackbars from "../Snackbar";
 import { readLocalStorage } from "../../lib/helpers";
+import { parseCookies } from "nookies";
 
 function Home(props) {
   const [pageNumber, setNumber] = useState(1);
+  const [auth, setAuth] = React.useState({
+    data: { token: null, user: null },
+    error: null,
+  });
   useEffect(() => {
+    const user = readLocalStorage("user");
+    const token = readLocalStorage("token");
+    if (user && token) {
+      const payload = { data: { user, token }, error: null };
+      setAuth(payload);
+    }
+    const { getHomePosts, getUnauthorizedPosts } = props;
+    if (token) {
+      getHomePosts({ pageNumber: 1, pageSize: 6, loderStart: true });
+    } else {
+      getUnauthorizedPosts({ pageNumber: 1, pageSize: 6, loderStart: true });
+    }
     return () => {
       props.clearStore("home_posts");
     };
@@ -35,7 +52,7 @@ function Home(props) {
   const fetchMoreData = () => {
     const newNumber = pageNumber + 1;
     const { getUnauthorizedPosts, getHomePosts } = props;
-    props.auth && props.auth.token
+    auth.token
       ? getHomePosts({
           pageNumber: newNumber,
           pageSize: 6,
@@ -50,7 +67,7 @@ function Home(props) {
     setNumber(newNumber);
   };
 
-  const { home, userCommunities, auth } = props;
+  const { home, userCommunities } = props;
   return (
     <div>
       <Helmet>
@@ -151,7 +168,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  auth: state.auth.data,
   home: state.home.data,
   userCommunities: state.userCommunities.data,
 });

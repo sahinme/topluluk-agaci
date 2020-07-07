@@ -19,12 +19,10 @@ export default function CreatePostTab(props) {
       )}
       <input
         onClick={() => {
-          /*   const token = readLocalStorage("token");
+          const token = readLocalStorage("token");
           token
-            ? */ router.push(
-            `/salla?is=${slug ? slug : ""}`
-          );
-          /* : router.push("/giris-yap"); */
+            ? router.push(`/salla?is=${slug ? slug : ""}`)
+            : router.push("/giris-yap");
         }}
         placeholder="Salla Bişiler"
         className="post_bar_input"

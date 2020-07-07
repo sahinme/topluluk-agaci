@@ -181,16 +181,17 @@ function PrimarySearchAppBar(props) {
       const payload = { data: { user, token }, error: null };
       setAuth(payload);
     }
-    /*  const {
+    const {
       getUserCommunities,
       getUnReads,
       ofModerators,
       getUnReadMessages,
     } = props;
-    getUserCommunities({});
+    getUserCommunities();
     getUnReads();
-    getUnReadMessages(); */
-    //user && user.isModerator && ofModerators();
+    getUnReadMessages();
+    debugger;
+    user && user.isModerator && ofModerators();
   }, []);
 
   const handleDrawerOpen = () => {

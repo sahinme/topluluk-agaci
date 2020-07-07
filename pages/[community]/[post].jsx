@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { Row, Col, Container } from "react-bootstrap";
 import PopularTags from "../../components/PopularTags";
@@ -11,13 +11,12 @@ import { Helmet } from "react-helmet";
 import { parseCookies } from "nookies";
 
 function PostDetail(props) {
-  /* useEffect(() => {
-    const {
-      getPostDetail,
-      match: { params },
-    } = props;
-    getPostDetail({ slug: params.pSlug, loaderStart: true });
-  }, []); */
+  const router = useRouter();
+  useEffect(() => {
+    const { getPostDetail } = props;
+    const { query } = router;
+    getPostDetail({ slug: query.post, loaderStart: true });
+  }, []);
 
   const onVote = (values) => {
     const { votePost } = props;
@@ -87,7 +86,7 @@ function PostDetail(props) {
   );
 }
 
-PostDetail.getInitialProps = async (ctx) => {
+/* PostDetail.getInitialProps = async (ctx) => {
   await ctx.store.execSagaTasks(ctx.isServer, (dispatch) => {
     const { post } = ctx.query;
     dispatch(
@@ -99,7 +98,7 @@ PostDetail.getInitialProps = async (ctx) => {
     );
   });
   return {};
-};
+}; */
 
 const mapDispatchToProps = (dispatch) => ({
   getPostDetail: (payload) => dispatch(getPostDetailRequest(payload)),

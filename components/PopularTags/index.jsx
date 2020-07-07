@@ -89,10 +89,10 @@ const renderBars = (classes, slug, name, memberCount, logoPath) => {
 function PopularTags(props) {
   const classes = useStyles();
   const { communities } = props;
-  /*  useEffect(() => {
+  useEffect(() => {
     const { getPopularsCom } = props;
     getPopularsCom();
-  }, []); */
+  }, []);
   return (
     <div className={classes.root}>
       <Paper className={classes.tag_card}>
