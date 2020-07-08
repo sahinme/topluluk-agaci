@@ -28,20 +28,24 @@ function PostDetail(props) {
   return (
     <MainLayout>
       <Head>
-        <title>
-          {post.community.name +
-            " salladı: " +
-            htmlToText(post.content) +
-            " | Saalla" || ""}
-        </title>
-        <meta
-          name="description"
-          content={
-            post.community.name +
+        {post && post.community && (
+          <title>
+            {post.community.name +
               " salladı: " +
-              htmlToText(post.content).slice(0, 100) || ""
-          }
-        />
+              htmlToText(post.content) +
+              " | Saalla"}
+          </title>
+        )}
+        {post && post.community && (
+          <meta
+            name="description"
+            content={
+              post.community.name +
+                " salladı: " +
+                htmlToText(post.content).slice(0, 100) || ""
+            }
+          />
+        )}
       </Head>
       <Container style={{ marginTop: "6rem" }}>
         <Row style={{ marginTop: "1rem" }}>
