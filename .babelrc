@@ -1,6 +1,11 @@
 {
   "presets": [
-    "next/babel"
+    "next/babel",
+    ["@babel/env", {
+      "targets": {
+        "node": 6
+      }
+    }]
   ],
   "env": {
     "development": {
