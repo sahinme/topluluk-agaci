@@ -4,10 +4,10 @@
   ],
   "env": {
     "development": {
-      "plugins": ["inline-dotenv"]
+      "plugins": ["inline-dotenv", "lodash"]
     },
     "production": {
-      "plugins": ["transform-inline-environment-variables"]
+      "plugins": ["transform-inline-environment-variables", "lodash"]
     }
   }
 }
