@@ -1,18 +1,13 @@
 {
   "presets": [
-    "next/babel",
-    ["@babel/env", {
-      "targets": {
-        "node": 6
-      }
-    }]
+    "next/babel"
   ],
   "env": {
     "development": {
-      "plugins": ["inline-dotenv", "lodash"]
+      "plugins": ["inline-dotenv"]
     },
     "production": {
-      "plugins": ["transform-inline-environment-variables", "lodash"]
+      "plugins": ["transform-inline-environment-variables"]
     }
   }
 }
