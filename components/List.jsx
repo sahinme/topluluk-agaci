@@ -40,7 +40,7 @@ export default function CommunityList(props) {
         items.map((item) => {
           return (
             <React.Fragment>
-              <Link href={`/t/${item.slug}`}>
+              <Link href={"/t/[community]"} as={`/t/${item.slug}`}>
                 <ListItem button>
                   <ListItemIcon>
                     <ArrowDropUpIcon

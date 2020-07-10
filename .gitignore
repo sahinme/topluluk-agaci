@@ -1,4 +1,5 @@
 node_modules
 .next
+_next
 .env
 package-lock.json

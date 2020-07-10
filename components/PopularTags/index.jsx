@@ -73,7 +73,7 @@ const renderBars = (classes, slug, name, memberCount, logoPath) => {
           <img className={classes.avatarImg} src={logoPath} alt="" />
           <div style={{ display: "grid" }}>
             <code className={classes.community_title}>
-              <Link href={`/t/${slug}`}>
+              <Link href={"/t/[community]"} as={`/t/${slug}`}>
                 <a style={{ color: "black" }}>{name}</a>
               </Link>
             </code>

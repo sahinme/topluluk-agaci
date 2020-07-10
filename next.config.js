@@ -1,10 +1,12 @@
 const withImages = require('next-images');
-/* const withCSS = require('@zeit/next-css');
- */
-/* module.exports = withImages(withCSS({
-    cssLoaderOptions: {
-        url: false
-    }
-})); */
 
-module.exports = withImages();
+module.exports = withImages({
+    distDir: "_next",
+    generateBuildId: async () => {
+        if (process.env.BUILD_ID) {
+            return process.env.BUILD_ID;
+        } else {
+            return `${new Date().getTime()}`;
+        }
+    },
+}) 

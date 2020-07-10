@@ -262,7 +262,7 @@ function SocialCard(props) {
               />
             ) : (
               <div>
-                <Link href={`/t/${community.slug}`}>
+                <Link href={"/t/[community]"} as={`/t/${community.slug}`}>
                   <a>{community.name}</a>
                 </Link>
                 <small
@@ -295,33 +295,28 @@ function SocialCard(props) {
           }
           subheader={createdDate && moment(createdDate).fromNow()}
         />
-        <div
-          className="content_container"
-          onClick={() =>
-            router.push({
-              pathname: `/${community.slug}/${pSlug}`,
-            })
-          }
-        >
-          <CardContent
-            className="post_content_area"
-            style={{ padding: "5px 16px 16px 25px" }}
-          >
-            {!id ? (
-              <Skeleton
-                animation="wave"
-                variant="rect"
-                className={classes.media}
-              />
-            ) : (
-              <div
-                className="card_post_content"
-                dangerouslySetInnerHTML={{ __html: content }}
-              />
-            )}
-          </CardContent>
-          {renderMedia()}
-        </div>
+        <Link as={`/${community.slug}/${pSlug}`} href={"/[community]/[post]"}>
+          <div className="content_container">
+            <CardContent
+              className="post_content_area"
+              style={{ padding: "5px 16px 16px 25px" }}
+            >
+              {!id ? (
+                <Skeleton
+                  animation="wave"
+                  variant="rect"
+                  className={classes.media}
+                />
+              ) : (
+                <div
+                  className="card_post_content"
+                  dangerouslySetInnerHTML={{ __html: content }}
+                />
+              )}
+            </CardContent>
+            {renderMedia()}
+          </div>
+        </Link>
         <Divider style={{ margin: "15px 0px 0px 0px" }} />
 
         <CardActions
