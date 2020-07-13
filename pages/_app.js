@@ -1,8 +1,10 @@
 import App from 'next/app';
 import { Provider } from 'react-redux';
+import Router from "next/router";
 import { ConnectedRouter } from 'connected-next-router'
 import withRedux from 'next-redux-wrapper';
 import makeStore from '../lib/store';
+import Index from "./index"
 
 import "react-image-lightbox/style.css";
 import "../components/Loader/index.css";
@@ -24,6 +26,7 @@ import '../components/MessageList/MessageList.css'
 import '../components/Messenger/Messenger.css'
 import '../components/Toolbar/Toolbar.css'
 import '../components/ToolbarButton/ToolbarButton.css'
+import { readLocalStorage } from '../lib/helpers';
 
 
 class MyApp extends App {
@@ -33,11 +36,16 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps, store } = this.props;
+    const { Component, pageProps, store, router } = this.props;
+    const token = readLocalStorage('token')
+    let allowed = true;
+    if (router.pathname.startsWith("/topluluk-olustur") && !token) {
+      allowed = false;
+    }
     return (
       <Provider store={store}>
         <ConnectedRouter>
-          <Component {...pageProps} />
+          {!allowed ? <Index {...pageProps} /> : <Component {...pageProps} />}
         </ConnectedRouter>
       </Provider>
     );

@@ -18,7 +18,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import MenuItem from "@material-ui/core/MenuItem";
 import Badge from "@material-ui/core/Badge";
-import { Button, Avatar } from "@material-ui/core";
+import { Button, Avatar, Icon } from "@material-ui/core";
 import { readLocalStorage } from "../../lib/helpers";
 import { logOut } from "../../lib/auth/actions";
 import ComboBox from "../AutoComplete";
@@ -273,7 +273,6 @@ function PrimarySearchAppBar(props) {
     >
       {auth.data.token ? (
         <span>
-          {" "}
           <MenuItem onClick={() => router.push("/chat")}>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={unReadMessages} color="secondary">
@@ -374,15 +373,16 @@ function PrimarySearchAppBar(props) {
               labelField="name"
             />
           </div>
-          {auth.data.token && (
-            <ComboBox
-              style={{ width: "50%" }}
-              onChange={handleSelectChange}
-              placeholder="Toplulukların"
-              options={props.userCommunities || []}
-              labelField="name"
-            />
-          )}
+          <Link href="/topluluk-olustur">
+            <Button
+              variant="contained"
+              color="primary"
+              className="com_add"
+              endIcon={<Icon>send</Icon>}
+            >
+              Topluluk Aç
+            </Button>
+          </Link>
           <div className={classes.grow} />
 
           <div className={classes.sectionDesktop}>

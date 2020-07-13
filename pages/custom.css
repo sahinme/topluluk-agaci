@@ -664,6 +664,14 @@ p {
         margin-right: 0 !important;
         margin-left: 0 !important;
     }
+
+
+    .com_add {
+        padding: 1px !important;
+        width: 100%;
+        height: 30px;
+        left: 0 !important;
+    }
 }
 
 .player-wrapper {
@@ -702,4 +710,8 @@ p {
     margin-left: 3rem !important;
     background-color: #ffffff99;
     border-radius: 30%;
+}
+
+.com_add {
+    left: 53rem;
 }
