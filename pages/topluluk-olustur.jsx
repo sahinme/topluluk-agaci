@@ -6,10 +6,10 @@ import MainLayout from "../components/mainLayout";
 import PopularTags from "../components/PopularTags";
 import { getCategoriesRequest } from "../lib/category/actions";
 import { createCommunityRequest } from "../lib/community/actions";
-import { create } from "lodash";
+import { values } from "lodash";
 
 function CreateCommunity({ categories, getCategories, create, response }) {
-  const [values, setValues] = useState({
+  const [payload, setPayload] = useState({
     name: null,
     description: null,
     catSlug: "dizifilm",
@@ -20,9 +20,9 @@ function CreateCommunity({ categories, getCategories, create, response }) {
   }, []);
 
   const handleInputChange = ({ currentTarget: input }) => {
-    const currentValues = values;
+    const currentValues = { ...payload };
     currentValues[input.id] = input.value;
-    setValues(currentValues);
+    setPayload(currentValues);
   };
 
   const handleSubmit = () => {
@@ -77,7 +77,11 @@ function CreateCommunity({ categories, getCategories, create, response }) {
                   rows="3"
                 />
               </Form.Group>
-              <Button onClick={handleSubmit} variant="primary">
+              <Button
+                disabled={!payload.name || !payload.description}
+                onClick={handleSubmit}
+                variant="primary"
+              >
                 Oluşturmaya çalış
               </Button>
             </Form>

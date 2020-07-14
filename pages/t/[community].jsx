@@ -89,13 +89,17 @@ function CommunityPage(props) {
           <img
             className="com_cover_image"
             src={community.coverImagePath}
-            alt=""
+            alt={community.name}
           />
         </Row>
         <Row>
           <Paper className="com_bar">
             <Col className="com_bar_info" md={8}>
-              <img className="profile_img" src={community.logoPath} alt="" />
+              <img
+                className="profile_img"
+                src={community.logoPath}
+                alt={community.name}
+              />
               <div className="com_name">
                 <div className="com_bar_title">
                   <h3 className="com_title">{community.name}</h3>

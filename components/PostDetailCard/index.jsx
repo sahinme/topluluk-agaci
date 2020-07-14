@@ -126,7 +126,7 @@ function PostDetailCard(props) {
             onClick={() => setOpen(true)}
             className={classes.postImage}
             src={img}
-            alt=""
+            alt={content.length > 70 ? content.slice(0, 70) : content}
           />
           {isOpen && (
             <ImageModal imageUrl={img} onClose={() => setOpen(false)} />

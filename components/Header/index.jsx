@@ -117,7 +117,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(3),
-      width: "auto",
+      width: "40%",
     },
   },
   searchIcon: {
@@ -229,7 +229,7 @@ function PrimarySearchAppBar(props) {
     if (values) {
       values.type === "community"
         ? router.push(`/t/${values.name}`)
-        : router.push(`/${values.name}`);
+        : router.push(`/u/${values.name}`);
     } else {
       return;
     }
@@ -388,15 +388,17 @@ function PrimarySearchAppBar(props) {
           <div className={classes.sectionDesktop}>
             {auth.data.token ? (
               <React.Fragment>
-                <IconButton
-                  onClick={() => router.push("/chat")}
-                  aria-label="show 4 new mails"
-                  color="inherit"
-                >
-                  <Badge badgeContent={unReadMessages} color="secondary">
-                    <MailIcon />
-                  </Badge>
-                </IconButton>
+                <Link href="/chat" as="/chat">
+                  <IconButton
+                    //onClick={() => router.push("/chat")}
+                    aria-label="show 4 new mails"
+                    color="inherit"
+                  >
+                    <Badge badgeContent={unReadMessages} color="secondary">
+                      <MailIcon />
+                    </Badge>
+                  </IconButton>
+                </Link>
                 <IconButton
                   onClick={() => router.push("/bildirimler")}
                   aria-label="show 17 new notifications"

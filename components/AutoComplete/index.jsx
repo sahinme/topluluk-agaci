@@ -56,7 +56,11 @@ export default function ComboBox({
     return (
       <div className={classes.com_cont}>
         <Col style={{ display: "flex", paddingLeft: "0px" }}>
-          <img className={classes.avatarImg} src={option.logoPath} alt="" />
+          <img
+            className={classes.avatarImg}
+            src={option.logoPath}
+            alt={option.name}
+          />
           <div style={{ display: "grid" }}>
             <code className={classes.community_title}>{option.name}</code>
             {option.type !== "user" && (
@@ -74,7 +78,11 @@ export default function ComboBox({
     return (
       <div className={classes.com_cont}>
         <Col style={{ display: "flex", paddingLeft: "0px" }}>
-          <img className={classes.avatarImg} src={option.profileImg} alt="" />
+          <img
+            className={classes.avatarImg}
+            src={option.profileImg}
+            alt={option.username}
+          />
           <div style={{ display: "grid" }}>
             <code className={classes.community_title}>{option.username}</code>
           </div>

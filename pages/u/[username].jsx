@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Helmet } from "react-helmet";
-import Router, { withRouter } from "next/router";
+import Router, { withRouter, useRouter } from "next/router";
 import { Row, Col, Container } from "react-bootstrap";
 import SocialCard from "../../components/SocialCard";
 import { getUserByUsername } from "../../lib/users/actions";
@@ -16,10 +16,20 @@ import SendMessageModal from "../../components/User/sendMessageModal";
 import { isLogged } from "../../lib/helpers";
 
 function User(props) {
+  const router = useRouter();
   const { user, posts, conversations } = props;
   const [open, setOpen] = useState(false);
   const [text, setText] = useState(null);
   const [newMessageUser, setUser] = useState({});
+
+  useEffect(() => {
+    const { getUserByUsername, getUserPosts, getConversations } = props;
+    const { query } = router;
+
+    getUserByUsername(query.username);
+    getUserPosts({ username: query.username });
+    getConversations();
+  }, []);
 
   const onSendMessage = () => {
     if (!isLogged()) {
@@ -138,16 +148,6 @@ function User(props) {
     </MainLayout>
   );
 }
-
-User.getInitialProps = async ({ isServer, store, query }) => {
-  await store.execSagaTasks(isServer, (dispatch) => {
-    const { username } = query;
-    dispatch(getUserByUsername(username));
-    dispatch(getUserPostsRequest({ username }));
-    dispatch(getConversationsRequest());
-  });
-  return {};
-};
 
 const mapDispatchToProps = (dispatch) => ({
   getUserByUsername: (username) => dispatch(getUserByUsername(username)),

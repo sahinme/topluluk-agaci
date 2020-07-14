@@ -14,7 +14,6 @@ class Chat extends Component {
             getConversationDetail,
             router: { query },
         } = this.props;
-        console.log(query);
         query &&
             query.conversationId &&
             getConversationDetail({ id: query.conversationId });

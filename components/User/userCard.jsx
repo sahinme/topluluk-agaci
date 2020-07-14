@@ -4,8 +4,8 @@ import { IconButton } from "@material-ui/core";
 
 export default function UserCard({ img, username, email, bio, id, onMessage }) {
   return (
-    <aside class="profile-card">
-      <div class="mask-shadow"></div>
+    <aside className="profile-card">
+      <div className="mask-shadow"></div>
       <header>
         <a href="#">
           <img
@@ -19,11 +19,11 @@ export default function UserCard({ img, username, email, bio, id, onMessage }) {
         {/*  <h2>WEB DESIGNER</h2> */}
       </header>
 
-      <div class="profile-bio">
+      <div className="profile-bio">
         <p>{bio}</p>
       </div>
 
-      <ul class="profile-social-links">
+      <ul className="profile-social-links">
         <li style={{ display: "grid" }}>
           <IconButton
             onClick={onMessage}

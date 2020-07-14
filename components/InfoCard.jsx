@@ -37,14 +37,14 @@ export default function InfoCard(props) {
           {moderators &&
             moderators.map((m) => {
               return (
-                <React.Fragment>
-                  <code className={classes.community_title}>
+                <>
+                  <code key={m.username} className={classes.community_title}>
                     <Link href={`/${m.username}`}>
                       <a style={{ color: "blue" }}>{`u/${m.username}`}</a>
                     </Link>
                   </code>
                   <Divider style={{ margin: "4px 0 4px 0" }} />
-                </React.Fragment>
+                </>
               );
             })}
         </Row>

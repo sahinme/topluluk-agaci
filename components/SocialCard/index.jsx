@@ -112,7 +112,7 @@ function SocialCard(props) {
             onClick={() => setOpen(true)}
             className={classes.postImage}
             src={img}
-            alt=""
+            alt={pSlug}
           />
           {isOpen && (
             <ImageModal imageUrl={img} onClose={() => setOpen(false)} />

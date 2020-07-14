@@ -7,9 +7,10 @@ import PrimarySearchAppBar from "../Header"
 import { connect } from 'react-redux';
 import { TextField, IconButton } from '@material-ui/core';
 import { sendMessageRequest } from '../../lib/conversation/actions';
+import { readLocalStorage } from '../../lib/helpers';
 
 function Messenger(props) {
-  const { conversation, auth } = props;
+  const { conversation } = props;
   const [message, setMessage] = useState(null);
 
   const handleChange = (e) => {
@@ -18,12 +19,14 @@ function Messenger(props) {
   }
 
   const onSubmit = () => {
-    const data = conversation;
+    const data = { ...conversation };
     const receiverId = data.receiver.id == auth.user.id ? data.sender.id : data.receiver.id;
     const payload = { receiverId, conversationId: data.id, content: message };
     props.sendMessage(payload);
     document.getElementById("message_iput").value = "";
   }
+
+  const auth = { user: readLocalStorage('user'), token: readLocalStorage('token') }
 
   return (
     <div>
@@ -81,7 +84,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => ({
   conversation: state.selectedConversation.data,
-  auth: state.auth.data
 });
 
 export default
