@@ -19,7 +19,7 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import MenuItem from "@material-ui/core/MenuItem";
 import Badge from "@material-ui/core/Badge";
 import { Button, Avatar, Icon } from "@material-ui/core";
-import { readLocalStorage } from "../../lib/helpers";
+import { readLocalStorage, isLogged } from "../../lib/helpers";
 import { logOut } from "../../lib/auth/actions";
 import ComboBox from "../AutoComplete";
 import {
@@ -242,6 +242,14 @@ function PrimarySearchAppBar(props) {
     delayedQuery(e.target.value);
   };
 
+  const onCreateCommunity = () => {
+    if (!isLogged()) {
+      router.push("/giris-yap");
+    } else {
+      router.push("/topluluk-olustur");
+    }
+  };
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -373,16 +381,15 @@ function PrimarySearchAppBar(props) {
               labelField="name"
             />
           </div>
-          <Link href="/topluluk-olustur">
-            <Button
-              variant="contained"
-              color="primary"
-              className="com_add"
-              endIcon={<Icon>send</Icon>}
-            >
-              Topluluk Aç
-            </Button>
-          </Link>
+          <Button
+            onClick={onCreateCommunity}
+            variant="contained"
+            color="primary"
+            className="com_add"
+            endIcon={<Icon>send</Icon>}
+          >
+            Topluluk Aç
+          </Button>
           <div className={classes.grow} />
 
           <div className={classes.sectionDesktop}>
