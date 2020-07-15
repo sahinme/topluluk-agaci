@@ -53,7 +53,7 @@ function Home(props) {
   const fetchMoreData = () => {
     const newNumber = pageNumber + 1;
     const { getUnauthorizedPosts, getHomePosts } = props;
-    auth.token
+    auth.data.token
       ? getHomePosts({
           pageNumber: newNumber,
           pageSize: 6,
