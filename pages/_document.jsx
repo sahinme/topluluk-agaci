@@ -10,6 +10,10 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <meta
+            name="google-site-verification"
+            content="VrEH79YJ_wSNZLb72-bH6PTSv1unhjxI2Dw3QbCcM5Y"
+          />
           <meta charSet="utf-8" />
           <meta
             name="viewport"
