@@ -12,12 +12,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CommentList(props) {
   const classes = useStyles();
-  const { comments, postId } = props;
+  const { comments, postId, slug } = props;
   return (
     <List className={classes.root}>
       {comments &&
         comments.map((item) => {
-          return <Comment key={item.id} item={item} postId={postId} />;
+          return (
+            <Comment slug={slug} key={item.id} item={item} postId={postId} />
+          );
         })}
     </List>
   );

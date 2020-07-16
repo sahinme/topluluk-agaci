@@ -75,6 +75,7 @@ function PostDetailCard(props) {
     const values = {};
     values.postId = id;
     values.content = comment;
+    values.slug = slug;
     const { createComment } = props;
     createComment(values);
     document.getElementById("comment").value = "";
@@ -91,6 +92,7 @@ function PostDetailCard(props) {
     user,
     linkUrl,
     onVote,
+    slug,
     userPostVote,
     voteCount,
   } = props;
@@ -100,7 +102,7 @@ function PostDetailCard(props) {
       router.push("/giris-yap");
       return;
     }
-    const values = { postId: id, value };
+    const values = { postId: id, value, slug };
     onVote(values);
   };
 
@@ -157,14 +159,6 @@ function PostDetailCard(props) {
 
   return (
     <React.Fragment>
-      {/*  {community && content && (
-        <Helmet title={community.name + " salladı: " + htmlToText(content)}>
-          <meta
-            name="description"
-            content={community.name + " salladı: " + htmlToText(content)}
-          />
-        </Helmet>
-      )} */}
       <Card className="post_card">
         <div className={classes.leftSide}>
           <div className="vote_cont">
@@ -280,7 +274,7 @@ function PostDetailCard(props) {
             >
               Salla Gitsin
             </Button>
-            <CommentList comments={comments} postId={id} />
+            <CommentList slug={slug} comments={comments} postId={id} />
           </Collapse>
         </div>
       </Card>

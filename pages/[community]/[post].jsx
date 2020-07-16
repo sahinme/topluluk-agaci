@@ -56,6 +56,7 @@ function PostDetail(props) {
           >
             {post && (
               <PostDetailCard
+                slug={post.slug}
                 id={post.id}
                 img={post.contentPath}
                 createdDate={post.createdDateTime}

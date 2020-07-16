@@ -54,7 +54,7 @@ function Comment(props) {
 
   const router = useRouter();
 
-  const { item } = props;
+  const { item, slug } = props;
 
   const handleChange = (e) => {
     setText(e.target.value);
@@ -68,7 +68,7 @@ function Comment(props) {
       return;
     } else {
       const { createReply, postId, item } = props;
-      const values = { postId, commentId: item.id, content: text };
+      const values = { postId, commentId: item.id, content: text, slug };
       createReply(values);
       document.getElementById("comment").value = "";
       setOpen(false);
@@ -79,7 +79,7 @@ function Comment(props) {
     if (!isLogged()) {
       router.push("/giris-yap");
     }
-    const values = { postId: props.postId, commentId: item.id };
+    const values = { postId: props.postId, commentId: item.id, slug };
     const { likeComment } = props;
     likeComment(values);
   };
@@ -88,20 +88,20 @@ function Comment(props) {
     if (!isLogged()) {
       router.push("/giris-yap");
     }
-    const values = { postId: props.postId, commentId: item.id };
+    const values = { postId: props.postId, commentId: item.id, slug };
     const { unLikeComment } = props;
     unLikeComment(values);
   };
 
   const onDeleteComment = () => {
-    const values = { commentId: item.id, postId: props.postId };
+    const values = { commentId: item.id, postId: props.postId, slug };
     const { deleteComment } = props;
     deleteComment(values);
     handleClose();
   };
 
   const onDeleteCommentModerator = () => {
-    const values = { commentId: item.id, postId: props.postId };
+    const values = { commentId: item.id, postId: props.postId, slug };
     const { deleteCommentModerator } = props;
     deleteCommentModerator(values);
     handleClose();
@@ -171,9 +171,9 @@ function Comment(props) {
       </ListItem>
       <div className="comment_icon_container">
         <CommentOutlinedIcon className={classes.commentIcon} />
-        <Link href="#" onClick={() => setOpen(!isOpen)}>
+        <a onClick={() => setOpen(!isOpen)}>
           <p className="reply_text">{isOpen ? "boşver" : "salla"}</p>
-        </Link>
+        </a>
         <FavoriteBorderOutlinedIcon
           className={
             item.isLoggedLiked
@@ -228,6 +228,7 @@ function Comment(props) {
         item.replies &&
         item.replies.map((reply, index) => (
           <Reply
+            slug={slug}
             key={reply.id}
             item={reply}
             postId={props.postId}

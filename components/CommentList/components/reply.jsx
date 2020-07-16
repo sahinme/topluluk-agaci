@@ -40,8 +40,8 @@ function Reply(props) {
   };
 
   const onDeleteReply = () => {
-    const { deleteReply, postId } = props;
-    const values = { replyId: item.id, postId };
+    const { deleteReply, postId, slug } = props;
+    const values = { replyId: item.id, postId, slug };
     deleteReply(values);
   };
 
@@ -60,7 +60,7 @@ function Reply(props) {
     if (!isLogged()) {
       router.push("/giris-yap");
     }
-    const values = { postId: props.postId, replyId: item.id };
+    const values = { postId: props.postId, replyId: item.id, slug: props.slug };
     const { likeReply } = props;
     likeReply(values);
   };
@@ -69,7 +69,7 @@ function Reply(props) {
     if (!isLogged()) {
       router.push("/giris-yap");
     }
-    const values = { postId: props.postId, replyId: item.id };
+    const values = { postId: props.postId, replyId: item.id, slug: props.slug };
     const { unLikeReply } = props;
     unLikeReply(values);
   };
@@ -79,8 +79,14 @@ function Reply(props) {
       router.push("/giris-yap");
       return;
     } else {
-      const { createReply, postId, item, commentId } = props;
-      const values = { postId, commentId, content: text, parentId: item.id };
+      const { createReply, postId, item, commentId, slug } = props;
+      const values = {
+        postId,
+        commentId,
+        content: text,
+        parentId: item.id,
+        slug,
+      };
       createReply(values);
       document.getElementById("comment").value = "";
       setOpen(false);
@@ -88,7 +94,7 @@ function Reply(props) {
   };
 
   const onDeleteReplyModerator = () => {
-    const values = { replyId: item.id, postId: props.postId };
+    const values = { replyId: item.id, postId: props.postId, slug: props.slug };
     const { deleteReplyModerator } = props;
     deleteReplyModerator(values);
     handleClose();
