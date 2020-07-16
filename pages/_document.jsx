@@ -10,6 +10,21 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=UA-169270484-1`}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+            
+              gtag('config', 'UA-169270484-1');
+          `,
+            }}
+          />
           <meta
             name="google-site-verification"
             content="VrEH79YJ_wSNZLb72-bH6PTSv1unhjxI2Dw3QbCcM5Y"
