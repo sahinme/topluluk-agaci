@@ -221,7 +221,7 @@ function PostDetailCard(props) {
                 >
                   /
                 </small>
-                <Link href={`/${user.userName}`}>
+                <Link href={`/u/${user.userName}`}>
                   <span className="posted_by">
                     {"u/" + user.userName + " " + "tarafından"}
                   </span>
