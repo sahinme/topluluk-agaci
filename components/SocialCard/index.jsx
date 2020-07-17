@@ -283,7 +283,7 @@ function SocialCard(props) {
                         : `u/[username]`
                     }
                   >
-                    <a>
+                    <a style={{cursor:"pointer"}} >
                       <span className="posted_by">
                         {"u/" + user.userName + " " + "tarafından"}
                       </span>
