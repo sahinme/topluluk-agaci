@@ -16,7 +16,6 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './custom.css';
 import './profile.css'
-import './candles.scss'
 import '../components/Compose/Compose.css';
 import '../components/ConversationList/ConversationList.css';
 import '../components/ConversationListItem/ConversationListItem.css';

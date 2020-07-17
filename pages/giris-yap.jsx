@@ -13,7 +13,7 @@ import Container from "@material-ui/core/Container";
 import { Alert } from "reactstrap";
 import { loginRequest } from "../lib/auth/actions";
 import { setErrorRequest } from "../lib/error/actions";
-import Candles from "../components/candles";
+//import Candles from "../components/candles";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -69,7 +69,7 @@ function SignIn(props) {
 
   return (
     <Container component="main" maxWidth="xs">
-      <Candles />
+      {/* <Candles /> */}
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
