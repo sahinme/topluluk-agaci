@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { API_URL } from "../lib/services"
 
-export const sitemapXML = data => {
+const sitemapXML = data => {
 
   let projectsXML = "";
   let comUrlsXml = "";
