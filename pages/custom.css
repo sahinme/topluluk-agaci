@@ -461,6 +461,7 @@ code {
     display: inline-block;
     padding-right: 24px;
     max-width: calc(100% - 96px);
+    white-space: nowrap;
 }
 
 .com_right_bar {

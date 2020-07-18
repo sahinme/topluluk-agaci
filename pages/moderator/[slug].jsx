@@ -171,7 +171,7 @@ function CommunityPage(props) {
     community && (
       <MainLayout>
         <div>
-          <Row style={{ marginTop: "4rem", height: "240px" }}>
+          <Row style={{ height: "240px" }}>
             <input
               style={{ display: "none" }}
               accept="image/*"

@@ -35,7 +35,7 @@ import {
   ofModeratorsRequest,
 } from "../../lib/community/actions";
 import { logOut } from "../../lib/auth/actions";
-import { Avatar, Button } from "@material-ui/core";
+import { Avatar, Button, Icon } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -327,6 +327,15 @@ function HeaderExample(props) {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+            <Button
+              style={{ margin: "10px" }}
+              onClick={onCreateCommunity}
+              variant="contained"
+              color="primary"
+              //className="com_add"
+            >
+              Topluluk Aç
+            </Button>
             {auth.data.token ? (
               <>
                 <Link href="/chat" as="/chat">
@@ -387,6 +396,15 @@ function HeaderExample(props) {
             )}
           </div>
           <div className={classes.sectionMobile}>
+            <Button
+              onClick={onCreateCommunity}
+              variant="contained"
+              color="primary"
+              style={{ height: "35px", marginTop: "5px" }}
+              //className="com_add"
+            >
+              Topluluk Aç
+            </Button>
             <IconButton
               aria-label="show more"
               aria-controls={mobileMenuId}
