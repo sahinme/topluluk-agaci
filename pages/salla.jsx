@@ -41,7 +41,7 @@ function CreatePost(props) {
   console.log(props);
   return (
     <MainLayout>
-      <Container style={{ marginTop: "6rem" }}>
+      <Container>
         <Row style={{ marginTop: "1rem" }}>
           <Col
             style={{ paddingBottom: "10px", paddingTop: "20px" }}

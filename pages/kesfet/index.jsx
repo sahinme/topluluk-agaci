@@ -27,7 +27,7 @@ function Explore(props) {
   const { categories, communities } = props;
   return (
     <MainLayout>
-      <Container style={{ marginTop: "6rem" }}>
+      <Container>
         <Row style={{ marginTop: "1rem", flexWrap: "wrap-reverse" }}>
           <Col style={{ paddingBottom: "10px" }} xs={12} md={8}>
             <CommunityList category={category} items={communities || []} />

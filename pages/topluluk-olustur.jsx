@@ -39,7 +39,7 @@ function CreateCommunity({ categories, getCategories, create, response }) {
   return (
     readLocalStorage("token") && (
       <MainLayout>
-        <Container style={{ marginTop: "6rem" }}>
+        <Container>
           <Row style={{ marginTop: "1rem", flexWrap: "wrap-reverse" }}>
             <Col style={{ paddingBottom: "10px" }} xs={12} md={8}>
               {response && !response.status && (

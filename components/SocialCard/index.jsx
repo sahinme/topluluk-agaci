@@ -112,7 +112,7 @@ function SocialCard(props) {
             onClick={() => setOpen(true)}
             className={classes.postImage}
             src={img}
-            alt={contentType === 10 && pSlug}
+            alt={contentType === 10 ? pSlug : ""}
           />
           {isOpen && (
             <ImageModal imageUrl={img} onClose={() => setOpen(false)} />
@@ -283,7 +283,7 @@ function SocialCard(props) {
                         : `u/[username]`
                     }
                   >
-                    <a style={{cursor:"pointer"}} >
+                    <a style={{ cursor: "pointer" }}>
                       <span className="posted_by">
                         {"u/" + user.userName + " " + "tarafından"}
                       </span>

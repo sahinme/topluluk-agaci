@@ -49,6 +49,8 @@ export default function ComboBox({
   defaultValue,
   style,
   onSearch,
+  customClasses,
+  inputProps,
 }) {
   const classes = useStyles();
 
@@ -94,6 +96,8 @@ export default function ComboBox({
   return (
     <Autocomplete
       className={className}
+      classes={customClasses}
+      inputprops={inputProps}
       defaultValue={defaultValue}
       onChange={(event, newValue) => {
         onChange(newValue);

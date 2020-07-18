@@ -95,7 +95,7 @@ function CommunityPage(props) {
             }
           />
         </Head>
-        <Row style={{ marginTop: "4rem", height: "240px" }}>
+        <Row style={{ height: "250px" }}>
           <img
             className="com_cover_image"
             src={community.coverImagePath}

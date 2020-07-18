@@ -24,7 +24,7 @@ function Notifications(props) {
     return (
         <MainLayout>
             <div>
-                <Container style={{ marginTop: "6rem" }}>
+                <Container>
                     <Row style={{ marginTop: "1rem" }}>
                         <Col
                             style={{ paddingBottom: "10px", marginTop: "20px" }}

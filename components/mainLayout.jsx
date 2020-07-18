@@ -3,10 +3,11 @@ import Head from "next/head";
 
 import EmailIcon from "@material-ui/icons/Email";
 import Loader from "./Loader";
-import PrimarySearchAppBar from "./Header";
+//import PrimarySearchAppBar from "./Header";
 import { connect } from "react-redux";
 import SendSuggestionModal from "./sendSuggestionModal";
 import { sendSuggestRequest } from "../lib/users/actions";
+import HeaderExample from "./Examples/header";
 
 function MainLayout(props) {
   const [open, setOpen] = useState(false);
@@ -39,7 +40,7 @@ function MainLayout(props) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <PrimarySearchAppBar />
+      <HeaderExample />
       {loader.loading && <Loader />}
       {props.children}
       <div className="icon-bar">

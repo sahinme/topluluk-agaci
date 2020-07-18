@@ -129,8 +129,11 @@ function PostDetailCard(props) {
             className={classes.postImage}
             src={img}
             alt={
-              contentType === 10 &&
-              (content.length > 70 ? content.slice(0, 70) : content)
+              contentType === 10
+                ? content.length > 70
+                  ? content.slice(0, 70)
+                  : content
+                : null
             }
           />
           {isOpen && (

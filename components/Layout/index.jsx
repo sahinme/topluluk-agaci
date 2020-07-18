@@ -80,7 +80,7 @@ function Home(props) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Container style={{ marginTop: "6rem" }}>
+      <Container>
         <Row>
           <Col xs={12} md={12}>
             <CreatePostTab user={auth.user} />

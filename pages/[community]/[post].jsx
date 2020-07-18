@@ -47,7 +47,7 @@ function PostDetail(props) {
           />
         )}
       </Head>
-      <Container style={{ marginTop: "6rem" }}>
+      <Container>
         <Row style={{ marginTop: "1rem" }}>
           <Col
             style={{ paddingBottom: "10px", paddingTop: "20px" }}
