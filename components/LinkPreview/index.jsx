@@ -110,7 +110,7 @@ export default function LinkPreview(props) {
 
   return (
     <Card className={classes.rootLink}>
-      <a href={previewData && previewData.link} target="_blank">
+      <a rel="nofollow" href={previewData && previewData.link} target="_blank">
         <CardActionArea>
           {!previewData ? (
             <Skeleton
