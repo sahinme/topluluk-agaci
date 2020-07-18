@@ -118,7 +118,7 @@ export default function MainDrawer(props) {
         {userCommunities &&
           userCommunities.length > 0 &&
           userCommunities.map((item, index) => (
-            <Link href={`/t/[community]`} as={`/t/${item.slug}`}>
+            <Link href="/t/[community]" as={`/t/${item.slug}`}>
               <ListItem button key={item.name}>
                 <img className={classes.avatarImg} src={item.logoPath} alt="" />
                 <ListItemText primary={item.name} />
@@ -133,7 +133,7 @@ export default function MainDrawer(props) {
         {ofModerators &&
           ofModerators.length > 0 &&
           ofModerators.map((item, index) => (
-            <Link href={`/moderator/[slug]`} as={`/moderator/${item.slug}`}>
+            <Link href="/moderator/[slug]" as={`/moderator/${item.slug}`}>
               <ListItem button key={item.name}>
                 <img className={classes.avatarImg} src={item.logoPath} alt="" />
                 <ListItemText primary={item.name} />

@@ -25,6 +25,7 @@ function CommunityPage(props) {
   const router = useRouter();
   const [pageNumber, setNumber] = useState(1);
   useEffect(() => {
+    console.log(router);
     props.getCommunity({ slug: router.query.community });
     props.getPosts({
       pageNumber: 1,
@@ -35,7 +36,7 @@ function CommunityPage(props) {
     return () => {
       props.clearStore("community_posts");
     };
-  }, []);
+  }, [router.asPath]);
 
   const element = () => {
     const { community } = props;
