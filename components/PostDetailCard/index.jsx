@@ -216,7 +216,7 @@ function PostDetailCard(props) {
             }
             title={
               <div>
-                <Link href={`/t/${community.slug}`}>
+                <Link href={`/t/[community]`} as={`/t/${community.slug}`}>
                   <a>{community.name}</a>
                 </Link>
                 <small
@@ -224,7 +224,7 @@ function PostDetailCard(props) {
                 >
                   /
                 </small>
-                <Link href={`/u/${user.userName}`}>
+                <Link href={`/u/[username]`} as={`/u/${user.userName}`}>
                   <span className="posted_by">
                     {"u/" + user.userName + " " + "tarafından"}
                   </span>
