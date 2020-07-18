@@ -385,7 +385,7 @@ function PrimarySearchAppBar(props) {
           <div className={classes.grow} />
 
           <div className={classes.sectionDesktop}>
-            <Button
+            {/*  <Button
               onClick={onCreateCommunity}
               variant="contained"
               color="primary"
@@ -394,7 +394,7 @@ function PrimarySearchAppBar(props) {
               endIcon={<Icon>send</Icon>}
             >
               Topluluk Aç
-            </Button>
+            </Button> */}
             {auth.data.token ? (
               <React.Fragment>
                 <Link href="/chat" as="/chat">
@@ -455,7 +455,7 @@ function PrimarySearchAppBar(props) {
             )}
           </div>
           <div className={classes.sectionMobile}>
-            <Button
+            {/*  <Button
               onClick={onCreateCommunity}
               variant="contained"
               color="primary"
@@ -464,7 +464,7 @@ function PrimarySearchAppBar(props) {
               endIcon={<Icon>send</Icon>}
             >
               Topluluk Aç
-            </Button>
+            </Button> */}
             <IconButton
               aria-label="show more"
               aria-controls={mobileMenuId}
