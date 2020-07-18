@@ -25,6 +25,7 @@ import Loader from "../../components/Loader";
 import { readLocalStorage } from "../../lib/helpers";
 import { useRouter } from "next/router";
 import MainLayout from "../../components/mainLayout";
+import { clearStoreRequest } from "../../lib/commonActions";
 
 function CommunityPage(props) {
   const router = useRouter();
@@ -49,7 +50,10 @@ function CommunityPage(props) {
     getCommunity({ slug, loaderStart: true });
     getUsers({ slug });
     getPosts({ pageNumber: 1, pageSize: 6, slug, loaderStart: true });
-  }, []);
+    return () => {
+      props.clearStore("community_posts");
+    };
+  }, [router.asPath]);
 
   const [isEditName, setEditName] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
@@ -306,6 +310,7 @@ const mapDispatchToProps = (dispatch) => ({
   getUsers: (payload) => dispatch(getUsers(payload)),
   deleteUser: (payload) => dispatch(deleteUserRequest(payload)),
   getPosts: (payload) => dispatch(getCommunityPostsRequest(payload)),
+  clearStore: (name) => dispatch(clearStoreRequest(name)),
 });
 
 const mapStateToProps = (state) => ({
