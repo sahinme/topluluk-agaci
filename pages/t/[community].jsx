@@ -16,14 +16,22 @@ import { votePostRequest } from "../../lib/posts/actions";
 import Loader from "../../components/Loader";
 import { clearStoreRequest } from "../../lib/commonActions";
 import CreatePostTab from "../../components/CreatePostTab";
-import { Helmet } from "react-helmet";
 import SocialCard from "../../components/SocialCard";
 import { parseCookies } from "nookies";
 import { readLocalStorage } from "../../lib/helpers";
+import { useRouter } from "next/router";
 
 function CommunityPage(props) {
+  const router = useRouter();
   const [pageNumber, setNumber] = useState(1);
   useEffect(() => {
+    props.getCommunity({ slug: router.query.community });
+    props.getPosts({
+      pageNumber: 1,
+      pageSize: 6,
+      slug: router.query.community,
+      loaderStart: true,
+    });
     return () => {
       props.clearStore("community_posts");
     };
@@ -81,6 +89,7 @@ function CommunityPage(props) {
             content={
               community.description !== "" &&
               community.description !== null &&
+              community.description.length > 100 &&
               community.description.slice(0, 100)
             }
           />
@@ -180,7 +189,7 @@ function CommunityPage(props) {
   );
 }
 
-CommunityPage.getInitialProps = async (ctx) => {
+/* CommunityPage.getInitialProps = async (ctx) => {
   await ctx.store.execSagaTasks(ctx.isServer, (dispatch) => {
     const { community } = ctx.query;
     dispatch(
@@ -201,7 +210,7 @@ CommunityPage.getInitialProps = async (ctx) => {
     );
   });
   return {};
-};
+}; */
 
 const mapDispatchToProps = (dispatch) => ({
   getCommunity: (payload) => dispatch(getCommunityRequest(payload)),
