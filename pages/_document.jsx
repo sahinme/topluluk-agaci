@@ -40,7 +40,7 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"
           />
           <link rel="shortcut icon" href="/favicon.png" />
-          <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+
           <style jsx global>
             {`
               html,
