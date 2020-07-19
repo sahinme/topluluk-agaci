@@ -39,6 +39,7 @@
     "next": "^9.4.4",
     "next-images": "^1.4.0",
     "next-redux-wrapper": "^2.0.0",
+    "next-seo": "^4.7.3",
     "node-localstorage": "^2.1.6",
     "nookies": "^2.3.2",
     "npm": "^6.14.6",

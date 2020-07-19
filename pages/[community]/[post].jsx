@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import Head from "next/head";
+import { NextSeo } from "next-seo";
 import { Row, Col, Container } from "react-bootstrap";
 import PopularTags from "../../components/PopularTags";
 import MainLayout from "../../components/mainLayout";
@@ -11,6 +11,8 @@ import { htmlToText } from "../../lib/helpers";
 import PostDetailCard from "../../components/PostDetailCard";
 
 function PostDetail(props) {
+  const { post } = props;
+
   const router = useRouter();
   useEffect(() => {
     const { getPostDetail } = props;
@@ -18,16 +20,55 @@ function PostDetail(props) {
     getPostDetail({ slug: query.post, loaderStart: true });
   }, []);
 
+  const featuredImage = {
+    url: post && post.contentPath,
+    alt: post && post.slug,
+  };
+
   const onVote = (values) => {
     const { votePost } = props;
     values.page = "post_detail";
     votePost(values);
   };
 
-  const { post } = props;
+  const handleTitle = (content) => {
+    const title = htmlToText(content);
+    const _title = title.length > 130 ? title.slice(0, 120) : title;
+    return _title;
+  };
+
   return (
     <MainLayout>
-      <Head>
+      {post && post.community && (
+        <NextSeo
+          title={
+            post.community.name +
+            " salladı: " +
+            handleTitle(post.content) +
+            " | Saalla"
+          }
+          description={
+            post.community.name +
+              " salladı: " +
+              htmlToText(post.content).slice(0, 100) || ""
+          }
+          canonical={`https://saalla.com/${post.community.slug}/${post.slug}`}
+          openGraph={{
+            url: `https://saalla.com/${post.community.slug}/${post.slug}`,
+            title:
+              post.community.name +
+              " salladı: " +
+              handleTitle(post.content) +
+              " | Saalla",
+            description:
+              post.community.name +
+                " salladı: " +
+                htmlToText(post.content).slice(0, 100) || "",
+            images: post.contentType === 10 ? [featuredImage] : [],
+          }}
+        />
+      )}
+      {/* <Head>
         {post && post.community && (
           <title>
             {post.community.name +
@@ -46,7 +87,7 @@ function PostDetail(props) {
             }
           />
         )}
-      </Head>
+      </Head> */}
       <Container>
         <Row style={{ marginTop: "1rem" }}>
           <Col

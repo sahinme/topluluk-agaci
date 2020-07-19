@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Head from "next/head";
+import { NextSeo } from "next-seo";
 import { Row, Col, Container } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { connect } from "react-redux";
@@ -83,7 +83,21 @@ function CommunityPage(props) {
   return (
     community && (
       <MainLayout>
-        <Head>
+        <NextSeo
+          title={community.name + " topluluğu | Saalla "}
+          description={community.description}
+          canonical={`https://saalla.com/t/${community.slug}`}
+          openGraph={{
+            url: `https://saalla.com/t/${community.slug}`,
+            title: community.name + " topluluğu | Saalla ",
+            description: community.description,
+            images:
+              community.logoPath !== null
+                ? [{ url: community.logoPath, alt: community.name }]
+                : [],
+          }}
+        />
+        {/* <Head>
           <title>{community.name + " topluluğu | Saalla "}</title>
           <meta
             name="description"
@@ -94,7 +108,7 @@ function CommunityPage(props) {
               community.description.slice(0, 100)
             }
           />
-        </Head>
+        </Head> */}
         <Row style={{ height: "250px" }}>
           <img
             className="com_cover_image"
