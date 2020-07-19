@@ -181,13 +181,14 @@ export default function TabPanelList(props) {
       >
         <Editor
           init={{
+            paste_as_text: true,
             height: 300,
             menubar: true,
             plugins: [
               "advlist autolink lists link image charmap print preview hr anchor pagebreak",
               "searchreplace wordcount visualblocks visualchars code fullscreen",
               "insertdatetime nonbreaking save table contextmenu directionality",
-              "emoticons template paste textpattern",
+              "emoticons template paste textpattern paste code",
             ],
             toolbar1:
               "undo redo | styleselect | emoticons | bold italic | bullist numlist outdent indent | link image",
@@ -211,7 +212,7 @@ export default function TabPanelList(props) {
               "advlist autolink lists link image charmap print preview hr anchor pagebreak",
               "searchreplace wordcount visualblocks visualchars code fullscreen",
               "insertdatetime nonbreaking save table contextmenu directionality",
-              "emoticons template paste textpattern",
+              "emoticons template paste textpattern paste code",
             ],
             toolbar1:
               "undo redo | styleselect | emoticons | bold italic | bullist numlist outdent indent | link image",
@@ -247,7 +248,7 @@ export default function TabPanelList(props) {
               "advlist autolink lists link image charmap print preview hr anchor pagebreak",
               "searchreplace wordcount visualblocks visualchars code fullscreen",
               "insertdatetime nonbreaking save table contextmenu directionality",
-              "emoticons template paste textpattern",
+              "emoticons template paste textpattern paste code",
             ],
             toolbar1: "styleselect | emoticons | bold italic",
           }}

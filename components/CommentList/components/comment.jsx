@@ -51,6 +51,7 @@ function Comment(props) {
   const [isOpen, setOpen] = useState(false);
   const [text, setText] = useState("");
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [readMore, setReadMore] = React.useState(false);
 
   const router = useRouter();
 
@@ -148,6 +149,32 @@ function Comment(props) {
     }
   };
 
+  const handleContent = (comment) => {
+    if (comment.length > 130) {
+      return (
+        <span>
+          {comment.slice(0, 130)}
+          <span onClick={() => setReadMore(true)} className="comment_read_more">
+            devamı
+          </span>{" "}
+        </span>
+      );
+    } else {
+      return comment;
+    }
+  };
+
+  const handleContentLong = (comment) => {
+    return (
+      <span>
+        {comment}
+        <span onClick={() => setReadMore(false)} className="comment_less_more">
+          daha az
+        </span>
+      </span>
+    );
+  };
+
   return (
     <React.Fragment key={item.id}>
       <ListItem className="comment_item" alignItems="flex-start">
@@ -166,7 +193,11 @@ function Comment(props) {
               {item.commentUserInfo && item.commentUserInfo.userName}
             </Link>
           }
-          secondary={item.content}
+          secondary={
+            readMore
+              ? handleContentLong(item.content)
+              : handleContent(item.content)
+          }
         />
       </ListItem>
       <div className="comment_icon_container">

@@ -20,7 +20,7 @@ code {
 
 .icon-bar {
     position: fixed;
-    top: 50%;
+    top: 92%;
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
@@ -715,4 +715,22 @@ p {
 
 .com_add {
     left: 22.5rem;
+}
+
+.comment_read_more {
+    color: #007bff;
+    margin-left: 3px;
+}
+
+.comment_read_more::before {
+    content: '...';
+}
+
+.comment_less_more {
+    color: #007bff;
+    margin-left: 3px;
+}
+
+.comment_less_more::before {
+    content: '...';
 }

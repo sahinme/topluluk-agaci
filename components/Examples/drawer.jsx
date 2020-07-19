@@ -127,6 +127,11 @@ export default function DrawerExample({
         </div>
         <Divider />
         <List>
+          <Link href="/">
+            <ListItem button key="home">
+              <ListItemText primary="Ana Sayfa" />
+            </ListItem>
+          </Link>
           <b style={{ marginLeft: "1rem" }}>Toplulukların</b>
           <Divider style={{ marginTop: "1rem" }} />
           {userCommunities &&

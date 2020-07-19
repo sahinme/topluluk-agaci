@@ -26,6 +26,8 @@ function Reply(props) {
   const [isOpen, setOpen] = useState(false);
   const [text, setText] = useState("");
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [readMore, setReadMore] = React.useState(false);
+
   const router = useRouter();
   const handleChange = (e) => {
     setText(e.target.value);
@@ -43,17 +45,6 @@ function Reply(props) {
     const { deleteReply, postId, slug } = props;
     const values = { replyId: item.id, postId, slug };
     deleteReply(values);
-  };
-
-  const replyTo = (username, content) => {
-    return username == null ? (
-      <p>{content}</p>
-    ) : (
-      <div>
-        <Link href={`/${username}`}>{`@${username}  `}</Link>
-        {content}
-      </div>
-    );
   };
 
   const onLikeReply = () => {
@@ -134,6 +125,58 @@ function Reply(props) {
     handleClose();
   };
 
+  const handleContent = (username, comment) => {
+    return username == null ? (
+      <span>
+        {comment.length > 130 ? comment.slice(0, 130) : comment}
+        {comment.length > 130 ? (
+          <span onClick={() => setReadMore(true)} className="comment_read_more">
+            devamı
+          </span>
+        ) : null}
+      </span>
+    ) : (
+      <span>
+        <Link href={`/${username}`}>{`@${username}  `}</Link>{" "}
+        {comment.length > 130 ? comment.slice(0, 130) : comment}
+        {comment.length > 130 ? (
+          <span onClick={() => setReadMore(true)} className="comment_read_more">
+            devamı
+          </span>
+        ) : null}
+      </span>
+    );
+  };
+
+  const handleContentLong = (username, comment) => {
+    return username == null ? (
+      <span>
+        {comment}
+        <span onClick={() => setReadMore(false)} className="comment_less_more">
+          daha az
+        </span>
+      </span>
+    ) : (
+      <span>
+        <Link href={`/${username}`}>{`@${username}  `}</Link> {comment}
+        <span onClick={() => setReadMore(false)} className="comment_less_more">
+          daha az
+        </span>
+      </span>
+    );
+  };
+
+  const replyTo = (username, content) => {
+    return username == null ? (
+      <p>{content}</p>
+    ) : (
+      <div>
+        <Link href={`/${username}`}>{`@${username}  `}</Link>
+        {content}
+      </div>
+    );
+  };
+
   const { item } = props;
   const { parent } = item;
   return (
@@ -148,7 +191,11 @@ function Reply(props) {
           </ListItemAvatar>
           <ListItemText
             primary={item.replyUserInfo.userName}
-            secondary={replyTo(parent.parentReplyUserName, item.content)}
+            secondary={
+              readMore
+                ? handleContentLong(parent.parentReplyUserName, item.content)
+                : handleContent(parent.parentReplyUserName, item.content)
+            }
           />
         </ListItem>
         <div
@@ -162,9 +209,9 @@ function Reply(props) {
               padding: "4px",
             }}
           />
-          <Link href="#" onClick={() => setOpen(!isOpen)}>
+          <a onClick={() => setOpen(!isOpen)}>
             <p className="reply_text">{isOpen ? "boşver" : "salla"}</p>
-          </Link>
+          </a>
           <FavoriteBorderOutlinedIcon
             className={
               item.isLoggedLiked
