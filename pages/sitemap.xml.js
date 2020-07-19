@@ -8,10 +8,11 @@ class Sitemap extends React.Component {
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
     const data = await axios
       .get(`${API_URL}/post/get-slugs`)
-      .then(response => response.data);
+    //console.log(data);
+    //.then(response => response.data);
 
     res.setHeader("Content-Type", "text/xml");
-    res.write(sitemapXML(data));
+    res.write(sitemapXML(data.data));
     res.end();
   }
 }
