@@ -730,7 +730,3 @@ p {
     color: #007bff;
     margin-left: 3px;
 }
-
-.comment_less_more::before {
-    content: '...';
-}

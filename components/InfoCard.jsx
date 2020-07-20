@@ -1,21 +1,21 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Link from "next/link";
-import { Row, Col } from "react-bootstrap";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Link from 'next/link';
+import { Row, Col } from 'react-bootstrap';
 
-import { Divider, Icon, Button } from "@material-ui/core";
+import { Divider, Icon, Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
-    paddingTop: "20px",
+    display: 'flex',
+    paddingTop: '20px'
   },
   tag_card: {
-    width: "100%",
-    padding: "0 1rem",
-    flexWrap: "wrap",
-  },
+    width: '100%',
+    padding: '0 1rem',
+    flexWrap: 'wrap'
+  }
 }));
 
 export default function InfoCard(props) {
@@ -30,20 +30,20 @@ export default function InfoCard(props) {
         <Row>
           <p className="com_desc">{description}</p>
         </Row>
-        <Row className="com_desc_container" style={{ display: "grid" }}>
+        <Row className="com_desc_container" style={{ display: 'grid' }}>
           <b className="info_card_title">Moderatorler</b>
         </Row>
-        <Row style={{ padding: "1rem", display: "grid" }}>
+        <Row style={{ padding: '1rem', display: 'grid' }}>
           {moderators &&
             moderators.map((m) => {
               return (
                 <div key={m.username}>
                   <code key={m.username} className={classes.community_title}>
-                    <Link href={`/${m.username}`}>
-                      <a style={{ color: "blue" }}>{`u/${m.username}`}</a>
+                    <Link href={`/u/[username]`} as={`/u/${m.username}`}>
+                      <a style={{ color: 'blue' }}>{`u/${m.username}`}</a>
                     </Link>
                   </code>
-                  <Divider style={{ margin: "4px 0 4px 0" }} />
+                  <Divider style={{ margin: '4px 0 4px 0' }} />
                 </div>
               );
             })}

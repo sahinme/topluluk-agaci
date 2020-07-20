@@ -1,60 +1,60 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
-import ReactPlayer from "react-player";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import moment from "moment";
-import "moment/locale/tr";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { Divider } from "@material-ui/core";
-import { MDBIcon } from "mdbreact";
-import Skeleton from "@material-ui/lab/Skeleton";
-import LinkPreview from "../LinkPreview";
-import { readLocalStorage } from "../../lib/helpers";
-import PostMenu from "../postMenu";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import ReactPlayer from 'react-player';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import moment from 'moment';
+import 'moment/locale/tr';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { Divider } from '@material-ui/core';
+import { MDBIcon } from 'mdbreact';
+import Skeleton from '@material-ui/lab/Skeleton';
+import LinkPreview from '../LinkPreview';
+import { readLocalStorage } from '../../lib/helpers';
+import PostMenu from '../postMenu';
 import {
   deletePostRequest,
-  deleteModeratorRequest,
-} from "../../lib/posts/actions";
-import { connect } from "react-redux";
-import DeleteCommentPop from "../CommentList/components/deleteCommentPop";
-import ImageModal from "../ImageModal";
-import ShareButton from "../ShareButton";
+  deleteModeratorRequest
+} from '../../lib/posts/actions';
+import { connect } from 'react-redux';
+import DeleteCommentPop from '../CommentList/components/deleteCommentPop';
+import ImageModal from '../ImageModal';
+import ShareButton from '../ShareButton';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
+    display: 'flex'
   },
   media: {
     height: 0,
-    paddingTop: "56.25%", // 16:9
-    backgroundSize: "contain",
+    paddingTop: '56.25%', // 16:9
+    backgroundSize: 'contain'
   },
   expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
+    transform: 'rotate(0deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest
+    })
   },
   expandOpen: {
-    transform: "rotate(180deg)",
+    transform: 'rotate(180deg)'
   },
   postImage: {
-    borderRadius: "20px",
-    maxHeight: "512px",
-    maxWidth: "100%",
+    borderRadius: '20px',
+    maxHeight: '512px',
+    maxWidth: '100%'
   },
   leftSide: {
-    width: "48px",
-    backgroundColor: "#edebebcc",
-  },
+    width: '48px',
+    backgroundColor: '#edebebcc'
+  }
 }));
 
 function SocialCard(props) {
@@ -83,7 +83,7 @@ function SocialCard(props) {
     profilePosts,
     isModerator,
     auth,
-    pageNumber,
+    pageNumber
   } = props;
 
   const handleVote = (value) => {
@@ -112,7 +112,7 @@ function SocialCard(props) {
             onClick={() => setOpen(true)}
             className={classes.postImage}
             src={img}
-            alt={contentType === 10 ? pSlug : ""}
+            alt={contentType === 10 ? pSlug : ''}
           />
           {isOpen && (
             <ImageModal imageUrl={img} onClose={() => setOpen(false)} />
@@ -150,7 +150,7 @@ function SocialCard(props) {
       slug: community.slug,
       postId: id,
       pageNumber: pageDto.pageNumber,
-      pageSize: pageDto.pageSize,
+      pageSize: pageDto.pageSize
     };
     moderatorDelete(payload);
     setPopupAnchor(null);
@@ -158,13 +158,13 @@ function SocialCard(props) {
   };
 
   const menuItems = [
-    !profilePosts && { title: "Şikayet Et", onClick: handleClose },
-    profilePosts ? { title: "Sil", onClick: onDeleteClick } : null,
+    !profilePosts && { title: 'Şikayet Et', onClick: handleClose },
+    profilePosts ? { title: 'Sil', onClick: onDeleteClick } : null
   ];
 
   const moderatorItems = [
-    { title: "Şikayet Et", onClick: handleClose },
-    { title: "Sil", onClick: onDeleteClick },
+    { title: 'Şikayet Et', onClick: handleClose },
+    { title: 'Sil', onClick: onDeleteClick }
   ];
 
   const calculateSallamaCount = (comments) => {
@@ -183,23 +183,23 @@ function SocialCard(props) {
           <MDBIcon
             className={
               userPostVote && userPostVote.value == 1
-                ? "angle-double-up_checked"
-                : "angle-double-up"
+                ? 'angle-double-up_checked'
+                : 'angle-double-up'
             }
             icon="angle-double-up"
             onClick={() => {
-              const token = readLocalStorage("token");
+              const token = readLocalStorage('token');
               token
                 ? handleVote(userPostVote && userPostVote.value == 1 ? 0 : 1)
-                : router.push("/giris-yap");
+                : router.push('/giris-yap');
             }}
           />
           <p className="vote">{voteCount}</p>
           <MDBIcon
             className={
               userPostVote && userPostVote.value == -1
-                ? "angle-double-down_checked"
-                : "angle-double-down"
+                ? 'angle-double-down_checked'
+                : 'angle-double-down'
             }
             icon="angle-double-down"
             onClick={() =>
@@ -208,10 +208,10 @@ function SocialCard(props) {
           />
         </div>
       </div>
-      <div style={{ width: "100%", overflow: "hidden" }}>
+      <div style={{ width: '100%', overflow: 'hidden' }}>
         <CardHeader
           className="post_card_header"
-          style={{ padding: "16px 16px 0 16px" }}
+          style={{ padding: '16px 16px 0 16px' }}
           avatar={
             !id ? (
               <Skeleton
@@ -262,11 +262,11 @@ function SocialCard(props) {
               />
             ) : (
               <div>
-                <Link href={"/t/[community]"} as={`/t/${community.slug}`}>
+                <Link href={'/t/[community]'} as={`/t/${community.slug}`}>
                   <a>{community.name}</a>
                 </Link>
                 <small
-                  style={{ margin: "4px", fontWeight: 600, fontSize: "92%" }}
+                  style={{ margin: '4px', fontWeight: 600, fontSize: '92%' }}
                 >
                   /
                 </small>
@@ -283,9 +283,9 @@ function SocialCard(props) {
                         : `u/[username]`
                     }
                   >
-                    <a style={{ cursor: "pointer" }}>
+                    <a style={{ cursor: 'pointer' }}>
                       <span className="posted_by">
-                        {"u/" + user.userName + " " + "tarafından"}
+                        {'u/' + user.userName + ' ' + 'tarafından'}
                       </span>
                     </a>
                   </Link>
@@ -295,11 +295,11 @@ function SocialCard(props) {
           }
           subheader={createdDate && moment(createdDate).fromNow()}
         />
-        <Link as={`/${community.slug}/${pSlug}`} href={"/[community]/[post]"}>
+        <Link as={`/${community.slug}/${pSlug}`} href={'/[community]/[post]'}>
           <div className="content_container">
             <CardContent
               className="post_content_area"
-              style={{ padding: "5px 16px 16px 25px" }}
+              style={{ padding: '5px 16px 16px 25px' }}
             >
               {!id ? (
                 <Skeleton
@@ -317,21 +317,25 @@ function SocialCard(props) {
             {renderMedia()}
           </div>
         </Link>
-        <Divider style={{ margin: "15px 0px 0px 0px" }} />
+        <Divider style={{ margin: '15px 0px 0px 0px' }} />
 
         <CardActions
-          style={{ padding: "0px", paddingLeft: "3.5rem" }}
+          style={{ padding: '0px', paddingLeft: '3.5rem' }}
           disableSpacing
         >
-          <MDBIcon
-            style={{ margin: "0.5rem" }}
-            size="lg"
-            far
-            icon="comment-dots"
-          />
-          <small style={{ marginLeft: "-5px" }}>
-            {comments && calculateSallamaCount(comments)} sallama
-          </small>
+          <Link as={`/${community.slug}/${pSlug}`} href={'/[community]/[post]'}>
+            <MDBIcon
+              style={{ margin: '0.5rem', cursor: 'pointer' }}
+              size="lg"
+              far
+              icon="comment-dots"
+            />
+          </Link>
+          <Link as={`/${community.slug}/${pSlug}`} href={'/[community]/[post]'}>
+            <small style={{ marginLeft: '-5px', cursor: 'pointer' }}>
+              {comments && calculateSallamaCount(comments)} sallama
+            </small>
+          </Link>
           <ShareButton />
         </CardActions>
       </div>
@@ -341,11 +345,11 @@ function SocialCard(props) {
 
 const mapDispatchToProps = (dispatch) => ({
   deletePost: (payload) => dispatch(deletePostRequest(payload)),
-  moderatorDelete: (payload) => dispatch(deleteModeratorRequest(payload)),
+  moderatorDelete: (payload) => dispatch(deleteModeratorRequest(payload))
 });
 
 const mapStateToProps = (state) => ({
-  auth: state.auth && state.auth.data,
+  auth: state.auth && state.auth.data
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SocialCard);

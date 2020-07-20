@@ -1,30 +1,30 @@
-import React from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import CommentOutlinedIcon from "@material-ui/icons/CommentOutlined";
-import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutlined";
-import SendIcon from "@material-ui/icons/Send";
-import DeleteCommentPop from "./deleteCommentPop";
-import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
-import { TextField, Button } from "@material-ui/core";
-import { useState } from "react";
+import React from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+import CommentOutlinedIcon from '@material-ui/icons/CommentOutlined';
+import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
+import SendIcon from '@material-ui/icons/Send';
+import DeleteCommentPop from './deleteCommentPop';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import { TextField, Button } from '@material-ui/core';
+import { useState } from 'react';
 import {
   deleteReplyRequest,
   createReplyRequest,
   likeReplyRequest,
   unlikeReplyRequest,
-  deleteReplyModeratorRequest,
-} from "../../../lib/comment/actions";
-import { connect } from "react-redux";
-import { isLogged } from "../../../lib/helpers";
+  deleteReplyModeratorRequest
+} from '../../../lib/comment/actions';
+import { connect } from 'react-redux';
+import { isLogged } from '../../../lib/helpers';
 
 function Reply(props) {
   const [isOpen, setOpen] = useState(false);
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [readMore, setReadMore] = React.useState(false);
 
@@ -49,7 +49,7 @@ function Reply(props) {
 
   const onLikeReply = () => {
     if (!isLogged()) {
-      router.push("/giris-yap");
+      router.push('/giris-yap');
     }
     const values = { postId: props.postId, replyId: item.id, slug: props.slug };
     const { likeReply } = props;
@@ -58,7 +58,7 @@ function Reply(props) {
 
   const onUnlike = () => {
     if (!isLogged()) {
-      router.push("/giris-yap");
+      router.push('/giris-yap');
     }
     const values = { postId: props.postId, replyId: item.id, slug: props.slug };
     const { unLikeReply } = props;
@@ -67,7 +67,7 @@ function Reply(props) {
 
   const handleSubmit = () => {
     if (!isLogged()) {
-      router.push("/giris-yap");
+      router.push('/giris-yap');
       return;
     } else {
       const { createReply, postId, item, commentId, slug } = props;
@@ -76,10 +76,10 @@ function Reply(props) {
         commentId,
         content: text,
         parentId: item.id,
-        slug,
+        slug
       };
       createReply(values);
-      document.getElementById("comment").value = "";
+      document.getElementById('comment').value = '';
       setOpen(false);
     }
   };
@@ -128,7 +128,11 @@ function Reply(props) {
   const handleContent = (username, comment) => {
     return username == null ? (
       <span>
-        {comment.length > 130 ? comment.slice(0, 130) : comment}
+        {comment.length > 130 ? (
+          <p>{comment.slice(0, 130)}</p>
+        ) : (
+          <p>{comment}</p>
+        )}
         {comment.length > 130 ? (
           <span onClick={() => setReadMore(true)} className="comment_read_more">
             devamı
@@ -137,8 +141,12 @@ function Reply(props) {
       </span>
     ) : (
       <span>
-        <Link href={`/${username}`}>{`@${username}  `}</Link>{" "}
-        {comment.length > 130 ? comment.slice(0, 130) : comment}
+        <Link href={`/${username}`}>{`@${username}  `}</Link>{' '}
+        {comment.length > 130 ? (
+          <p>{comment.slice(0, 130)}</p>
+        ) : (
+          <p>{comment}</p>
+        )}
         {comment.length > 130 ? (
           <span onClick={() => setReadMore(true)} className="comment_read_more">
             devamı
@@ -151,14 +159,14 @@ function Reply(props) {
   const handleContentLong = (username, comment) => {
     return username == null ? (
       <span>
-        {comment}
+        <p>{comment}</p>
         <span onClick={() => setReadMore(false)} className="comment_less_more">
           daha az
         </span>
       </span>
     ) : (
       <span>
-        <Link href={`/${username}`}>{`@${username}  `}</Link> {comment}
+        <Link href={`/${username}`}>{`@${username}  `}</Link> <p>{comment}</p>
         <span onClick={() => setReadMore(false)} className="comment_less_more">
           daha az
         </span>
@@ -181,7 +189,7 @@ function Reply(props) {
   const { parent } = item;
   return (
     item && (
-      <div key={item.id}>
+      <div style={{ marginRight: '25px' }} key={item.id}>
         <ListItem className="reply_item" alignItems="flex-start">
           <ListItemAvatar>
             <Avatar
@@ -199,24 +207,24 @@ function Reply(props) {
           />
         </ListItem>
         <div
-          style={{ marginLeft: "7.2rem" }}
+          style={{ marginLeft: '7.2rem' }}
           className="comment_icon_container"
         >
           <CommentOutlinedIcon
             style={{
-              borderRadius: "2px",
-              display: "inline-block",
-              padding: "4px",
+              borderRadius: '2px',
+              display: 'inline-block',
+              padding: '4px'
             }}
           />
           <a onClick={() => setOpen(!isOpen)}>
-            <p className="reply_text">{isOpen ? "boşver" : "salla"}</p>
+            <p className="reply_text">{isOpen ? 'boşver' : 'salla'}</p>
           </a>
           <FavoriteBorderOutlinedIcon
             className={
               item.isLoggedLiked
-                ? "checked_comment_like_icon"
-                : "comment_like_icon"
+                ? 'checked_comment_like_icon'
+                : 'comment_like_icon'
             }
             onClick={item.isLoggedLiked ? onUnlike : onLikeReply}
           />
@@ -245,7 +253,7 @@ function Reply(props) {
               onChange={handleChange}
               rows={4}
               variant="outlined"
-              style={{ width: "100%", borderRadius: "10px" }}
+              style={{ width: '100%', borderRadius: '10px' }}
             />
             <Button
               className="comment_button"
@@ -270,12 +278,12 @@ const mapDispatchToProps = (dispatch) => ({
   likeReply: (payload) => dispatch(likeReplyRequest(payload)),
   unLikeReply: (payload) => dispatch(unlikeReplyRequest(payload)),
   deleteReplyModerator: (payload) =>
-    dispatch(deleteReplyModeratorRequest(payload)),
+    dispatch(deleteReplyModeratorRequest(payload))
 });
 
 const mapStateToProps = (state) => ({
   auth: state.auth.data,
-  post: state.postDetail.data,
+  post: state.postDetail.data
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Reply);
