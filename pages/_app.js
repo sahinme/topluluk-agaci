@@ -38,9 +38,9 @@ class MyApp extends App {
     const { Component, pageProps, store, router } = this.props;
     const token = readLocalStorage('token')
     let allowed = true;
-    /* if (router.pathname.startsWith("/topluluk-olustur") && !token) {
+    if ((router.pathname.startsWith("/topluluk-olustur") || router.pathname.startsWith('/salla')) && !token) {
       allowed = false;
-    } */
+    }
     return (
       <Provider store={store}>
         <ConnectedRouter>

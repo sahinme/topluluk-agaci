@@ -1,7 +1,7 @@
 {
   "name": "next-saga-example",
   "version": "1.0.0",
-  "description": "Example of using next.js with redux-saga",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "next",
@@ -9,7 +9,7 @@
     "start": "next start",
     "export": "next build && next export"
   },
-  "author": "Victor Chan (victor36max@gmail.com)",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "@material-ui/core": "^4.10.2",
@@ -58,6 +58,7 @@
     "regenerator-runtime": "^0.13.2",
     "rollbar": "^2.17.0",
     "sass": "^1.26.8",
+    "sitemap": "^6.2.0",
     "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
@@ -69,5 +70,8 @@
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.10.0"
+  },
+  "browser": {
+    "child_process": false
   }
 }
