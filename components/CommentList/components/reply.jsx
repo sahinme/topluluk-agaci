@@ -129,9 +129,9 @@ function Reply(props) {
     return username == null ? (
       <span>
         {comment.length > 130 ? (
-          <p>{comment.slice(0, 130)}</p>
+          <p className="comment_rep_text">{comment.slice(0, 130)}</p>
         ) : (
-          <p>{comment}</p>
+          <p className="comment_rep_text">{comment}</p>
         )}
         {comment.length > 130 ? (
           <span onClick={() => setReadMore(true)} className="comment_read_more">
@@ -143,9 +143,9 @@ function Reply(props) {
       <span>
         <Link href={`/${username}`}>{`@${username}  `}</Link>{' '}
         {comment.length > 130 ? (
-          <p>{comment.slice(0, 130)}</p>
+          <p className="comment_rep_text">{comment.slice(0, 130)}</p>
         ) : (
-          <p>{comment}</p>
+          <p className="comment_rep_text">{comment}</p>
         )}
         {comment.length > 130 ? (
           <span onClick={() => setReadMore(true)} className="comment_read_more">
@@ -159,14 +159,15 @@ function Reply(props) {
   const handleContentLong = (username, comment) => {
     return username == null ? (
       <span>
-        <p>{comment}</p>
+        <p className="comment_rep_text">{comment}</p>
         <span onClick={() => setReadMore(false)} className="comment_less_more">
           daha az
         </span>
       </span>
     ) : (
       <span>
-        <Link href={`/${username}`}>{`@${username}  `}</Link> <p>{comment}</p>
+        <Link href={`/${username}`}>{`@${username}  `}</Link>{' '}
+        <p className="comment_rep_text">{comment}</p>
         <span onClick={() => setReadMore(false)} className="comment_less_more">
           daha az
         </span>

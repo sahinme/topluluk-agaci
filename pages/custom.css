@@ -730,3 +730,7 @@ p {
     color: #007bff;
     margin-left: 3px;
 }
+
+.comment_rep_text {
+    color: black;
+}

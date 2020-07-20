@@ -1,55 +1,55 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import { makeStyles } from "@material-ui/core/styles";
-import ListItem from "@material-ui/core/ListItem";
-import Divider from "@material-ui/core/Divider";
-import SendIcon from "@material-ui/icons/Send";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import CommentOutlinedIcon from "@material-ui/icons/CommentOutlined";
-import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
-import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutlined";
-import { TextField, Button } from "@material-ui/core";
-import Reply from "./reply";
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { makeStyles } from '@material-ui/core/styles';
+import ListItem from '@material-ui/core/ListItem';
+import Divider from '@material-ui/core/Divider';
+import SendIcon from '@material-ui/icons/Send';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+import CommentOutlinedIcon from '@material-ui/icons/CommentOutlined';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
+import { TextField, Button } from '@material-ui/core';
+import Reply from './reply';
 import {
   createReplyRequest,
   likeCommentRequest,
   unlikeCommentRequest,
   deleteCommentRequest,
-  deleteCommentModeratorRequest,
-} from "../../../lib/comment/actions";
-import { connect } from "react-redux";
-import { readLocalStorage, isLogged } from "../../../lib/helpers";
-import DeleteCommentPop from "./deleteCommentPop";
+  deleteCommentModeratorRequest
+} from '../../../lib/comment/actions';
+import { connect } from 'react-redux';
+import { readLocalStorage, isLogged } from '../../../lib/helpers';
+import DeleteCommentPop from './deleteCommentPop';
 
 const useStyles = makeStyles((theme) => ({
   likeIcon: {
-    marginLeft: "0.5rem",
-    borderRadius: "2px",
-    display: "inline-block",
-    padding: "4px",
-    cursor: "pointer",
+    marginLeft: '0.5rem',
+    borderRadius: '2px',
+    display: 'inline-block',
+    padding: '4px',
+    cursor: 'pointer'
   },
   commentIcon: {
-    borderRadius: "2px",
-    display: "inline-block",
-    padding: "4px",
+    borderRadius: '2px',
+    display: 'inline-block',
+    padding: '4px'
   },
   deleteIcon: {
-    borderRadius: "2px",
-    display: "inline-block",
-    padding: "4px",
-    cursor: "pointer",
-    marginLeft: "0.5rem",
-  },
+    borderRadius: '2px',
+    display: 'inline-block',
+    padding: '4px',
+    cursor: 'pointer',
+    marginLeft: '0.5rem'
+  }
 }));
 
 function Comment(props) {
   const classes = useStyles();
   const [isOpen, setOpen] = useState(false);
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [readMore, setReadMore] = React.useState(false);
 
@@ -62,23 +62,23 @@ function Comment(props) {
   };
 
   const handleSubmit = () => {
-    const token = readLocalStorage("token");
-    const user = readLocalStorage("user");
+    const token = readLocalStorage('token');
+    const user = readLocalStorage('user');
     if (!token || !user) {
-      router.push("/giris-yap");
+      router.push('/giris-yap');
       return;
     } else {
       const { createReply, postId, item } = props;
       const values = { postId, commentId: item.id, content: text, slug };
       createReply(values);
-      document.getElementById("comment").value = "";
+      document.getElementById('comment').value = '';
       setOpen(false);
     }
   };
 
   const onLikeComment = () => {
     if (!isLogged()) {
-      router.push("/giris-yap");
+      router.push('/giris-yap');
     }
     const values = { postId: props.postId, commentId: item.id, slug };
     const { likeComment } = props;
@@ -87,7 +87,7 @@ function Comment(props) {
 
   const onUnlike = () => {
     if (!isLogged()) {
-      router.push("/giris-yap");
+      router.push('/giris-yap');
     }
     const values = { postId: props.postId, commentId: item.id, slug };
     const { unLikeComment } = props;
@@ -153,21 +153,21 @@ function Comment(props) {
     if (comment.length > 130) {
       return (
         <span>
-          {comment.slice(0, 130)}
+          <p className="comment_rep_text">{comment.slice(0, 130)}</p>
           <span onClick={() => setReadMore(true)} className="comment_read_more">
             devamı
-          </span>{" "}
+          </span>
         </span>
       );
     } else {
-      return comment;
+      return <p className="comment_rep_text"> {comment} </p>;
     }
   };
 
   const handleContentLong = (comment) => {
     return (
       <span>
-        {comment}
+        <p className="comment_rep_text">{comment}</p>
         <span onClick={() => setReadMore(false)} className="comment_less_more">
           daha az
         </span>
@@ -188,7 +188,7 @@ function Comment(props) {
           primary={
             <Link
               href={`/${item.commentUserInfo && item.commentUserInfo.userName}`}
-              style={{ color: "black" }}
+              style={{ color: 'black' }}
             >
               {item.commentUserInfo && item.commentUserInfo.userName}
             </Link>
@@ -203,13 +203,13 @@ function Comment(props) {
       <div className="comment_icon_container">
         <CommentOutlinedIcon className={classes.commentIcon} />
         <a onClick={() => setOpen(!isOpen)}>
-          <p className="reply_text">{isOpen ? "boşver" : "salla"}</p>
+          <p className="reply_text">{isOpen ? 'boşver' : 'salla'}</p>
         </a>
         <FavoriteBorderOutlinedIcon
           className={
             item.isLoggedLiked
-              ? "checked_comment_like_icon"
-              : "comment_like_icon"
+              ? 'checked_comment_like_icon'
+              : 'comment_like_icon'
           }
           onClick={item.isLoggedLiked ? onUnlike : onLikeComment}
         />
@@ -241,7 +241,7 @@ function Comment(props) {
             onChange={handleChange}
             rows={4}
             variant="outlined"
-            style={{ width: "100%", borderRadius: "10px" }}
+            style={{ width: '100%', borderRadius: '10px' }}
           />
           <Button
             className="comment_button"
@@ -277,12 +277,12 @@ const mapDispatchToProps = (dispatch) => ({
   unLikeComment: (payload) => dispatch(unlikeCommentRequest(payload)),
   deleteComment: (payload) => dispatch(deleteCommentRequest(payload)),
   deleteCommentModerator: (payload) =>
-    dispatch(deleteCommentModeratorRequest(payload)),
+    dispatch(deleteCommentModeratorRequest(payload))
 });
 
 const mapStateToProps = (state) => ({
   auth: state.auth.data,
-  post: state.postDetail.data,
+  post: state.postDetail.data
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Comment);
