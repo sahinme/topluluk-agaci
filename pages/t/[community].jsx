@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from "react";
-import { NextSeo } from "next-seo";
-import { Row, Col, Container } from "react-bootstrap";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { connect } from "react-redux";
-import { Paper } from "@material-ui/core";
-import InfoCard from "../../components/InfoCard";
-import MainLayout from "../../components/mainLayout";
+import React, { useEffect, useState } from 'react';
+import { NextSeo } from 'next-seo';
+import { Row, Col, Container } from 'react-bootstrap';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { connect } from 'react-redux';
+import { Paper } from '@material-ui/core';
+import InfoCard from '../../components/InfoCard';
+import MainLayout from '../../components/mainLayout';
 import {
   getCommunityRequest,
-  getCommunityPostsRequest,
-} from "../../lib/community/actions";
-import { joinCommunityRequest } from "../../lib/users/actions";
-import ActionButton from "../../components/ActionButton";
-import { votePostRequest } from "../../lib/posts/actions";
-import Loader from "../../components/Loader";
-import { clearStoreRequest } from "../../lib/commonActions";
-import CreatePostTab from "../../components/CreatePostTab";
-import SocialCard from "../../components/SocialCard";
-import { parseCookies } from "nookies";
-import { readLocalStorage } from "../../lib/helpers";
-import { useRouter } from "next/router";
+  getCommunityPostsRequest
+} from '../../lib/community/actions';
+import { joinCommunityRequest } from '../../lib/users/actions';
+import ActionButton from '../../components/ActionButton';
+import { votePostRequest } from '../../lib/posts/actions';
+import Loader from '../../components/Loader';
+import { clearStoreRequest } from '../../lib/commonActions';
+import CreatePostTab from '../../components/CreatePostTab';
+import SocialCard from '../../components/SocialCard';
+import { parseCookies } from 'nookies';
+import { readLocalStorage } from '../../lib/helpers';
+import { useRouter } from 'next/router';
+import planetLogo from './planet.png';
 
 function CommunityPage(props) {
   const router = useRouter();
@@ -31,17 +32,17 @@ function CommunityPage(props) {
       pageNumber: 1,
       pageSize: 6,
       slug: router.query.community,
-      loaderStart: true,
+      loaderStart: true
     });
     return () => {
-      props.clearStore("community_posts");
+      props.clearStore('community_posts');
     };
   }, [router.asPath]);
 
   const element = () => {
     const { community } = props;
-    const token = readLocalStorage("token");
-    const user = readLocalStorage("user");
+    const token = readLocalStorage('token');
+    const user = readLocalStorage('user');
     if (!token) return <ActionButton isLogged={false} />;
     let isJoined = false;
     community &&
@@ -59,7 +60,7 @@ function CommunityPage(props) {
 
   const onVote = (values) => {
     const { votePost, community } = props;
-    values.page = "community";
+    values.page = 'community';
     values.cSlug = community.slug;
     values.communityId = community.id;
     values.pageSize = 6;
@@ -74,7 +75,7 @@ function CommunityPage(props) {
       pageNumber: newNumber,
       pageSize: 6,
       slug: community.slug,
-      loaderStart: false,
+      loaderStart: false
     });
     setNumber(newNumber);
   };
@@ -84,17 +85,17 @@ function CommunityPage(props) {
     community && (
       <MainLayout>
         <NextSeo
-          title={community.name + " topluluğu | Saalla "}
+          title={community.name + ' topluluğu | Saalla '}
           description={community.description}
           canonical={`https://saalla.com/t/${community.slug}`}
           openGraph={{
             url: `https://saalla.com/t/${community.slug}`,
-            title: community.name + " topluluğu | Saalla ",
+            title: community.name + ' topluluğu | Saalla ',
             description: community.description,
             images:
               community.logoPath !== null
                 ? [{ url: community.logoPath, alt: community.name }]
-                : [],
+                : []
           }}
         />
         {/* <Head>
@@ -109,9 +110,13 @@ function CommunityPage(props) {
             }
           />
         </Head> */}
-        <Row style={{ height: "250px" }}>
+        <Row style={{ height: '250px' }}>
           <img
-            className="com_cover_image"
+            className={
+              community.coverImagePath
+                ? 'com_cover_image'
+                : 'com_cover_image_null'
+            }
             src={community.coverImagePath}
             alt={community.name}
           />
@@ -121,14 +126,14 @@ function CommunityPage(props) {
             <Col className="com_bar_info" md={8}>
               <img
                 className="profile_img"
-                src={community.logoPath}
+                src={community.logoPath || planetLogo}
                 alt={community.name}
               />
               <div className="com_name">
                 <div className="com_bar_title">
                   <h3 className="com_title">{community.name}</h3>
                   <small className="com_member_count">
-                    t/{community.slug + " |"}
+                    t/{community.slug + ' |'}
                   </small>
                   <small className="com_member_count">
                     {community && community.members && community.members.length}
@@ -140,18 +145,18 @@ function CommunityPage(props) {
             </Col>
           </Paper>
         </Row>
-        <Container style={{ marginTop: "1rem" }}>
+        <Container style={{ marginTop: '1rem' }}>
           <Row>
             <Col xs={12} md={12}>
               <CreatePostTab
                 slug={community.slug}
-                user={readLocalStorage("user")}
+                user={readLocalStorage('user')}
               />
             </Col>
           </Row>
-          <Row style={{ marginTop: "1rem" }}>
+          <Row style={{ marginTop: '1rem' }}>
             <Col
-              style={{ paddingBottom: "10px", paddingTop: "20px" }}
+              style={{ paddingBottom: '10px', paddingTop: '20px' }}
               xs={12}
               md={8}
             >
@@ -177,7 +182,7 @@ function CommunityPage(props) {
                       community={{
                         name: community.name,
                         slug: community.slug,
-                        logoPath: community.logoPath,
+                        logoPath: community.logoPath
                       }}
                       comments={item.comments}
                       user={item.user}
@@ -189,7 +194,7 @@ function CommunityPage(props) {
                   ))}
               </InfiniteScroll>
             </Col>
-            <Col style={{ paddingBottom: "10px" }} xs={12} md={4}>
+            <Col style={{ paddingBottom: '10px' }} xs={12} md={4}>
               <div className="com_right_bar">
                 <InfoCard
                   moderators={community.moderators}
@@ -232,12 +237,12 @@ const mapDispatchToProps = (dispatch) => ({
   joinCommunity: (payload) => dispatch(joinCommunityRequest(payload)),
   votePost: (payload) => dispatch(votePostRequest(payload)),
   getPosts: (payload) => dispatch(getCommunityPostsRequest(payload)),
-  clearStore: (name) => dispatch(clearStoreRequest(name)),
+  clearStore: (name) => dispatch(clearStoreRequest(name))
 });
 
 const mapStateToProps = (state) => ({
   community: state.community.data,
-  posts: state.community.pagedData,
+  posts: state.community.pagedData
   //auth: state.auth.data,
 });
 

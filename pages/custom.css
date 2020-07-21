@@ -443,6 +443,14 @@ code {
     height: 100%;
 }
 
+.com_cover_image_null {
+    background-color: black;
+    width: 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
 .com_bar {
     width: 100%;
     height: 100px;
