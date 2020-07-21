@@ -1,23 +1,24 @@
-import React from "react";
-import Link from "next/link";
-import { makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
-import Avatar from "@material-ui/core/Avatar";
-import { Divider, ListSubheader } from "@material-ui/core";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
+import React from 'react';
+import Link from 'next/link';
+import { makeStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
+import Avatar from '@material-ui/core/Avatar';
+import { Divider, ListSubheader } from '@material-ui/core';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import planetLogo from '../pages/t/planet.png';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "100%",
+    width: '100%',
     backgroundColor: theme.palette.background.paper,
-    paddingBottom: "0",
-    paddingTop: "0",
-    border: "1px double #00000057 !important;",
-  },
+    paddingBottom: '0',
+    paddingTop: '0',
+    border: '1px double #00000057 !important;'
+  }
 }));
 
 export default function CommunityList(props) {
@@ -29,7 +30,7 @@ export default function CommunityList(props) {
       subheader={
         <React.Fragment>
           <ListSubheader>
-            {category && category.displayName + " için"} Trend Topluluklar
+            {category && category.displayName + ' için'} Trend Topluluklar
           </ListSubheader>
           <Divider />
         </React.Fragment>
@@ -40,20 +41,20 @@ export default function CommunityList(props) {
         items.map((item) => {
           return (
             <React.Fragment>
-              <Link href={"/t/[community]"} as={`/t/${item.slug}`}>
+              <Link href={'/t/[community]'} as={`/t/${item.slug}`}>
                 <ListItem button>
                   <ListItemIcon>
                     <ArrowDropUpIcon
                       fontSize="large"
-                      style={{ color: "#40eb3d" }}
+                      style={{ color: '#40eb3d' }}
                     />
                   </ListItemIcon>
                   <ListItemAvatar>
-                    <Avatar src={item.logoPath} />
+                    <Avatar src={item.logoPath || planetLogo} />
                   </ListItemAvatar>
                   <ListItemText
-                    primary={"s/" + item.name}
-                    secondary={item.memberCount + " üye"}
+                    primary={'s/' + item.name}
+                    secondary={item.memberCount + ' üye'}
                   />
                 </ListItem>
               </Link>
