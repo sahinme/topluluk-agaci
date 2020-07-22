@@ -89,6 +89,7 @@ function CommunityPage(props) {
         result = true;
       }
     });
+    return result;
   };
 
   const { community, posts } = props;
@@ -152,15 +153,15 @@ function CommunityPage(props) {
                 user={readLocalStorage('user')}
               />
               {isModeratorThis() && (
-                <>
-                  <p>Bu topluluğuun moderatörüsün.</p>
+                <div style={{ display: 'flex' }}>
+                  <p>Bu topluluğun moderatörüsün.</p>
                   <Link
                     href="/moderator/[slug]"
                     as={`/moderator/${community.slug}`}
                   >
                     &nbsp; Yönetici sayfasına geçiş yap
                   </Link>{' '}
-                </>
+                </div>
               )}
             </Col>
           </Row>
