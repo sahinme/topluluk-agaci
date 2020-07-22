@@ -324,7 +324,7 @@ function SocialCard(props) {
           style={{ padding: '0px', paddingLeft: '3.5rem' }}
           disableSpacing
         >
-          <Link as={`/${community.slug}/${pSlug}`} href={'/[community]/[post]'}>
+          <Link as={`/${community.slug}/${pSlug}`} href="/[community]/[post]">
             <MDBIcon
               style={{ margin: '0.5rem', cursor: 'pointer' }}
               size="lg"
@@ -332,7 +332,7 @@ function SocialCard(props) {
               icon="comment-dots"
             />
           </Link>
-          <Link as={`/${community.slug}/${pSlug}`} href={'/[community]/[post]'}>
+          <Link as={`/${community.slug}/${pSlug}`} href="/[community]/[post]">
             <small style={{ marginLeft: '-5px', cursor: 'pointer' }}>
               {comments && calculateSallamaCount(comments)} sallama
             </small>

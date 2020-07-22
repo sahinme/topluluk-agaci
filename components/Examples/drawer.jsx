@@ -3,23 +3,17 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 
 import logo from '../logo.png';
+import planetLogo from '../../pages/t/planet.png';
 
 const drawerWidth = 240;
 
@@ -139,16 +133,18 @@ export default function DrawerExample({
           {userCommunities &&
             userCommunities.length > 0 &&
             userCommunities.map((item, index) => (
-              <Link href="/t/[community]" as={`/t/${item.slug}`}>
-                <ListItem button key={item.name}>
-                  <img
-                    className={classes.avatarImg}
-                    src={item.logoPath}
-                    alt=""
-                  />
-                  <ListItemText primary={item.name} />
-                </ListItem>
-              </Link>
+              <span key={item.slug}>
+                <Link href="/t/[community]" as={`/t/${item.slug}`}>
+                  <ListItem button key={item.name}>
+                    <img
+                      className={classes.avatarImg}
+                      src={item.logoPath || planetLogo}
+                      alt=""
+                    />
+                    <ListItemText primary={item.name} />
+                  </ListItem>
+                </Link>
+              </span>
             ))}
         </List>
         <Divider />
@@ -158,16 +154,18 @@ export default function DrawerExample({
           {ofModerators &&
             ofModerators.length > 0 &&
             ofModerators.map((item, index) => (
-              <Link href="/moderator/[slug]" as={`/moderator/${item.slug}`}>
-                <ListItem button key={item.name}>
-                  <img
-                    className={classes.avatarImg}
-                    src={item.logoPath}
-                    alt=""
-                  />
-                  <ListItemText primary={item.name} />
-                </ListItem>
-              </Link>
+              <span key={item.slug}>
+                <Link href="/moderator/[slug]" as={`/moderator/${item.slug}`}>
+                  <ListItem button key={item.name}>
+                    <img
+                      className={classes.avatarImg}
+                      src={item.logoPath || planetLogo}
+                      alt=""
+                    />
+                    <ListItemText primary={item.name} />
+                  </ListItem>
+                </Link>
+              </span>
             ))}
         </List>
       </Drawer>

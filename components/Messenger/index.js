@@ -33,7 +33,7 @@ function Messenger(props) {
       <PrimarySearchAppBar />
       <Container style={{ marginTop: "6rem" }}>
 
-        <Row style={{ marginTop: "1rem" }}>
+        <Row style={{ marginTop: "1rem", flexWrap: "wrap-reverse" }}>
           <Col
             style={{ paddingBottom: "10px" }}
             xs={12}

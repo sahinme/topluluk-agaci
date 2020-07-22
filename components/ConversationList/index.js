@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import ConversationSearch from '../ConversationSearch';
 import ConversationListItem from '../ConversationListItem';
 import Toolbar from '../Toolbar';
 import ToolbarButton from '../ToolbarButton';
 import { getConversationsRequest, getConversationDetailRequest } from '../../lib/conversation/actions';
-import { connect } from 'react-redux';
+import { readLocalStorage } from "../../lib/helpers";
 
 function ConversationList(props) {
   const { conversations, auth, getConversationDetail, selectedConversation, getConversations } = props;
@@ -35,7 +36,7 @@ function ConversationList(props) {
             key={conversation.id}
             id={conversation.id}
             data={conversation}
-            user={auth.user}
+            user={readLocalStorage('user')}
             selectedId={selectedConversation && selectedConversation.id}
             onSelect={onSelect}
           />
@@ -53,7 +54,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => ({
   conversations: state.conversations.data,
-  auth: state.auth.data,
+  //auth: state.auth.data,
   selectedConversation: state.selectedConversation.data,
 });
 

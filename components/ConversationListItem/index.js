@@ -10,7 +10,7 @@ export default function ConversationListItem(props) {
   const data = user && receiver.username == user.username ? sender : receiver;
   return (
     <div style={{ backgroundColor: selectedId == id && "#ededed" }} onClick={() => onSelect(id)} className="conversation-list-item">
-      <img className="conversation-photo" src={data.logoPath || imgIcon} alt="conversation" />
+      <img className="conversation-photo" src={data.logoPath || imgIcon} />
       <div className="conversation-info">
         <h1 className="conversation-title">{data.username}</h1>
         <p className="conversation-snippet">{moment(createdDate).fromNow()}</p>
