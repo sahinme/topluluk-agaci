@@ -1,34 +1,34 @@
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import Head from "next/head";
-import { Row, Col, Container } from "react-bootstrap";
-import { connect } from "react-redux";
-import { getPopularCommnityListRequest } from "../../lib/community/actions";
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import Head from 'next/head';
+import { Row, Col, Container } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { getPopularCommnityListRequest } from '../../lib/community/actions';
 import {
   getHomePostsRequest,
-  getUnauthorizedPostsRequest,
-} from "../../lib/home/actions";
-import { votePostRequest } from "../../lib/posts/actions";
-import Loader from "../Loader";
-import { clearStoreRequest } from "../../lib/commonActions";
-import { Helmet } from "react-helmet";
-import InfiniteScroll from "react-infinite-scroll-component";
-import SocialCard from "../SocialCard";
-import PopularTags from "../PopularTags";
-import CreatePostTab from "../CreatePostTab";
-import CustomizedSnackbars from "../Snackbar";
-import { readLocalStorage } from "../../lib/helpers";
-import { parseCookies } from "nookies";
+  getUnauthorizedPostsRequest
+} from '../../lib/home/actions';
+import { votePostRequest } from '../../lib/posts/actions';
+import Loader from '../Loader';
+import { clearStoreRequest } from '../../lib/commonActions';
+import { Helmet } from 'react-helmet';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import SocialCard from '../SocialCard';
+import PopularTags from '../PopularTags';
+import CreatePostTab from '../CreatePostTab';
+import CustomizedSnackbars from '../Snackbar';
+import { readLocalStorage } from '../../lib/helpers';
+import { parseCookies } from 'nookies';
 
 function Home(props) {
   const [pageNumber, setNumber] = useState(1);
   const [auth, setAuth] = React.useState({
     data: { token: null, user: null },
-    error: null,
+    error: null
   });
   useEffect(() => {
-    const user = readLocalStorage("user");
-    const token = readLocalStorage("token");
+    const user = readLocalStorage('user');
+    const token = readLocalStorage('token');
     if (user && token) {
       const payload = { data: { user, token }, error: null };
       setAuth(payload);
@@ -40,7 +40,7 @@ function Home(props) {
       getUnauthorizedPosts({ pageNumber: 1, pageSize: 6, loderStart: true });
     }
     return () => {
-      props.clearStore("home_posts");
+      props.clearStore('home_posts');
     };
   }, []);
 
@@ -58,12 +58,12 @@ function Home(props) {
           pageNumber: newNumber,
           pageSize: 6,
           loderStart: false,
-          token: readLocalStorage("token"),
+          token: readLocalStorage('token')
         })
       : getUnauthorizedPosts({
           pageNumber: newNumber,
           pageSize: 6,
-          loderStart: false,
+          loderStart: false
         });
     setNumber(newNumber);
   };
@@ -81,7 +81,7 @@ function Home(props) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Container>
-        <Row>
+        <Row style={{ marginTop: '1rem' }}>
           <Col xs={12} md={12}>
             <CreatePostTab user={auth.user} />
           </Col>
@@ -89,8 +89,8 @@ function Home(props) {
         <Row>
           <Col
             style={{
-              paddingBottom: "4px",
-              paddingTop: "20px",
+              paddingBottom: '4px',
+              paddingTop: '20px'
             }}
             xs={12}
             md={8}
@@ -98,11 +98,11 @@ function Home(props) {
             <b>Populer Sallamalar</b>
           </Col>
         </Row>
-        <Row style={{ flexWrap: "wrap-reverse" }}>
+        <Row style={{ flexWrap: 'wrap-reverse' }}>
           <Col
             style={{
-              paddingBottom: "10px",
-              paddingTop: "20px",
+              paddingBottom: '10px',
+              paddingTop: '20px'
             }}
             xs={12}
             md={8}
@@ -112,7 +112,7 @@ function Home(props) {
                 <CustomizedSnackbars
                   message="Topluluklari Kesfet - Hiçbir topluluğa üye değilsin Şimdi tam zamanı"
                   type="warning"
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: 'pointer' }}
                 />
               </Link>
             )}
@@ -144,9 +144,9 @@ function Home(props) {
               ))}
             </InfiniteScroll>
           </Col>
-          <Col style={{ paddingBottom: "10px" }} xs={12} md={4}>
+          <Col style={{ paddingBottom: '10px' }} xs={12} md={4}>
             <div
-              style={{ position: "-webkit-sticky", position: "sticky", top: 0 }}
+              style={{ position: '-webkit-sticky', position: 'sticky', top: 0 }}
             >
               <PopularTags />
             </div>
@@ -163,12 +163,12 @@ const mapDispatchToProps = (dispatch) => ({
   getHomePosts: (payload) => dispatch(getHomePostsRequest(payload)),
   getUnauthorizedPosts: (payload) =>
     dispatch(getUnauthorizedPostsRequest(payload)),
-  votePost: (payload) => dispatch(votePostRequest(payload)),
+  votePost: (payload) => dispatch(votePostRequest(payload))
 });
 
 const mapStateToProps = (state) => ({
   home: state.home.data,
-  userCommunities: state.userCommunities.data,
+  userCommunities: state.userCommunities.data
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -26,6 +26,7 @@ import { connect } from 'react-redux';
 import DeleteCommentPop from '../CommentList/components/deleteCommentPop';
 import ImageModal from '../ImageModal';
 import ShareButton from '../ShareButton';
+import planetLogo from '../../pages/t/planet.png';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -223,7 +224,7 @@ function SocialCard(props) {
             ) : (
               <Avatar
                 aria-label="recipe"
-                src={community.logoPath}
+                src={community.logoPath || planetLogo}
                 className={classes.avatar}
               ></Avatar>
             )

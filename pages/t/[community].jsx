@@ -21,6 +21,7 @@ import { parseCookies } from 'nookies';
 import { readLocalStorage } from '../../lib/helpers';
 import { useRouter } from 'next/router';
 import planetLogo from './planet.png';
+import Link from 'next/link';
 
 function CommunityPage(props) {
   const router = useRouter();
@@ -98,18 +99,6 @@ function CommunityPage(props) {
                 : []
           }}
         />
-        {/* <Head>
-          <title>{community.name + " topluluğu | Saalla "}</title>
-          <meta
-            name="description"
-            content={
-              community.description !== "" &&
-              community.description !== null &&
-              community.description.length > 100 &&
-              community.description.slice(0, 100)
-            }
-          />
-        </Head> */}
         <Row style={{ height: '250px' }}>
           <img
             className={
@@ -152,8 +141,16 @@ function CommunityPage(props) {
                 slug={community.slug}
                 user={readLocalStorage('user')}
               />
+              Bu topluluğuun moderatörüsün.
+              <Link
+                href="/moderator/[slug]"
+                as={`/moderator/${community.slug}`}
+              >
+                &nbsp; Yönetici sayfasına geçiş yap
+              </Link>
             </Col>
           </Row>
+
           <Row style={{ marginTop: '1rem' }}>
             <Col
               style={{ paddingBottom: '10px', paddingTop: '20px' }}
