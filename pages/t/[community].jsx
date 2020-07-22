@@ -81,6 +81,16 @@ function CommunityPage(props) {
     setNumber(newNumber);
   };
 
+  const isModeratorThis = () => {
+    let result = false;
+    const comMods = readLocalStorage('user').comMods;
+    comMods.map((x) => {
+      if (x === community.slug) {
+        result = true;
+      }
+    });
+  };
+
   const { community, posts } = props;
   return (
     community && (
@@ -126,7 +136,7 @@ function CommunityPage(props) {
                   </small>
                   <small className="com_member_count">
                     {community && community.members && community.members.length}
-                    Üye
+                    &nbsp;Üye
                   </small>
                 </div>
                 <div className="join_button_container">{element()}</div>
@@ -141,13 +151,17 @@ function CommunityPage(props) {
                 slug={community.slug}
                 user={readLocalStorage('user')}
               />
-              Bu topluluğuun moderatörüsün.
-              <Link
-                href="/moderator/[slug]"
-                as={`/moderator/${community.slug}`}
-              >
-                &nbsp; Yönetici sayfasına geçiş yap
-              </Link>
+              {isModeratorThis() && (
+                <>
+                  <p>Bu topluluğuun moderatörüsün.</p>
+                  <Link
+                    href="/moderator/[slug]"
+                    as={`/moderator/${community.slug}`}
+                  >
+                    &nbsp; Yönetici sayfasına geçiş yap
+                  </Link>{' '}
+                </>
+              )}
             </Col>
           </Row>
 
