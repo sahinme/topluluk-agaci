@@ -83,12 +83,14 @@ function CommunityPage(props) {
 
   const isModeratorThis = () => {
     let result = false;
-    const comMods = readLocalStorage('user').comMods;
-    comMods.map((x) => {
-      if (x === community.slug) {
-        result = true;
-      }
-    });
+    const user = readLocalStorage('user');
+    if (user && user.comMods) {
+      user.comMods.map((x) => {
+        if (x === community.slug) {
+          result = true;
+        }
+      });
+    }
     return result;
   };
 
