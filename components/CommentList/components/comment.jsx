@@ -187,7 +187,9 @@ function Comment(props) {
         <ListItemText
           primary={
             <Link
-              href={`/${item.commentUserInfo && item.commentUserInfo.userName}`}
+              href={`/u/${
+                item.commentUserInfo && item.commentUserInfo.userName
+              }`}
               style={{ color: 'black' }}
             >
               {item.commentUserInfo && item.commentUserInfo.userName}

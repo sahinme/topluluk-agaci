@@ -1,7 +1,7 @@
-import React from "react";
-import Document, { Html, Head, Main, NextScript } from "next/document";
-import { ServerStyleSheets } from "@material-ui/styles";
-import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
+import React from 'react';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+import { ServerStyleSheets } from '@material-ui/styles';
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
 const theme = responsiveFontSizes(createMuiTheme());
 
@@ -10,6 +10,11 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <script
+            data-ad-client="ca-pub-7573250938739874"
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+          ></script>
           <script
             async
             src={`https://www.googletagmanager.com/gtag/js?id=UA-169270484-1`}
@@ -22,7 +27,7 @@ class MyDocument extends Document {
               gtag('js', new Date());
             
               gtag('config', 'UA-169270484-1');
-          `,
+          `
             }}
           />
           <meta
@@ -54,7 +59,7 @@ class MyDocument extends Document {
                 box-sizing: border-box;
               }
               body {
-                font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+                font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
                 font-size: 1rem;
                 margin: 0;
               }
@@ -77,7 +82,7 @@ MyDocument.getInitialProps = async (ctx) => {
 
   ctx.renderPage = () =>
     originalRenderPage({
-      enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
+      enhanceApp: (App) => (props) => sheets.collect(<App {...props} />)
     });
 
   const initialProps = await Document.getInitialProps(ctx);
@@ -89,8 +94,8 @@ MyDocument.getInitialProps = async (ctx) => {
       <React.Fragment key="styles">
         {initialProps.styles}
         {sheets.getStyleElement()}
-      </React.Fragment>,
-    ],
+      </React.Fragment>
+    ]
   };
 };
 

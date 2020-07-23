@@ -141,7 +141,7 @@ function Reply(props) {
       </span>
     ) : (
       <span>
-        <Link href={`/${username}`}>{`@${username}  `}</Link>{' '}
+        <Link href={`u/${username}`}>{`@${username}  `}</Link>{' '}
         {comment.length > 130 ? (
           <p className="comment_rep_text">{comment.slice(0, 130)}</p>
         ) : (
@@ -166,7 +166,7 @@ function Reply(props) {
       </span>
     ) : (
       <span>
-        <Link href={`/${username}`}>{`@${username}  `}</Link>{' '}
+        <Link href={`u/${username}`}>{`@${username}  `}</Link>{' '}
         <p className="comment_rep_text">{comment}</p>
         <span onClick={() => setReadMore(false)} className="comment_less_more">
           daha az
@@ -193,10 +193,7 @@ function Reply(props) {
       <div style={{ marginRight: '25px' }} key={item.id}>
         <ListItem className="reply_item" alignItems="flex-start">
           <ListItemAvatar>
-            <Avatar
-              alt="Remy Sharp"
-              src={item.replyUserInfo.profileImagePath}
-            />
+            <Avatar alt="User" src={item.replyUserInfo.profileImagePath} />
           </ListItemAvatar>
           <ListItemText
             primary={item.replyUserInfo.userName}
