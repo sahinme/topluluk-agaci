@@ -36,15 +36,6 @@ function CreateCommunity({ categories, getCategories, create, response }) {
     create(payload);
   };
 
-  const adammi = () => {
-    let deger = false;
-    const user = readLocalStorage('user');
-    if (user && user.username === 'Ehrmantraut') {
-      deger = true;
-    }
-    return deger;
-  };
-
   return (
     readLocalStorage('token') && (
       <MainLayout>
@@ -52,8 +43,8 @@ function CreateCommunity({ categories, getCategories, create, response }) {
           <Container>
             <Row style={{ marginTop: '1rem', flexWrap: 'wrap-reverse' }}>
               <Col style={{ paddingBottom: '10px' }} xs={12} md={8}>
-                {response && !response.status && (
-                  <Alert color="danger">Bu isimde topluluk zaten var!</Alert>
+                {response && response.message && (
+                  <Alert color="danger">{response.message}</Alert>
                 )}
                 <Form>
                   <Form.Row>

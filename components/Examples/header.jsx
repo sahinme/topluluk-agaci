@@ -194,18 +194,6 @@ function HeaderExample(props) {
     }
   };
 
-  const adammi = () => {
-    let deger = false;
-    const user = readLocalStorage('user');
-    if (
-      (user && user.username === 'Ehrmantraut') ||
-      (user && user.username === 'Alperen')
-    ) {
-      deger = true;
-    }
-    return deger;
-  };
-
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -339,17 +327,15 @@ function HeaderExample(props) {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            {adammi() ? null : (
-              <Button
-                style={{ marginRight: '10px' }}
-                onClick={onCreateCommunity}
-                variant="contained"
-                color="primary"
-                //className="com_add"
-              >
-                Topluluk Aç
-              </Button>
-            )}
+            <Button
+              style={{ marginRight: '10px' }}
+              onClick={onCreateCommunity}
+              variant="contained"
+              color="primary"
+              //className="com_add"
+            >
+              Topluluk Aç
+            </Button>
             {auth.data.token ? (
               <span>
                 <Link href="/chat" as="/chat">
@@ -410,17 +396,15 @@ function HeaderExample(props) {
             )}
           </div>
           <div className={classes.sectionMobile}>
-            {adammi() ? null : (
-              <Button
-                onClick={onCreateCommunity}
-                variant="contained"
-                color="primary"
-                style={{ height: '35px', marginTop: '5px' }}
-                //className="com_add"
-              >
-                Topluluk Aç
-              </Button>
-            )}
+            <Button
+              onClick={onCreateCommunity}
+              variant="contained"
+              color="primary"
+              style={{ height: '35px', marginTop: '5px' }}
+              //className="com_add"
+            >
+              Topluluk Aç
+            </Button>
             <IconButton
               aria-label="show more"
               aria-controls={mobileMenuId}

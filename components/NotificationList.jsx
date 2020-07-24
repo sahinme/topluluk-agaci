@@ -25,59 +25,66 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const renderModRequest = (item) => {
-  return (
-    <>
-      <ListItem
-        style={{ backgroundColor: !item.isRead && '#cacacaa6' }}
-        //onClick={() => router.push(`/${item.targetName}`)}
-        //button
-      >
-        <ListItemIcon>
-          <NotificationsNoneIcon
-            fontSize="large"
-            style={{ color: '#40eb3d' }}
-          />
-        </ListItemIcon>
-        <ListItemAvatar>
-          <Avatar src={item.imgPath} />
-        </ListItemAvatar>
-        <ListItemText
-          primary={item.content}
-          secondary={moment(item.createdDate).fromNow()}
-        />
-      </ListItem>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Button
-          style={{ backgroundColor: '#28B351' }}
-          className="modal_action"
-          variant="contained"
-          color="primary"
-          //onClick={onSubmit}
-          startIcon={<CheckCircleOutlineIcon />}
-        >
-          Onayla
-        </Button>
-        <Button
-          className="modal_action"
-          variant="contained"
-          color="secondary"
-          //onClick={onClose}
-          startIcon={<CancelIcon />}
-        >
-          Reddet
-        </Button>
-      </div>
-    </>
-  );
-};
-
 export default function NotificationList(props) {
   moment.locale();
 
   const classes = useStyles();
   const router = useRouter();
-  const { items } = props;
+  const { items, handleModReq } = props;
+
+  const renderModRequest = (item) => {
+    return (
+      <>
+        <ListItem
+          style={{ backgroundColor: !item.isRead && '#cacacaa6' }}
+          //onClick={() => router.push(`/${item.targetName}`)}
+          //button
+        >
+          <ListItemIcon>
+            <NotificationsNoneIcon
+              fontSize="large"
+              style={{ color: '#40eb3d' }}
+            />
+          </ListItemIcon>
+          <ListItemAvatar>
+            <Avatar src={item.imgPath} />
+          </ListItemAvatar>
+          <ListItemText
+            primary={item.content}
+            secondary={moment(item.createdDate).fromNow()}
+          />
+        </ListItem>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Button
+            style={{ backgroundColor: '#28B351' }}
+            className="modal_action"
+            disabled={item.isRead}
+            variant="contained"
+            color="primary"
+            onClick={() =>
+              handleModReq({ comSlug: item.targetName.substring(3), value: 20 })
+            }
+            startIcon={<CheckCircleOutlineIcon />}
+          >
+            Onayla
+          </Button>
+          <Button
+            className="modal_action"
+            variant="contained"
+            color="secondary"
+            disabled={item.isRead}
+            onClick={() =>
+              handleModReq({ comSlug: item.targetName.substring(3), value: 30 })
+            }
+            startIcon={<CancelIcon />}
+          >
+            Reddet
+          </Button>
+        </div>
+      </>
+    );
+  };
+
   return (
     <List
       subheader={

@@ -8,6 +8,7 @@ import {
 } from "../lib/notifications/actions";
 import PopularTags from "../components/PopularTags"
 import MainLayout from "../components/mainLayout"
+import { handleModRequest } from "../lib/users/actions";
 
 function Notifications(props) {
     const { notifications, getNotifications } = props;
@@ -21,6 +22,11 @@ function Notifications(props) {
         }
     }, [notifications && notifications.length]);
 
+    const handleModReq = (payload) => {
+        //console.log(payload)
+        props.handleModReq(payload)
+    }
+
     return (
         <MainLayout>
             <div>
@@ -31,7 +37,7 @@ function Notifications(props) {
                             xs={12}
                             md={8}
                         >
-                            <NotificationList items={notifications || []} />
+                            <NotificationList handleModReq={handleModReq} items={notifications || []} />
                         </Col>
                         <Col style={{ paddingBottom: "10px" }} xs={12} md={4}>
                             <div
@@ -50,6 +56,7 @@ function Notifications(props) {
 const mapDispatchToProps = (dispatch) => ({
     getNotifications: () => dispatch(getNotificationsRequest()),
     markAsRead: (payload) => dispatch(markAsReadRequest(payload)),
+    handleModReq: (payload) => dispatch(handleModRequest(payload)),
 });
 
 const mapStateToProps = (state) => ({

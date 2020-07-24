@@ -300,6 +300,7 @@ function CommunityPage(props) {
                         key={item.id}
                         id={item.id}
                         pSlug={item.slug}
+                        isPinneable={true}
                         img={item.mediaContentPath}
                         createdDate={item.createdDateTime}
                         content={item.content}

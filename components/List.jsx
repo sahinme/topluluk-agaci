@@ -53,7 +53,7 @@ export default function CommunityList(props) {
                     <Avatar src={item.logoPath || planetLogo} />
                   </ListItemAvatar>
                   <ListItemText
-                    primary={'s/' + item.name}
+                    primary={'t/' + item.name}
                     secondary={item.memberCount + ' üye'}
                   />
                 </ListItem>

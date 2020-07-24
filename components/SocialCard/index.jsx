@@ -84,7 +84,8 @@ function SocialCard(props) {
     profilePosts,
     isModerator,
     auth,
-    pageNumber
+    pageNumber,
+    isPinneable
   } = props;
 
   const handleVote = (value) => {
@@ -231,6 +232,9 @@ function SocialCard(props) {
           }
           action={
             <div>
+              {/*  {isPinneable && (
+                <MDBIcon style={{ color: '#007bff' }} icon="thumbtack" />
+              )} */}
               <IconButton
                 aria-controls="simple-menu"
                 aria-haspopup="true"

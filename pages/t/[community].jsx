@@ -168,7 +168,7 @@ function CommunityPage(props) {
             </Col>
           </Row>
 
-          <Row style={{ marginTop: '1rem' }}>
+          <Row style={{ marginTop: '1rem', flexWrap: 'wrap-reverse' }}>
             <Col
               style={{ paddingBottom: '10px', paddingTop: '20px' }}
               xs={12}
