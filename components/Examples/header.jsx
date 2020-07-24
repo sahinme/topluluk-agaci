@@ -197,7 +197,10 @@ function HeaderExample(props) {
   const adammi = () => {
     let deger = false;
     const user = readLocalStorage('user');
-    if (user && user.username === 'Ehrmantraut') {
+    if (
+      (user && user.username === 'Ehrmantraut') ||
+      (user && user.username === 'Alperen')
+    ) {
       deger = true;
     }
     return deger;
