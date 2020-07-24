@@ -200,6 +200,7 @@ function HeaderExample(props) {
     if (user && user.username === 'Ehrmantraut') {
       deger = true;
     }
+    return deger;
   };
 
   const menuId = 'primary-search-account-menu';
