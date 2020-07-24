@@ -194,6 +194,14 @@ function HeaderExample(props) {
     }
   };
 
+  const adammi = () => {
+    let deger = false;
+    const user = readLocalStorage('user');
+    if (user && user.username === 'Ehrmantraut') {
+      deger = true;
+    }
+  };
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -327,15 +335,17 @@ function HeaderExample(props) {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <Button
-              style={{ marginRight: '10px' }}
-              onClick={onCreateCommunity}
-              variant="contained"
-              color="primary"
-              //className="com_add"
-            >
-              Topluluk Aç
-            </Button>
+            {adammi() ? null : (
+              <Button
+                style={{ marginRight: '10px' }}
+                onClick={onCreateCommunity}
+                variant="contained"
+                color="primary"
+                //className="com_add"
+              >
+                Topluluk Aç
+              </Button>
+            )}
             {auth.data.token ? (
               <span>
                 <Link href="/chat" as="/chat">
@@ -396,15 +406,17 @@ function HeaderExample(props) {
             )}
           </div>
           <div className={classes.sectionMobile}>
-            <Button
-              onClick={onCreateCommunity}
-              variant="contained"
-              color="primary"
-              style={{ height: '35px', marginTop: '5px' }}
-              //className="com_add"
-            >
-              Topluluk Aç
-            </Button>
+            {adammi() ? null : (
+              <Button
+                onClick={onCreateCommunity}
+                variant="contained"
+                color="primary"
+                style={{ height: '35px', marginTop: '5px' }}
+                //className="com_add"
+              >
+                Topluluk Aç
+              </Button>
+            )}
             <IconButton
               aria-label="show more"
               aria-controls={mobileMenuId}
