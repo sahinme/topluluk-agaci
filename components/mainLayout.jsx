@@ -1,19 +1,28 @@
-import React, { useState } from "react";
-import Head from "next/head";
+import React, { useState, useEffect } from 'react';
+import Head from 'next/head';
 
-import EmailIcon from "@material-ui/icons/Email";
-import Loader from "./Loader";
+import EmailIcon from '@material-ui/icons/Email';
+import Loader from './Loader';
 //import PrimarySearchAppBar from "./Header";
-import { connect } from "react-redux";
-import SendSuggestionModal from "./sendSuggestionModal";
-import { sendSuggestRequest } from "../lib/users/actions";
-import HeaderExample from "./Examples/header";
+import { connect } from 'react-redux';
+import SendSuggestionModal from './sendSuggestionModal';
+import { sendSuggestRequest } from '../lib/users/actions';
+import HeaderExample from './Examples/header';
+import { logOut } from '../lib/auth/actions';
+import { readLocalStorage } from '../lib/helpers';
 
 function MainLayout(props) {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState(null);
   const [email, setEmail] = useState(null);
   const { loader } = props;
+
+  useEffect(() => {
+    const user = readLocalStorage('user');
+    if (user && user.username === 'saymer') {
+      props.logOut();
+    }
+  }, []);
 
   const handleChange = (e) => {
     setText(e.target.value);
@@ -61,11 +70,12 @@ function MainLayout(props) {
 }
 
 const mapStateToProps = (state) => ({
-  loader: state.loader,
+  loader: state.loader
 });
 
 const mapDispatchToProps = (dispatch) => ({
   sendSuggest: (payload) => dispatch(sendSuggestRequest(payload)),
+  logOut: () => dispatch(logOut())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainLayout);
