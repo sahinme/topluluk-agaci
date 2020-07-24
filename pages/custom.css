@@ -443,6 +443,24 @@ code {
     height: 100%;
 }
 
+.modal_action {
+    margin: 4px !important;
+}
+
+.add_mod_list_item {
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    border: 1px solid;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.info_text_modal {
+    font-family: Noto Sans, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: 400;
+}
+
 .com_cover_image_null {
     background-color: black;
     width: 100%;

@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { getCategoriesRequest } from '../lib/category/actions';
 import Home from "../components/Layout"
 import MainLayout from "../components/mainLayout";
+import { toast } from "react-toastify";
 
+toast.configure();
 
 const mapStateToProps = state => ({
   categories: state.categories,

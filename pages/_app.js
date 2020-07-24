@@ -6,6 +6,7 @@ import withRedux from 'next-redux-wrapper';
 import makeStore from '../lib/store';
 import Index from "./index"
 
+
 import "react-image-lightbox/style.css";
 import "../components/Loader/index.css";
 import '../components/ShareButton/index.css'
@@ -14,6 +15,7 @@ import 'mdbreact/dist/css/mdb.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 import './custom.css';
 import './profile.css'
 import '../components/Compose/Compose.css';
@@ -26,6 +28,8 @@ import '../components/Messenger/Messenger.css'
 import '../components/Toolbar/Toolbar.css'
 import '../components/ToolbarButton/ToolbarButton.css'
 import { readLocalStorage } from '../lib/helpers';
+
+
 
 
 class MyApp extends App {

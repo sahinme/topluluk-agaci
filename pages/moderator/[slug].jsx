@@ -1,31 +1,34 @@
-import React, { useEffect, useState } from "react";
-import { Row, Col, Container } from "react-bootstrap";
-import { connect } from "react-redux";
-import { compose } from "lodash/fp";
-import { Paper, TextField } from "@material-ui/core";
-import InfiniteScroll from "react-infinite-scroll-component";
-import EditIcon from "@material-ui/icons/Edit";
-import SocialCard from "../../components/SocialCard";
-import PhotoCamera from "@material-ui/icons/PhotoCamera";
-import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
-import IconButton from "@material-ui/core/IconButton";
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import React, { useEffect, useState } from 'react';
+import { Row, Col, Container } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { Paper, TextField, Button } from '@material-ui/core';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import EditIcon from '@material-ui/icons/Edit';
+import SocialCard from '../../components/SocialCard';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import IconButton from '@material-ui/core/IconButton';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import {
   getCommunityRequest,
   updateCommunityRequest,
   getUsers,
   deleteUserRequest,
   getCommunityPostsRequest,
-} from "../../lib/community/actions";
-import { votePostRequest } from "../../lib/posts/actions";
-import InfoCard from "../../components/Moderator/components/InfoCard";
-import ComboBox from "../../components/AutoComplete";
-import UserModal from "../../components/Moderator/components/userModal";
-import Loader from "../../components/Loader";
-import { readLocalStorage } from "../../lib/helpers";
-import { useRouter } from "next/router";
-import MainLayout from "../../components/mainLayout";
-import { clearStoreRequest } from "../../lib/commonActions";
+  addModeratorRequest
+} from '../../lib/community/actions';
+import { votePostRequest } from '../../lib/posts/actions';
+import InfoCard from '../../components/Moderator/components/InfoCard';
+import ComboBox from '../../components/AutoComplete';
+import UserModal from '../../components/Moderator/components/userModal';
+import Loader from '../../components/Loader';
+import { readLocalStorage } from '../../lib/helpers';
+import { useRouter } from 'next/router';
+import MainLayout from '../../components/mainLayout';
+import { clearStoreRequest } from '../../lib/commonActions';
+import AddModeratorModal from '../../components/Moderator/components/addModeratorModal';
+import planetLogo from '../t/planet.png';
 
 function CommunityPage(props) {
   const router = useRouter();
@@ -34,8 +37,8 @@ function CommunityPage(props) {
 
   useEffect(() => {
     const data = {
-      token: readLocalStorage("token"),
-      user: readLocalStorage("user"),
+      token: readLocalStorage('token'),
+      user: readLocalStorage('user')
     };
     setAuth(data);
     const { getCommunity, getUsers, getPosts } = props;
@@ -51,20 +54,22 @@ function CommunityPage(props) {
     getUsers({ slug });
     getPosts({ pageNumber: 1, pageSize: 6, slug, loaderStart: true });
     return () => {
-      props.clearStore("community_posts");
+      props.clearStore('community_posts');
     };
   }, [router.asPath]);
 
   const [isEditName, setEditName] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [addModModalOpen, setModModal] = useState(false);
   const [selectedUser, setUser] = useState({});
+  const [userForModerator, setModeratorRequest] = useState(null);
   const [values, setValues] = useState({
-    name: "",
+    name: ''
   });
 
   const onVote = (values) => {
     const { votePost, community } = props;
-    values.page = "community";
+    values.page = 'community';
     values.slug = community.slug;
     votePost(values);
   };
@@ -109,13 +114,26 @@ function CommunityPage(props) {
     setModalOpen(true);
   };
 
+  const onModeratorSelect = (user) => {
+    setModeratorRequest(user);
+  };
+
   const handleUserDelete = (payload) => {
     const values = {
       slug: community.slug,
-      username: payload.username,
+      username: payload.username
     };
     props.deleteUser(values);
     setModalOpen(false);
+  };
+
+  const onAddModerator = () => {
+    const payload = {
+      userId: userForModerator.userId,
+      communitySlug: community.slug
+    };
+    props.addModerator(payload);
+    setModModal(false);
   };
 
   const renderNameArea = () => {
@@ -135,7 +153,7 @@ function CommunityPage(props) {
               className="close_icon"
             />
             <CheckCircleOutlineIcon
-              onClick={values.name == "" ? () => {} : handleSubmit}
+              onClick={values.name == '' ? () => {} : handleSubmit}
               className="check_icon"
             />
           </div>
@@ -161,7 +179,7 @@ function CommunityPage(props) {
       pageNumber: newNumber,
       pageSize: 6,
       slug: community.slug,
-      loaderStart: false,
+      loaderStart: false
     });
     setNumber(newNumber);
   };
@@ -171,14 +189,14 @@ function CommunityPage(props) {
     community && (
       <MainLayout>
         <div>
-          <Row style={{ height: "240px" }}>
+          <Row style={{ height: '240px' }}>
             <input
-              style={{ display: "none" }}
+              style={{ display: 'none' }}
               accept="image/*"
               id="icon-button-file"
               type="file"
               onChange={(event) =>
-                handleCoverPhotoChange(event, { name: "file" })
+                handleCoverPhotoChange(event, { name: 'file' })
               }
             />
             <label className="cover_upload_icon" htmlFor="icon-button-file">
@@ -191,7 +209,11 @@ function CommunityPage(props) {
               </IconButton>
             </label>
             <img
-              className="com_cover_image"
+              className={
+                community.coverImagePath
+                  ? 'com_cover_image'
+                  : 'com_cover_image_null'
+              }
               src={community.coverImagePath}
               alt=""
             />
@@ -199,17 +221,21 @@ function CommunityPage(props) {
           <Row>
             <Paper className="com_bar">
               <Col className="com_bar_info" md={8}>
-                <img className="profile_img" src={community.logoPath} alt="" />
+                <img
+                  className="profile_img"
+                  src={community.logoPath || planetLogo}
+                  alt=""
+                />
                 <div>
                   <label htmlFor="myInput">
                     <EditIcon className="profile_edit_icon" />
                   </label>
                   <input
                     id="myInput"
-                    style={{ display: "none" }}
-                    type={"file"}
+                    style={{ display: 'none' }}
+                    type={'file'}
                     onChange={(event) =>
-                      handleLogoChange(event, { name: "file" })
+                      handleLogoChange(event, { name: 'file' })
                     }
                   />
                 </div>
@@ -227,10 +253,10 @@ function CommunityPage(props) {
               </Col>
             </Paper>
           </Row>
-          <Container style={{ marginTop: "1rem" }}>
-            <Row style={{ marginTop: "1rem" }}>
+          <Container style={{ marginTop: '1rem' }}>
+            <Row style={{ marginTop: '1rem' }}>
               <Col
-                style={{ paddingBottom: "10px", paddingTop: "20px" }}
+                style={{ paddingBottom: '10px', paddingTop: '20px' }}
                 xs={12}
                 md={8}
               >
@@ -242,6 +268,15 @@ function CommunityPage(props) {
                   className="com_users"
                   onChange={onSelectChange}
                 />
+                <Button
+                  variant="contained"
+                  color="default"
+                  onClick={() => setModModal(true)}
+                  //className={classes.button}
+                  startIcon={<SupervisorAccountIcon />}
+                >
+                  Moderator Ekle
+                </Button>
                 {selectedUser && (
                   <UserModal
                     data={selectedUser}
@@ -272,7 +307,7 @@ function CommunityPage(props) {
                         community={{
                           name: community.name,
                           slug: community.slug,
-                          logoPath: community.logoPath,
+                          logoPath: community.logoPath
                         }}
                         comments={item.commentsCount}
                         user={item.user}
@@ -286,7 +321,7 @@ function CommunityPage(props) {
                     ))}
                 </InfiniteScroll>
               </Col>
-              <Col style={{ paddingBottom: "10px" }} xs={12} md={4}>
+              <Col style={{ paddingBottom: '10px' }} xs={12} md={4}>
                 <div className="com_right_bar">
                   <InfoCard
                     moderators={community.moderators}
@@ -298,6 +333,18 @@ function CommunityPage(props) {
             </Row>
           </Container>
         </div>
+        <AddModeratorModal
+          labelField="username"
+          options={props.users}
+          placeholder="Tüm üyeler"
+          onSubmit={onAddModerator}
+          open={addModModalOpen}
+          user={true}
+          selectedUser={userForModerator}
+          className="com_users"
+          onChange={onModeratorSelect}
+          onClose={() => setModModal(false)}
+        />
       </MainLayout>
     )
   );
@@ -310,14 +357,15 @@ const mapDispatchToProps = (dispatch) => ({
   getUsers: (payload) => dispatch(getUsers(payload)),
   deleteUser: (payload) => dispatch(deleteUserRequest(payload)),
   getPosts: (payload) => dispatch(getCommunityPostsRequest(payload)),
-  clearStore: (name) => dispatch(clearStoreRequest(name)),
+  addModerator: (payload) => dispatch(addModeratorRequest(payload)),
+  clearStore: (name) => dispatch(clearStoreRequest(name))
 });
 
 const mapStateToProps = (state) => ({
   community: state.community.data,
   //auth: state.auth.data,
   posts: state.community.pagedData,
-  users: state.communityUsers.data,
+  users: state.communityUsers.data
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommunityPage);

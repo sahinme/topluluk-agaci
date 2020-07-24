@@ -328,7 +328,7 @@ function HeaderExample(props) {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <Button
-              style={{ margin: '10px' }}
+              style={{ marginRight: '10px' }}
               onClick={onCreateCommunity}
               variant="contained"
               color="primary"
