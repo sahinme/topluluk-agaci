@@ -39,76 +39,74 @@ function CreateCommunity({ categories, getCategories, create, response }) {
   return (
     readLocalStorage('token') && (
       <MainLayout>
-        {adammi() ? null : (
-          <Container>
-            <Row style={{ marginTop: '1rem', flexWrap: 'wrap-reverse' }}>
-              <Col style={{ paddingBottom: '10px' }} xs={12} md={8}>
-                {response && response.message && (
-                  <Alert color="danger">{response.message}</Alert>
-                )}
-                <Form>
-                  <Form.Row>
-                    <Form.Group as={Col}>
-                      <Form.Label>Topluluk Adı</Form.Label>
-                      <Form.Control
-                        onChange={handleInputChange}
-                        id="name"
-                        type="text"
-                        placeholder="örn:bilim ve uzay"
-                      />
-                    </Form.Group>
-                  </Form.Row>
-
-                  <Form.Group>
-                    <Form.Label>Kategori</Form.Label>
+        <Container>
+          <Row style={{ marginTop: '1rem', flexWrap: 'wrap-reverse' }}>
+            <Col style={{ paddingBottom: '10px' }} xs={12} md={8}>
+              {response && response.message && (
+                <Alert color="danger">{response.message}</Alert>
+              )}
+              <Form>
+                <Form.Row>
+                  <Form.Group as={Col}>
+                    <Form.Label>Topluluk Adı</Form.Label>
                     <Form.Control
                       onChange={handleInputChange}
-                      id="catSlug"
-                      as="select"
-                      custom
-                    >
-                      {categories &&
-                        categories.map((c) => (
-                          <option key={c.slug} value={c.slug}>
-                            {c.displayName}
-                          </option>
-                        ))}
-                    </Form.Control>
-                  </Form.Group>
-
-                  <Form.Group>
-                    <Form.Label>Hakkında ve Kurallar</Form.Label>
-                    <Form.Control
-                      placeholder="örn: Dizi film replikleri yorumlari ve tartismalari"
-                      onChange={handleInputChange}
-                      id="description"
-                      as="textarea"
-                      rows="3"
+                      id="name"
+                      type="text"
+                      placeholder="örn:bilim ve uzay"
                     />
                   </Form.Group>
-                  <Button
-                    disabled={!payload.name || !payload.description}
-                    onClick={handleSubmit}
-                    variant="primary"
+                </Form.Row>
+
+                <Form.Group>
+                  <Form.Label>Kategori</Form.Label>
+                  <Form.Control
+                    onChange={handleInputChange}
+                    id="catSlug"
+                    as="select"
+                    custom
                   >
-                    Oluşturmaya çalış
-                  </Button>
-                </Form>
-              </Col>
-              <Col style={{ paddingBottom: '10px' }} xs={12} md={4}>
-                <div
-                  style={{
-                    position: '-webkit-sticky',
-                    position: 'sticky',
-                    top: 0
-                  }}
+                    {categories &&
+                      categories.map((c) => (
+                        <option key={c.slug} value={c.slug}>
+                          {c.displayName}
+                        </option>
+                      ))}
+                  </Form.Control>
+                </Form.Group>
+
+                <Form.Group>
+                  <Form.Label>Hakkında ve Kurallar</Form.Label>
+                  <Form.Control
+                    placeholder="örn: Dizi film replikleri yorumlari ve tartismalari"
+                    onChange={handleInputChange}
+                    id="description"
+                    as="textarea"
+                    rows="3"
+                  />
+                </Form.Group>
+                <Button
+                  disabled={!payload.name || !payload.description}
+                  onClick={handleSubmit}
+                  variant="primary"
                 >
-                  <PopularTags />
-                </div>
-              </Col>
-            </Row>
-          </Container>
-        )}
+                  Oluşturmaya çalış
+                </Button>
+              </Form>
+            </Col>
+            <Col style={{ paddingBottom: '10px' }} xs={12} md={4}>
+              <div
+                style={{
+                  position: '-webkit-sticky',
+                  position: 'sticky',
+                  top: 0
+                }}
+              >
+                <PopularTags />
+              </div>
+            </Col>
+          </Row>
+        </Container>
       </MainLayout>
     )
   );
