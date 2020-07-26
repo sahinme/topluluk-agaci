@@ -651,8 +651,8 @@ p {
     }
 
     .player-wrapper {
-        margin-left: 10px !important;
-        margin-right: 52px !important;
+        /* margin-left: 10px !important;
+        margin-right: 52px !important; */
     }
 
     .share-button {
