@@ -447,6 +447,11 @@ code {
     margin: 4px !important;
 }
 
+div[title="Heading 1"],
+div[title="Heading 2"] {
+    display: none !important;
+}
+
 .add_mod_list_item {
     box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
     border: 1px solid;
