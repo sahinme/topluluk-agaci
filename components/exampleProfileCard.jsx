@@ -66,15 +66,17 @@ export default function ExampleProfileCard({
         <div className="name">
           <a target="_blank">{username}</a>
         </div>
-        <div className="button_pro">
-          <a
-            style={{ backgroundColor: '#007bff' }}
-            onClick={onMessage}
-            className="btn"
-          >
-            Mesaj <i className="fas fa-paper-plane"></i>
-          </a>
-        </div>
+        {!isEditMode && (
+          <div className="button_pro">
+            <a
+              style={{ backgroundColor: '#007bff' }}
+              onClick={onMessage}
+              className="btn"
+            >
+              Mesaj <i className="fas fa-paper-plane"></i>
+            </a>
+          </div>
+        )}
         <div className="ds-info">
           <div className="ds pens">
             <h6>

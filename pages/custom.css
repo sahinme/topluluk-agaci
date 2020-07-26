@@ -689,7 +689,7 @@ p {
     }
 
     .react-player {
-        height: auto !important;
+        height: 100% !important;
     }
 
     .MuiTypography-body2 {

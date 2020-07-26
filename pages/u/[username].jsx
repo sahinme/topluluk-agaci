@@ -91,7 +91,7 @@ function User(props) {
           <link href={`https://saalla.com/${user.username}`} />
         </Helmet>
       )}
-      <Container style={{ marginTop: '8rem' }}>
+      <Container>
         <Row style={{ flexWrap: 'wrap-reverse' }}>
           <Col
             style={{ paddingBottom: '10px', paddingTop: '20px' }}

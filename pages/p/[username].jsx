@@ -46,7 +46,7 @@ function Profile(props) {
   return (
     <MainLayout>
       {profile && <Helmet title={profile.username} />}
-      <Container style={{ marginTop: '8rem' }}>
+      <Container>
         <Row style={{ flexWrap: 'wrap-reverse' }}>
           <Col
             style={{ paddingBottom: '10px', paddingTop: '20px' }}
