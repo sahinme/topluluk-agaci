@@ -14,6 +14,7 @@ import {
 } from '../../lib/conversation/actions';
 import SendMessageModal from '../../components/User/sendMessageModal';
 import { isLogged, readLocalStorage } from '../../lib/helpers';
+import ExampleProfileCard from '../../components/exampleProfileCard';
 
 function User(props) {
   const router = useRouter();
@@ -128,11 +129,13 @@ function User(props) {
             md={4}
           >
             {user && (
-              <UserCard
+              <ExampleProfileCard
                 img={user.profileImagePath}
                 username={user.username}
                 email={user.emailAddress}
                 id={user.id}
+                sPoint={user.sPoint}
+                gender={user.gender}
                 onMessage={onSendMessage}
                 bio={user.bio}
               />

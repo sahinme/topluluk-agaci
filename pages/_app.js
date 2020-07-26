@@ -27,6 +27,7 @@ import '../components/MessageList/MessageList.css'
 import '../components/Messenger/Messenger.css'
 import '../components/Toolbar/Toolbar.css'
 import '../components/ToolbarButton/ToolbarButton.css'
+import '../components/exUserCard.scss'
 import { readLocalStorage } from '../lib/helpers';
 
 

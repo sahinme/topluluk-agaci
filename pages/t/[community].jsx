@@ -22,6 +22,7 @@ import { readLocalStorage } from '../../lib/helpers';
 import { useRouter } from 'next/router';
 import planetLogo from './planet.png';
 import Link from 'next/link';
+import RulesAccardion from '../../components/Accordion';
 
 function CommunityPage(props) {
   const router = useRouter();
@@ -183,29 +184,60 @@ function CommunityPage(props) {
                 {posts &&
                   posts.results &&
                   posts.results.length > 0 &&
-                  posts.results.map((item) => (
-                    <SocialCard
-                      pageNumber={item.pageNumber}
-                      key={item.id}
-                      id={item.id}
-                      pSlug={item.slug}
-                      img={item.mediaContentPath}
-                      createdDate={item.createdDateTime}
-                      content={item.content}
-                      contentType={item.contentType}
-                      community={{
-                        name: community.name,
-                        slug: community.slug,
-                        logoPath: community.logoPath
-                      }}
-                      comments={item.comments}
-                      user={item.user}
-                      linkUrl={item.linkUrl}
-                      voteCount={item.voteCount}
-                      userPostVote={item.userPostVote}
-                      onVote={onVote}
-                    />
-                  ))}
+                  posts.results
+                    .filter((x) => x.isPinned)
+                    .map((item) => (
+                      <SocialCard
+                        pageNumber={item.pageNumber}
+                        key={item.id}
+                        id={item.id}
+                        pSlug={item.slug}
+                        isPinned={item.isPinned}
+                        img={item.mediaContentPath}
+                        createdDate={item.createdDateTime}
+                        content={item.content}
+                        contentType={item.contentType}
+                        community={{
+                          name: community.name,
+                          slug: community.slug,
+                          logoPath: community.logoPath
+                        }}
+                        comments={item.comments}
+                        user={item.user}
+                        linkUrl={item.linkUrl}
+                        voteCount={item.voteCount}
+                        userPostVote={item.userPostVote}
+                        onVote={onVote}
+                      />
+                    ))}
+                {posts &&
+                  posts.results &&
+                  posts.results.length > 0 &&
+                  posts.results
+                    .filter((x) => !x.isPinned)
+                    .map((item) => (
+                      <SocialCard
+                        pageNumber={item.pageNumber}
+                        key={item.id}
+                        id={item.id}
+                        pSlug={item.slug}
+                        img={item.mediaContentPath}
+                        createdDate={item.createdDateTime}
+                        content={item.content}
+                        contentType={item.contentType}
+                        community={{
+                          name: community.name,
+                          slug: community.slug,
+                          logoPath: community.logoPath
+                        }}
+                        comments={item.comments}
+                        user={item.user}
+                        linkUrl={item.linkUrl}
+                        voteCount={item.voteCount}
+                        userPostVote={item.userPostVote}
+                        onVote={onVote}
+                      />
+                    ))}
               </InfiniteScroll>
             </Col>
             <Col style={{ paddingBottom: '10px' }} xs={12} md={4}>
@@ -215,6 +247,7 @@ function CommunityPage(props) {
                   description={community.description}
                 />
               </div>
+              {/* <RulesAccardion /> */}
             </Col>
           </Row>
         </Container>

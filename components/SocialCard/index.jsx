@@ -13,7 +13,7 @@ import 'moment/locale/tr';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Divider } from '@material-ui/core';
-import { MDBIcon } from 'mdbreact';
+import { MDBIcon, MDBTooltip } from 'mdbreact';
 import Skeleton from '@material-ui/lab/Skeleton';
 import LinkPreview from '../LinkPreview';
 import { readLocalStorage } from '../../lib/helpers';
@@ -85,12 +85,19 @@ function SocialCard(props) {
     isModerator,
     auth,
     pageNumber,
-    isPinneable
+    isPinneable,
+    handlePin,
+    isPinned
   } = props;
 
   const handleVote = (value) => {
     const values = { postId: id, value, pageNumber };
     onVote(values);
+  };
+
+  const onPinClick = (value) => {
+    const payload = { slug: pSlug, value, pageNumber, cSlug: community.slug };
+    handlePin(payload);
   };
 
   const renderMedia = () => {
@@ -211,6 +218,22 @@ function SocialCard(props) {
         </div>
       </div>
       <div style={{ width: '100%', overflow: 'hidden' }}>
+        {isPinned && (
+          <span
+            style={{ marginLeft: '18px', fontWeight: 500 }}
+            className="posted_by"
+          >
+            <MDBIcon
+              style={{
+                color: 'gray',
+                marginRight: '10px'
+              }}
+              icon="thumbtack"
+            />
+            Sabitlenmiş Sallama
+          </span>
+        )}
+
         <CardHeader
           className="post_card_header"
           style={{ padding: '16px 16px 0 16px' }}
@@ -232,9 +255,21 @@ function SocialCard(props) {
           }
           action={
             <div>
-              {/*  {isPinneable && (
-                <MDBIcon style={{ color: '#007bff' }} icon="thumbtack" />
-              )} */}
+              {isPinneable && (
+                <MDBTooltip domElement tag="span" material placement="top">
+                  <span>
+                    <MDBIcon
+                      onClick={() => onPinClick(!isPinned)}
+                      style={{
+                        cursor: 'pointer',
+                        color: isPinned ? 'red' : 'gray'
+                      }}
+                      icon="thumbtack"
+                    />
+                  </span>
+                  <span>{isPinned ? 'Ayır' : 'Sabitle'}</span>
+                </MDBTooltip>
+              )}
               <IconButton
                 aria-controls="simple-menu"
                 aria-haspopup="true"

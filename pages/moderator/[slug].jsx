@@ -18,7 +18,7 @@ import {
   getCommunityPostsRequest,
   addModeratorRequest
 } from '../../lib/community/actions';
-import { votePostRequest } from '../../lib/posts/actions';
+import { votePostRequest, handlePinPostRequest } from '../../lib/posts/actions';
 import InfoCard from '../../components/Moderator/components/InfoCard';
 import ComboBox from '../../components/AutoComplete';
 import UserModal from '../../components/Moderator/components/userModal';
@@ -29,6 +29,7 @@ import MainLayout from '../../components/mainLayout';
 import { clearStoreRequest } from '../../lib/commonActions';
 import AddModeratorModal from '../../components/Moderator/components/addModeratorModal';
 import planetLogo from '../t/planet.png';
+import RulesAccardion from '../../components/Accordion';
 
 function CommunityPage(props) {
   const router = useRouter();
@@ -72,6 +73,11 @@ function CommunityPage(props) {
     values.page = 'community';
     values.slug = community.slug;
     votePost(values);
+  };
+
+  const handlePin = (payload) => {
+    payload.pageSize = 6;
+    props.handlePin(payload);
   };
 
   const handleNameChange = (e) => {
@@ -294,32 +300,69 @@ function CommunityPage(props) {
                   {posts &&
                     posts.results &&
                     posts.results.length > 0 &&
-                    posts.results.map((item) => (
-                      <SocialCard
-                        pageNumber={item.pageNumber}
-                        key={item.id}
-                        id={item.id}
-                        pSlug={item.slug}
-                        isPinneable={true}
-                        img={item.mediaContentPath}
-                        createdDate={item.createdDateTime}
-                        content={item.content}
-                        contentType={item.contentType}
-                        community={{
-                          name: community.name,
-                          slug: community.slug,
-                          logoPath: community.logoPath
-                        }}
-                        comments={item.commentsCount}
-                        user={item.user}
-                        linkUrl={item.linkUrl}
-                        voteCount={item.voteCount}
-                        userPostVote={item.userPostVote}
-                        onVote={onVote}
-                        isModerator={true}
-                        pageDto={{ pageSize: 6, pageNumber }}
-                      />
-                    ))}
+                    posts.results
+                      .filter((x) => x.isPinned)
+                      .map((item) => (
+                        <SocialCard
+                          pageNumber={item.pageNumber}
+                          key={item.id}
+                          handlePin={handlePin}
+                          id={item.id}
+                          pSlug={item.slug}
+                          isPinned={item.isPinned}
+                          isPinneable={true}
+                          img={item.mediaContentPath}
+                          createdDate={item.createdDateTime}
+                          content={item.content}
+                          contentType={item.contentType}
+                          community={{
+                            name: community.name,
+                            slug: community.slug,
+                            logoPath: community.logoPath
+                          }}
+                          comments={item.commentsCount}
+                          user={item.user}
+                          linkUrl={item.linkUrl}
+                          voteCount={item.voteCount}
+                          userPostVote={item.userPostVote}
+                          onVote={onVote}
+                          isModerator={true}
+                          pageDto={{ pageSize: 6, pageNumber }}
+                        />
+                      ))}
+                  {posts &&
+                    posts.results &&
+                    posts.results.length > 0 &&
+                    posts.results
+                      .filter((x) => !x.isPinned)
+                      .map((item) => (
+                        <SocialCard
+                          pageNumber={item.pageNumber}
+                          key={item.id}
+                          handlePin={handlePin}
+                          id={item.id}
+                          pSlug={item.slug}
+                          isPinned={item.isPinned}
+                          isPinneable={true}
+                          img={item.mediaContentPath}
+                          createdDate={item.createdDateTime}
+                          content={item.content}
+                          contentType={item.contentType}
+                          community={{
+                            name: community.name,
+                            slug: community.slug,
+                            logoPath: community.logoPath
+                          }}
+                          comments={item.commentsCount}
+                          user={item.user}
+                          linkUrl={item.linkUrl}
+                          voteCount={item.voteCount}
+                          userPostVote={item.userPostVote}
+                          onVote={onVote}
+                          isModerator={true}
+                          pageDto={{ pageSize: 6, pageNumber }}
+                        />
+                      ))}
                 </InfiniteScroll>
               </Col>
               <Col style={{ paddingBottom: '10px' }} xs={12} md={4}>
@@ -330,6 +373,7 @@ function CommunityPage(props) {
                     onSubmit={handleSubmit}
                   />
                 </div>
+                {/*  <RulesAccardion /> */}
               </Col>
             </Row>
           </Container>
@@ -359,7 +403,8 @@ const mapDispatchToProps = (dispatch) => ({
   deleteUser: (payload) => dispatch(deleteUserRequest(payload)),
   getPosts: (payload) => dispatch(getCommunityPostsRequest(payload)),
   addModerator: (payload) => dispatch(addModeratorRequest(payload)),
-  clearStore: (name) => dispatch(clearStoreRequest(name))
+  clearStore: (name) => dispatch(clearStoreRequest(name)),
+  handlePin: (payload) => dispatch(handlePinPostRequest(payload))
 });
 
 const mapStateToProps = (state) => ({
