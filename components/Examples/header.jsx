@@ -400,7 +400,12 @@ function HeaderExample(props) {
               onClick={onCreateCommunity}
               variant="contained"
               color="primary"
-              style={{ height: '35px', marginTop: '5px' }}
+              style={{
+                height: '35px',
+                marginTop: '5px',
+                fontSize: '10px',
+                fontWeight: 500
+              }}
               //className="com_add"
             >
               Topluluk Aç
