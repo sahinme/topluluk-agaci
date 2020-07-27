@@ -73,6 +73,7 @@ function Profile(props) {
                   contentType={item.contentType}
                   community={item.community}
                   linkUrl={item.linkUrl}
+                  onVote={onVote}
                   voteCount={item.voteCount}
                   comments={item.comments}
                   userPostVote={item.userPostVote}

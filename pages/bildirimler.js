@@ -23,7 +23,6 @@ function Notifications(props) {
     }, [notifications && notifications.length]);
 
     const handleModReq = (payload) => {
-        //console.log(payload)
         props.handleModReq(payload)
     }
 

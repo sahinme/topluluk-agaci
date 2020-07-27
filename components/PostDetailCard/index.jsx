@@ -1,59 +1,59 @@
-import React from "react";
-import moment from "moment";
-import { connect } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
-import Collapse from "@material-ui/core/Collapse";
-import Card from "@material-ui/core/Card";
-import ReactPlayer from "react-player";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import ShareIcon from "@material-ui/icons/Share";
-import SportsHandballIcon from "@material-ui/icons/SportsHandball";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import CommentList from "../CommentList";
-import { TextField, Button, Divider } from "@material-ui/core";
-import SendIcon from "@material-ui/icons/Send";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { createCommentRequest } from "../../lib/comment/actions";
-import LinkPre from "../LinkPreview";
-import { MDBIcon } from "mdbreact";
-import { isLogged, htmlToText } from "../../lib/helpers";
-import PostMenu from "../postMenu";
-import ImageModal from "../ImageModal";
-import { Helmet } from "react-helmet";
+import React from 'react';
+import moment from 'moment';
+import { connect } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
+import Collapse from '@material-ui/core/Collapse';
+import Card from '@material-ui/core/Card';
+import ReactPlayer from 'react-player';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import ShareIcon from '@material-ui/icons/Share';
+import SportsHandballIcon from '@material-ui/icons/SportsHandball';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import CommentList from '../CommentList';
+import { TextField, Button, Divider } from '@material-ui/core';
+import SendIcon from '@material-ui/icons/Send';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { createCommentRequest } from '../../lib/comment/actions';
+import LinkPre from '../LinkPreview';
+import { MDBIcon } from 'mdbreact';
+import { isLogged, htmlToText } from '../../lib/helpers';
+import PostMenu from '../postMenu';
+import ImageModal from '../ImageModal';
+import { Helmet } from 'react-helmet';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: "1rem",
-    marginBottom: "2rem",
+    padding: '1rem',
+    marginBottom: '2rem'
   },
   media: {
     height: 0,
-    paddingTop: "56.25%", // 16:9
+    paddingTop: '56.25%' // 16:9
   },
   expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
+    transform: 'rotate(0deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest
+    })
   },
   expandOpen: {
-    transform: "rotate(180deg)",
+    transform: 'rotate(180deg)'
   },
   avatar: {},
   postImage: {
-    width: "100%",
+    width: '100%'
   },
   leftSide: {
-    width: "48px",
-    backgroundColor: "#edebebcc",
-  },
+    width: '48px',
+    backgroundColor: '#edebebcc'
+  }
 }));
 
 function PostDetailCard(props) {
@@ -69,7 +69,7 @@ function PostDetailCard(props) {
 
   const handleSubmit = () => {
     if (!isLogged()) {
-      router.push("/giris-yap");
+      router.push('/giris-yap');
       return;
     }
     const values = {};
@@ -78,7 +78,7 @@ function PostDetailCard(props) {
     values.slug = slug;
     const { createComment } = props;
     createComment(values);
-    document.getElementById("comment").value = "";
+    document.getElementById('comment').value = '';
   };
 
   const {
@@ -94,12 +94,12 @@ function PostDetailCard(props) {
     onVote,
     slug,
     userPostVote,
-    voteCount,
+    voteCount
   } = props;
 
   const handleVote = (value) => {
     if (!isLogged()) {
-      router.push("/giris-yap");
+      router.push('/giris-yap');
       return;
     }
     const values = { postId: id, value, slug };
@@ -124,7 +124,7 @@ function PostDetailCard(props) {
       return (
         <div className={classes.imgContainer}>
           <img
-            style={{ cursor: "pointer" }}
+            style={{ cursor: 'pointer' }}
             onClick={() => setOpen(true)}
             className={classes.postImage}
             src={img}
@@ -161,7 +161,7 @@ function PostDetailCard(props) {
     return count;
   };
 
-  const menuItems = [{ title: "Şikayet Et", onClick: handleClose }];
+  const menuItems = [{ title: 'Şikayet Et', onClick: handleClose }];
 
   return (
     <React.Fragment>
@@ -171,8 +171,8 @@ function PostDetailCard(props) {
             <MDBIcon
               className={
                 userPostVote && userPostVote.value == 1
-                  ? "angle-double-up_checked"
-                  : "angle-double-up"
+                  ? 'angle-double-up_checked'
+                  : 'angle-double-up'
               }
               icon="angle-double-up"
               onClick={() =>
@@ -183,8 +183,8 @@ function PostDetailCard(props) {
             <MDBIcon
               className={
                 userPostVote && userPostVote.value == -1
-                  ? "angle-double-down_checked"
-                  : "angle-double-down"
+                  ? 'angle-double-down_checked'
+                  : 'angle-double-down'
               }
               icon="angle-double-down"
               onClick={() =>
@@ -193,9 +193,9 @@ function PostDetailCard(props) {
             />
           </div>
         </div>
-        <div className="right_side_post">
+        <div style={{ padding: '0' }} className="right_side_post">
           <CardHeader
-            style={{ padding: "16px 16px 0 16px" }}
+            style={{ padding: '16px 16px 0 16px' }}
             avatar={
               <Avatar
                 aria-label="recipe"
@@ -223,41 +223,41 @@ function PostDetailCard(props) {
                   <a>{community.name}</a>
                 </Link>
                 <small
-                  style={{ margin: "4px", fontWeight: 600, fontSize: "92%" }}
+                  style={{ margin: '4px', fontWeight: 600, fontSize: '92%' }}
                 >
                   /
                 </small>
                 <Link href={`/u/[username]`} as={`/u/${user.userName}`}>
                   <span className="posted_by">
-                    {"u/" + user.userName + " " + "tarafından"}
+                    {'u/' + user.userName + ' ' + 'tarafından'}
                   </span>
                 </Link>
               </div>
             }
             subheader={createdDate && moment(createdDate).fromNow()}
           />
-          <CardContent style={{ padding: "5px 16px 16px 25px" }}>
+          <CardContent style={{ padding: '5px 16px 16px 25px' }}>
             <div
               dangerouslySetInnerHTML={{ __html: content }}
               variant="body2"
-              style={{ color: "black" }}
+              style={{ color: 'black' }}
               component="p"
             />
           </CardContent>
           {renderMedia()}
-          <Divider style={{ margin: "15px 0px 0px 0px" }} />
+          <Divider style={{ margin: '15px 0px 0px 0px' }} />
 
           <CardActions disableSpacing>
             <IconButton aria-label="add to favorites">
-              <SportsHandballIcon style={{ padding: "3px" }} />
+              <SportsHandballIcon style={{ padding: '3px' }} />
             </IconButton>
-            <small style={{ marginLeft: "-5px" }}>
+            <small style={{ marginLeft: '-5px' }}>
               {comments && calculateSallamaCount(comments)} sallama
             </small>
             <IconButton aria-label="share">
-              <ShareIcon style={{ padding: "3px" }}></ShareIcon>
+              <ShareIcon style={{ padding: '3px' }}></ShareIcon>
             </IconButton>
-            <small style={{ marginLeft: "-5px" }}>Paylaş</small>
+            <small style={{ marginLeft: '-5px' }}>Paylaş</small>
           </CardActions>
           <Collapse in={true} timeout="auto" unmountOnExit>
             <TextField
@@ -268,7 +268,7 @@ function PostDetailCard(props) {
               onChange={handleChange}
               rows={4}
               variant="outlined"
-              style={{ width: "100%", borderRadius: "10px" }}
+              style={{ width: '100%', borderRadius: '10px' }}
             />
             <Button
               className="comment_button"
@@ -289,7 +289,7 @@ function PostDetailCard(props) {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  createComment: (payload) => dispatch(createCommentRequest(payload)),
+  createComment: (payload) => dispatch(createCommentRequest(payload))
 });
 
 const mapStateToProps = (state) => ({});

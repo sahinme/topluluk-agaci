@@ -1,30 +1,30 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import Link from "next/link";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import { Alert } from "reactstrap";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import { InputLabel, Select, MenuItem } from "@material-ui/core";
-import { signUpRequest } from "../lib/auth/actions";
-import { setErrorRequest } from "../lib/error/actions";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import Link from 'next/link';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import { Alert } from 'reactstrap';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import { InputLabel, Select, MenuItem } from '@material-ui/core';
+import { signUpRequest } from '../lib/auth/actions';
+import { setErrorRequest } from '../lib/error/actions';
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
+      {'Copyright © '}
       <Link href="/">
         <a>Saalla</a>
       </Link>
       {new Date().getFullYear()}
-      {"."}
+      {'.'}
     </Typography>
   );
 }
@@ -32,21 +32,21 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(3)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
+    margin: theme.spacing(3, 0, 2)
+  }
 }));
 
 function SignUp(props) {
@@ -56,15 +56,15 @@ function SignUp(props) {
     };
   }, []);
   const [values, setValue] = useState({
-    username: "",
-    emailAddress: "",
-    password: "",
-    gender: "",
+    username: '',
+    emailAddress: '',
+    password: '',
+    gender: ''
   });
   const [errors, setErrors] = useState({ email: false, username: false });
 
   const handleInputChange = ({ currentTarget: input }) => {
-    if (input.id === "emailAddress") {
+    if (input.id === 'emailAddress') {
       validateEmail(input.value);
     }
     const currentValues = values;
@@ -79,12 +79,11 @@ function SignUp(props) {
   };
 
   const onselectChange = (e) => {
-    console.log(e.target.value);
     setValue({ ...values, gender: e.target.value });
   };
 
   const validateEmail = (email) => {
-    var reg = new RegExp("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}");
+    var reg = new RegExp('[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}');
     let newErrors = { ...errors };
     newErrors.email = !reg.test(email);
     setErrors(newErrors);
@@ -92,7 +91,7 @@ function SignUp(props) {
 
   const validateUsername = (username) => {
     var reg = new RegExp(
-      "^(?=.{5,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$"
+      '^(?=.{5,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$'
     );
     let newErrors = { ...errors };
     newErrors.username = !reg.test(username);
@@ -103,7 +102,7 @@ function SignUp(props) {
 
   const handleSubmit = () => {
     const payload = { ...values };
-    if (payload.gender == "") payload.gender = "N";
+    if (payload.gender == '') payload.gender = 'N';
     const { signUp } = props;
     signUp(payload);
   };
@@ -133,7 +132,7 @@ function SignUp(props) {
               fullWidth
               id="username"
               error={errors.username}
-              helperText={errors.username && "Gecersiz kullanici adi"}
+              helperText={errors.username && 'Gecersiz kullanici adi'}
               label="Kullanici Adi"
               name="username"
               autoComplete="username"
@@ -145,7 +144,7 @@ function SignUp(props) {
               variant="outlined"
               required
               error={errors.email}
-              helperText={errors.email && "Lütfen e-postayı sallamayın"}
+              helperText={errors.email && 'Lütfen e-postayı sallamayın'}
               fullWidth
               id="emailAddress"
               label="E-Posta"
@@ -171,7 +170,7 @@ function SignUp(props) {
               Cinsiyet
             </InputLabel>
             <Select
-              style={{ width: "50%" }}
+              style={{ width: '50%' }}
               labelId="demo-simple-select-outlined-label"
               id="gender"
               value={values.gender}
@@ -211,11 +210,11 @@ function SignUp(props) {
 
 const mapDispatchToProps = (dispatch) => ({
   signUp: (payload) => dispatch(signUpRequest(payload)),
-  clearErrors: (errorType) => dispatch(setErrorRequest(errorType)),
+  clearErrors: (errorType) => dispatch(setErrorRequest(errorType))
 });
 
 const mapStateToProps = (state) => ({
-  errors: state.errors,
+  errors: state.errors
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

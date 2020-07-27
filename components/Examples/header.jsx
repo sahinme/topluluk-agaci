@@ -305,7 +305,7 @@ function HeaderExample(props) {
             <MenuIcon />
           </IconButton>
           <Link href="/">
-            <img className={classes.title} src={logo} />
+            <img style={{cursor:"pointer"}} className={classes.title} src={logo} />
           </Link>
           <div className={classes.search}>
             <div className={classes.searchIcon}>

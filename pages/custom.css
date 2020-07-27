@@ -628,6 +628,19 @@ p {
       padding-left: 1rem; */
     }
 
+    /*  .l_layout {
+        display: none;
+    } */
+
+    /* .mobileTabs {
+        display: inherit !important;
+        margin-top: -3.4rem
+    } */
+
+    /*  .home_trends_col {
+        display: none;
+    } */
+
     .post_card_header {
         padding: 10px 10px 10px 5px !important;
     }
@@ -643,6 +656,11 @@ p {
     .reply_item {
         padding-right: 36px !important;
         padding-left: 0px !important;
+        margin-left: 2rem !important;
+    }
+
+    .MuiCollapse-entered {
+        padding: 0;
     }
 
     body .scene {
@@ -757,6 +775,10 @@ p {
     content: '...';
 }
 
+.MuiCollapse-entered {
+    padding: 1rem;
+}
+
 .comment_less_more {
     color: #007bff;
     margin-left: 3px;
@@ -765,3 +787,23 @@ p {
 .comment_rep_text {
     color: black;
 }
+
+.MuiAppBar-positionStatic {
+    position: static !important;
+}
+
+.MuiTab-root {
+    min-width: 105px !important;
+}
+
+.MuiTabs-flexContainer {
+    justify-content: center;
+}
+
+.MuiTab-wrapper {
+    display: inline-flex !important;
+}
+
+/* .mobileTabs {
+    display: none;
+} */

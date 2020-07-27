@@ -301,7 +301,7 @@ function SocialCard(props) {
                 style={{ marginBottom: 6 }}
               />
             ) : (
-              <div>
+              <>
                 <Link href={'/t/[community]'} as={`/t/${community.slug}`}>
                   <a>{community.name}</a>
                 </Link>
@@ -315,12 +315,12 @@ function SocialCard(props) {
                     as={
                       auth && auth.user && auth.user.username == user.userName
                         ? `/p/${user.userName}`
-                        : `u/${user.userName}`
+                        : `/u/${user.userName}`
                     }
                     href={
                       auth && auth.user && auth.user.username == user.userName
                         ? `/p/[username]`
-                        : `u/[username]`
+                        : `/u/[username]`
                     }
                   >
                     <a style={{ cursor: 'pointer' }}>
@@ -330,7 +330,7 @@ function SocialCard(props) {
                     </a>
                   </Link>
                 )}
-              </div>
+              </>
             )
           }
           subheader={createdDate && moment(createdDate).fromNow()}

@@ -169,13 +169,6 @@ export default function DrawerExample({
             ))}
         </List>
       </Drawer>
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: isOpen
-        })}
-      >
-        <div className={classes.drawerHeader} />
-      </main>
     </>
   );
 }

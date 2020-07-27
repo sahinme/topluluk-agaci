@@ -38,7 +38,6 @@ function CreatePost(props) {
     communities,
     router: { query },
   } = props;
-  console.log(props);
   return (
     <MainLayout>
       <Container>
