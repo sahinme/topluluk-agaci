@@ -1,20 +1,22 @@
-import React, { useState } from "react";
-import "core-js-pure/stable";
-import "regenerator-runtime/runtime";
-import { DropzoneArea } from "material-ui-dropzone";
-import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import PostAddIcon from "@material-ui/icons/PostAdd";
-import ImageIcon from "@material-ui/icons/Image";
-import LinkIcon from "@material-ui/icons/Link";
-import { Editor } from "@tinymce/tinymce-react";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import { Button } from "@material-ui/core";
-import LinkInput from "./LinkPreview/linkInput";
+import React, { useState } from 'react';
+import 'core-js-pure/stable';
+import 'regenerator-runtime/runtime';
+import { DropzoneArea } from 'material-ui-dropzone';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import YouTubeIcon from '@material-ui/icons/YouTube';
+import PostAddIcon from '@material-ui/icons/PostAdd';
+import ImageIcon from '@material-ui/icons/Image';
+import LinkIcon from '@material-ui/icons/Link';
+import { Editor } from '@tinymce/tinymce-react';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import { Button, TextField } from '@material-ui/core';
+import LinkInput from './LinkPreview/linkInput';
+import ReactPlayer from 'react-player';
 
 function TabPanel(props) {
   const {
@@ -39,7 +41,7 @@ function TabPanel(props) {
           <Typography> {children} </Typography>
           <div className="two_but">
             <Button
-              style={{ marginRight: "0.5rem" }}
+              style={{ marginRight: '0.5rem' }}
               variant="outlined"
               color="primary"
             >
@@ -63,34 +65,36 @@ function TabPanel(props) {
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired
 };
 
 function a11yProps(index) {
   return {
     id: `scrollable-force-tab-${index}`,
-    "aria-controls": `scrollable-force-tabpanel-${index}`,
+    'aria-controls': `scrollable-force-tabpanel-${index}`
   };
 }
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: "1rem",
+    marginTop: '1rem',
     flexGrow: 1,
-    width: "100%",
-    backgroundColor: theme.palette.background.paper,
-  },
+    width: '100%',
+    backgroundColor: theme.palette.background.paper
+  }
 }));
 
 export default function TabPanelList(props) {
   const classes = useStyles();
   const [tabValue, setValue] = useState(0);
   const [link, setLink] = useState(null);
+  const [youtubeLink, setYoutubeLink] = useState(null);
   const [image, setImage] = useState(null);
   const [postContents, setContents] = useState({
-    post: "",
-    imageOrVideo: "",
-    link: "",
+    post: '',
+    imageOrVideo: '',
+    link: '',
+    youtube: ''
   });
 
   const handleTabChange = (event, newValue) => {
@@ -111,9 +115,11 @@ export default function TabPanelList(props) {
   };
 
   const contentValidation = (community) => {
-    if (tabValue === 0 && postContents.post === "") return false;
-    else if (tabValue === 1 && postContents.imageOrVideo === "") return false;
-    else if (tabValue === 2 && postContents.link === "") return false;
+    if (tabValue === 0 && postContents.post === '') return false;
+    else if (tabValue === 1 && postContents.imageOrVideo === '') return false;
+    else if (tabValue === 2 && postContents.link === '') return false;
+    else if ((tabValue === 3 && postContents.youtube === '') || !youtubeLink)
+      return false;
     else if (!community) return false;
     else return true;
   };
@@ -128,7 +134,7 @@ export default function TabPanelList(props) {
       case 1:
         values.content = postContents.imageOrVideo;
         values.contentFile = image;
-        if (image.type == "video/mp4" || image.type == "video/mp3") {
+        if (image.type == 'video/mp4' || image.type == 'video/mp3') {
           values.contentType = 20;
         } else {
           values.contentType = 10;
@@ -138,6 +144,11 @@ export default function TabPanelList(props) {
         values.content = postContents.link;
         values.linkUrl = link;
         values.contentType = 50;
+        break;
+      case 3:
+        values.content = postContents.youtube;
+        values.linkUrl = youtubeLink;
+        values.contentType = 60;
         break;
       default:
         return;
@@ -170,6 +181,7 @@ export default function TabPanelList(props) {
           <Tab label="Gonderi" icon={<PostAddIcon />} {...a11yProps(0)} />
           <Tab label="Resim & Video" icon={<ImageIcon />} {...a11yProps(1)} />
           <Tab label="Link" icon={<LinkIcon />} {...a11yProps(2)} />
+          <Tab label="Youtube" icon={<YouTubeIcon />} {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <TabPanel
@@ -185,15 +197,15 @@ export default function TabPanelList(props) {
             height: 300,
             menubar: true,
             plugins: [
-              "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-              "searchreplace wordcount visualblocks visualchars code fullscreen",
-              "insertdatetime nonbreaking save table contextmenu directionality",
-              "emoticons template paste textpattern paste code",
+              'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+              'searchreplace wordcount visualblocks visualchars code fullscreen',
+              'insertdatetime nonbreaking save table contextmenu directionality',
+              'emoticons template paste textpattern paste code'
             ],
             toolbar1:
-              "undo redo | styleselect | emoticons | bold italic | bullist numlist outdent indent | link image",
+              'undo redo | styleselect | emoticons | bold italic | bullist numlist outdent indent | link image'
           }}
-          onEditorChange={(value) => handleEditorChange(value, "post")}
+          onEditorChange={(value) => handleEditorChange(value, 'post')}
           rows={4}
         />
       </TabPanel>
@@ -209,21 +221,21 @@ export default function TabPanelList(props) {
             height: 250,
             menubar: true,
             plugins: [
-              "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-              "searchreplace wordcount visualblocks visualchars code fullscreen",
-              "insertdatetime nonbreaking save table contextmenu directionality",
-              "emoticons template paste textpattern paste code",
+              'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+              'searchreplace wordcount visualblocks visualchars code fullscreen',
+              'insertdatetime nonbreaking save table contextmenu directionality',
+              'emoticons template paste textpattern paste code'
             ],
             toolbar1:
-              "undo redo | styleselect | emoticons | bold italic | bullist numlist outdent indent | link image",
+              'undo redo | styleselect | emoticons | bold italic | bullist numlist outdent indent | link image'
           }}
-          onEditorChange={(value) => handleEditorChange(value, "imageOrVideo")}
+          onEditorChange={(value) => handleEditorChange(value, 'imageOrVideo')}
           rows={4}
         />
         <DropzoneArea
           filesLimit={1}
-          acceptedFiles={["image/*,video/mp4,video/mp3,application/*"]}
-          dropzoneText={"Dosyanızı sürükleyin bırakın"}
+          acceptedFiles={['image/*,video/mp4,video/mp3,application/*']}
+          dropzoneText={'Dosyanızı sürükleyin bırakın'}
           onChange={(files) => handleImageUpload(files)}
           maxFileSize={15000000}
           showFileNames
@@ -245,17 +257,50 @@ export default function TabPanelList(props) {
             height: 250,
             menubar: true,
             plugins: [
-              "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-              "searchreplace wordcount visualblocks visualchars code fullscreen",
-              "insertdatetime nonbreaking save table contextmenu directionality",
-              "emoticons template paste textpattern paste code",
+              'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+              'searchreplace wordcount visualblocks visualchars code fullscreen',
+              'insertdatetime nonbreaking save table contextmenu directionality',
+              'emoticons template paste textpattern paste code'
             ],
-            toolbar1: "styleselect | emoticons | bold italic",
+            toolbar1: 'styleselect | emoticons | bold italic'
           }}
-          onEditorChange={(value) => handleEditorChange(value, "link")}
+          onEditorChange={(value) => handleEditorChange(value, 'link')}
           rows={4}
         />
         <LinkInput onChange={handleLinkChange} />
+      </TabPanel>
+      <TabPanel
+        community={community}
+        submitValidation={contentValidation}
+        onSubmit={handleSubmit}
+        value={tabValue}
+        index={3}
+      >
+        <Editor
+          init={{
+            height: 250,
+            menubar: true,
+            plugins: [
+              'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+              'searchreplace wordcount visualblocks visualchars code fullscreen',
+              'insertdatetime nonbreaking save table contextmenu directionality',
+              'emoticons template paste textpattern paste code'
+            ],
+            toolbar1: 'styleselect | emoticons | bold italic'
+          }}
+          onEditorChange={(value) => handleEditorChange(value, 'youtube')}
+          rows={4}
+        />
+        <TextField
+          onChange={(e) => setYoutubeLink(e.target.value)}
+          style={{ width: '100%', marginTop: '1rem' }}
+          placeholder="Youtube video linkini yapıştırınız"
+        />
+        {youtubeLink && (
+          <div className="player-wrapper">
+            <ReactPlayer className="react-player" controls url={youtubeLink} />
+          </div>
+        )}
       </TabPanel>
     </div>
   );

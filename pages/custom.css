@@ -722,6 +722,7 @@ p {
 .player-wrapper {
     position: relative;
     padding-top: 56.25%;
+    margin: 10px;
 }
 
 .react-player {
@@ -822,4 +823,8 @@ p {
 
 .com_add_but {
     margin-right: 10px !important;
+}
+
+iframe {
+    border-radius: 10px;
 }

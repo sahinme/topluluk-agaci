@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
-import { useRouter } from "next/router";
-import { NextSeo } from "next-seo";
-import { Row, Col, Container } from "react-bootstrap";
-import PopularTags from "../../components/PopularTags";
-import MainLayout from "../../components/mainLayout";
-import { getPostDetailRequest, votePostRequest } from "../../lib/posts/actions";
-import { connect } from "react-redux";
-import { Helmet } from "react-helmet";
-import { htmlToText } from "../../lib/helpers";
-import PostDetailCard from "../../components/PostDetailCard";
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { NextSeo } from 'next-seo';
+import { Row, Col, Container } from 'react-bootstrap';
+import PopularTags from '../../components/PopularTags';
+import MainLayout from '../../components/mainLayout';
+import { getPostDetailRequest, votePostRequest } from '../../lib/posts/actions';
+import { connect } from 'react-redux';
+import { Helmet } from 'react-helmet';
+import { htmlToText } from '../../lib/helpers';
+import PostDetailCard from '../../components/PostDetailCard';
 
 function PostDetail(props) {
   const { post } = props;
@@ -22,12 +22,12 @@ function PostDetail(props) {
 
   const featuredImage = {
     url: post && post.contentPath,
-    alt: post && post.slug,
+    alt: post && post.slug
   };
 
   const onVote = (values) => {
     const { votePost } = props;
-    values.page = "post_detail";
+    values.page = 'post_detail';
     votePost(values);
   };
 
@@ -43,55 +43,35 @@ function PostDetail(props) {
         <NextSeo
           title={
             post.community.name +
-            " salladı: " +
+            ' salladı: ' +
             handleTitle(post.content) +
-            " | Saalla"
+            ' | Saalla'
           }
           description={
             post.community.name +
-              " salladı: " +
-              htmlToText(post.content).slice(0, 100) || ""
+              ' salladı: ' +
+              htmlToText(post.content).slice(0, 100) || ''
           }
           canonical={`https://saalla.com/${post.community.slug}/${post.slug}`}
           openGraph={{
             url: `https://saalla.com/${post.community.slug}/${post.slug}`,
             title:
               post.community.name +
-              " salladı: " +
+              ' salladı: ' +
               handleTitle(post.content) +
-              " | Saalla",
+              ' | Saalla',
             description:
               post.community.name +
-                " salladı: " +
-                htmlToText(post.content).slice(0, 100) || "",
-            images: post.contentType === 10 ? [featuredImage] : [],
+                ' salladı: ' +
+                htmlToText(post.content).slice(0, 100) || '',
+            images: post.contentType === 10 ? [featuredImage] : []
           }}
         />
       )}
-      {/* <Head>
-        {post && post.community && (
-          <title>
-            {post.community.name +
-              " salladı: " +
-              htmlToText(post.content) +
-              " | Saalla"}
-          </title>
-        )}
-        {post && post.community && (
-          <meta
-            name="description"
-            content={
-              post.community.name +
-                " salladı: " +
-                htmlToText(post.content).slice(0, 100) || ""
-            }
-          />
-        )}
-      </Head> */}
       <Container>
-        <Row style={{ marginTop: "1rem" }}>
+        <Row style={{ marginTop: '1rem' }}>
           <Col
-            style={{ paddingBottom: "10px", paddingTop: "20px" }}
+            style={{ paddingBottom: '10px', paddingTop: '20px' }}
             xs={12}
             md={8}
           >
@@ -113,9 +93,9 @@ function PostDetail(props) {
               />
             )}
           </Col>
-          <Col style={{ paddingBottom: "10px" }} xs={12} md={4}>
+          <Col style={{ paddingBottom: '10px' }} xs={12} md={4}>
             <div
-              style={{ position: "-webkit-sticky", position: "sticky", top: 0 }}
+              style={{ position: '-webkit-sticky', position: 'sticky', top: 0 }}
             >
               <PopularTags />
             </div>
@@ -142,11 +122,11 @@ function PostDetail(props) {
 
 const mapDispatchToProps = (dispatch) => ({
   getPostDetail: (payload) => dispatch(getPostDetailRequest(payload)),
-  votePost: (payload) => dispatch(votePostRequest(payload)),
+  votePost: (payload) => dispatch(votePostRequest(payload))
 });
 
 const mapStateToProps = (state) => ({
-  post: state.postDetail.data,
+  post: state.postDetail.data
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);

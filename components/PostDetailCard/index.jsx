@@ -120,6 +120,13 @@ function PostDetailCard(props) {
           <ReactPlayer className="react-player" controls url={img} />
         </div>
       );
+    }
+    if (contentType == 60) {
+      return (
+        <div className="player-wrapper">
+          <ReactPlayer className="react-player" controls url={linkUrl} />
+        </div>
+      );
     } else {
       return (
         <div className={classes.imgContainer}>

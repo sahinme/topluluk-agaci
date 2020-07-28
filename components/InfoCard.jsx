@@ -25,13 +25,13 @@ export default function InfoCard(props) {
     <div className={classes.root}>
       <Paper className={classes.tag_card}>
         <Row className="com_desc_container">
-          <b className="info_card_title">Hakkinda</b>
+          <b className="info_card_title">Hakkında</b>
         </Row>
         <Row>
           <p className="com_desc">{description}</p>
         </Row>
         <Row className="com_desc_container" style={{ display: 'grid' }}>
-          <b className="info_card_title">Moderatorler</b>
+          <b className="info_card_title">Moderatörler</b>
         </Row>
         <Row style={{ padding: '1rem', display: 'grid' }}>
           {moderators &&

@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { withRouter } from "next/router";
-import { connect } from "react-redux";
-import { Row, Col, Container } from "react-bootstrap";
-import PopularTags from "../components/PopularTags";
-import TabPanelList from "../components/tabPanel";
-import ComboBox from "../components/AutoComplete";
-import MainLayout from "../components/mainLayout";
-import { getUserCommunitiesRequest } from "../lib/community/actions";
-import { createPostRequest } from "../lib/posts/actions";
-import { getParameterByName } from "../lib/helpers";
+import React, { useState, useEffect } from 'react';
+import { withRouter } from 'next/router';
+import { connect } from 'react-redux';
+import { Row, Col, Container } from 'react-bootstrap';
+import PopularTags from '../components/PopularTags';
+import TabPanelList from '../components/tabPanel';
+import ComboBox from '../components/AutoComplete';
+import MainLayout from '../components/mainLayout';
+import { getUserCommunitiesRequest } from '../lib/community/actions';
+import { createPostRequest } from '../lib/posts/actions';
+import { getParameterByName } from '../lib/helpers';
 
 function CreatePost(props) {
   const [community, setCommunity] = useState(null);
@@ -16,7 +16,7 @@ function CreatePost(props) {
     const {
       getUserCommunities,
       communities,
-      router: { query },
+      router: { query }
     } = props;
     getUserCommunities({});
     if (query && query.is) {
@@ -36,14 +36,14 @@ function CreatePost(props) {
 
   const {
     communities,
-    router: { query },
+    router: { query }
   } = props;
   return (
     <MainLayout>
       <Container>
-        <Row style={{ marginTop: "1rem" }}>
+        <Row style={{ marginTop: '1rem' }}>
           <Col
-            style={{ paddingBottom: "10px", paddingTop: "20px" }}
+            style={{ paddingBottom: '10px', paddingTop: '20px' }}
             xs={12}
             md={8}
           >
@@ -60,9 +60,9 @@ function CreatePost(props) {
             />
             <TabPanelList community={community} onSubmit={handleSubmit} />
           </Col>
-          <Col style={{ paddingBottom: "10px" }} xs={12} md={4}>
+          <Col style={{ paddingBottom: '10px' }} xs={12} md={4}>
             <div
-              style={{ position: "-webkit-sticky", position: "sticky", top: 0 }}
+              style={{ position: '-webkit-sticky', position: 'sticky', top: 0 }}
             >
               <PopularTags />
             </div>
@@ -75,11 +75,11 @@ function CreatePost(props) {
 
 const mapDispatchToProps = (dispatch) => ({
   getUserCommunities: (payload) => dispatch(getUserCommunitiesRequest(payload)),
-  createPost: (payload) => dispatch(createPostRequest(payload)),
+  createPost: (payload) => dispatch(createPostRequest(payload))
 });
 
 const mapStateToProps = (state) => ({
-  communities: state.userCommunities.data,
+  communities: state.userCommunities.data
 });
 
 export default connect(
