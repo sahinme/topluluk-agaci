@@ -14,7 +14,7 @@ const SEO = {
     description,
     images: [
       {
-        url: 'https://saalla.com/favicon2.png',
+        url: 'https://saalla.com/brand.jfif',
         alt: title,
         width: 1280,
         height: 720
