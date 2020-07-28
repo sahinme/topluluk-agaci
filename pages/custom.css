@@ -792,18 +792,32 @@ p {
     position: static !important;
 }
 
-.MuiTab-root {
-    min-width: 105px !important;
-}
-
-.MuiTabs-flexContainer {
-    justify-content: center;
-}
-
-.MuiTab-wrapper {
-    display: inline-flex !important;
-}
-
 /* .mobileTabs {
     display: none;
 } */
+.salla_text {
+    font-family: cursive;
+    margin-left: 1rem;
+    font-size: 1.3rem;
+}
+
+.salla_box_button {
+    color: rgba(0, 0, 0, 0.54) !important;
+}
+
+.salla_box_actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around !important;
+    border-top: 1px solid rgba(0, 0, 0, .15);
+    padding: 4px 0;
+}
+
+.salla_pen {
+    margin: 8px 16px 8px 0;
+    padding: 0 12px;
+    font-size: 1.6rem;
+    width: 100%;
+    max-width: none;
+    justify-content: left !important;
+}

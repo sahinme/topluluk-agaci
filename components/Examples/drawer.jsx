@@ -109,7 +109,7 @@ export default function DrawerExample({
           <Link href="/">
             <img
               style={{ width: '7rem', marginRight: '1rem' }}
-              src={logo}
+              src="/saalla-red.png"
               alt=""
             />
           </Link>

@@ -19,6 +19,8 @@ import CreatePostTab from '../CreatePostTab';
 import CustomizedSnackbars from '../Snackbar';
 import { readLocalStorage } from '../../lib/helpers';
 import { parseCookies } from 'nookies';
+import SidebarAd from '../sidebarAd';
+import CreatePostBox from '../CreatePostBox';
 
 function Home(props) {
   const [pageNumber, setNumber] = useState(1);
@@ -81,11 +83,12 @@ function Home(props) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Container>
-        <Row style={{ marginTop: '1rem' }}>
+        {/*  <Row style={{ marginTop: '1rem' }}>
           <Col xs={12} md={12}>
             <CreatePostTab user={auth.user} />
+           
           </Col>
-        </Row>
+        </Row> */}
         <Row>
           <Col
             style={{
@@ -95,7 +98,8 @@ function Home(props) {
             xs={12}
             md={8}
           >
-            <b>Populer Sallamalar</b>
+            <CreatePostBox />
+            {/*  <b>Populer Sallamalar</b> */}
           </Col>
         </Row>
         <Row style={{ flexWrap: 'wrap-reverse' }}>
@@ -149,6 +153,7 @@ function Home(props) {
               style={{ position: '-webkit-sticky', position: 'sticky', top: 0 }}
             >
               <PopularTags />
+              <SidebarAd />
             </div>
           </Col>
         </Row>

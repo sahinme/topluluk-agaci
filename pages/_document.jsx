@@ -44,8 +44,13 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"
           />
-          <link rel="shortcut icon" href="/favicon.png" />
-          <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+          <link rel="shortcut icon" href="/favicon2.png" />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon2.png"
+          />
           <style jsx global>
             {`
               html,
