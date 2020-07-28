@@ -10,11 +10,11 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          {/*  <script
+          <script
             data-ad-client="ca-pub-7573250938739874"
             async
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-          ></script> */}
+          ></script>
           <script
             async
             src={`https://www.googletagmanager.com/gtag/js?id=UA-169270484-1`}
