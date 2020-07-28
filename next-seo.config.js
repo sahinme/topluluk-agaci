@@ -14,7 +14,7 @@ const SEO = {
     description,
     images: [
       {
-        url: 'https://saalla.com/favicon.png',
+        url: 'https://saalla.com/favicon2.png',
         alt: title,
         width: 1280,
         height: 720
