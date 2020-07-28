@@ -305,6 +305,9 @@ function HeaderExample(props) {
             <MenuIcon />
           </IconButton>
           <Link href="/">
+            <img className="mobile_logo" src="/favicon2.png" />
+          </Link>
+          <Link href="/">
             <img
               style={{ cursor: 'pointer' }}
               className={classes.title}
@@ -332,11 +335,10 @@ function HeaderExample(props) {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <Button
-              style={{ marginRight: '10px' }}
               onClick={onCreateCommunity}
               variant="contained"
               color="primary"
-              //className="com_add"
+              className="com_add_but"
             >
               Topluluk Aç
             </Button>
