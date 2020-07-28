@@ -12,6 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import { IconButton, Divider } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Link from 'next/link';
+import { isLogged } from '../lib/helpers';
+import { useRouter } from 'next/router';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,47 +34,51 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CreatePostBox() {
   const classes = useStyles();
+
+  const router = useRouter();
+
+  const handleClick = () => {
+    isLogged() ? router.push('/salla') : router.push('/giris-yap');
+  };
   return (
-    <Link href="/salla">
-      <Card className={classes.root}>
-        <CardContent>
-          <IconButton
-            className="salla_pen"
-            text
-            aria-label="delete" /* className={classes.margin} */
-          >
-            <BorderColorTwoToneIcon fontSize="default" />{' '}
-            <span className="salla_text">sallamaya başla</span>
-          </IconButton>
-        </CardContent>
-        <Divider />
-        <CardActions
-          className="salla_box_actions"
-          style={{ justifyContent: 'space-between' }}
+    <Card onClick={handleClick} className={classes.root}>
+      <CardContent>
+        <IconButton
+          className="salla_pen"
+          text
+          aria-label="delete" /* className={classes.margin} */
         >
-          <Button
-            className="salla_box_button"
-            size="large"
-            startIcon={<ImageOutlinedIcon style={{ color: 'blue' }} />}
-          >
-            Resim
-          </Button>
-          <Button
-            size="large"
-            className="salla_box_button"
-            startIcon={<VideoCallOutlinedIcon style={{ color: '#ef7e37' }} />}
-          >
-            Video
-          </Button>
-          <Button
-            size="large"
-            className="salla_box_button"
-            startIcon={<LinkOutlinedIcon style={{ color: '#2de117' }} />}
-          >
-            Link
-          </Button>
-        </CardActions>
-      </Card>
-    </Link>
+          <BorderColorTwoToneIcon fontSize="default" />{' '}
+          <span className="salla_text">sallamaya başla</span>
+        </IconButton>
+      </CardContent>
+      <Divider />
+      <CardActions
+        className="salla_box_actions"
+        style={{ justifyContent: 'space-between' }}
+      >
+        <Button
+          className="salla_box_button"
+          size="large"
+          startIcon={<ImageOutlinedIcon style={{ color: 'blue' }} />}
+        >
+          Resim
+        </Button>
+        <Button
+          size="large"
+          className="salla_box_button"
+          startIcon={<VideoCallOutlinedIcon style={{ color: '#ef7e37' }} />}
+        >
+          Video
+        </Button>
+        <Button
+          size="large"
+          className="salla_box_button"
+          startIcon={<LinkOutlinedIcon style={{ color: '#2de117' }} />}
+        >
+          Link
+        </Button>
+      </CardActions>
+    </Card>
   );
 }

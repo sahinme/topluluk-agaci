@@ -12,7 +12,13 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { InputLabel, Select, MenuItem } from '@material-ui/core';
+import {
+  InputLabel,
+  Select,
+  MenuItem,
+  FormControlLabel,
+  Checkbox
+} from '@material-ui/core';
 import { signUpRequest } from '../lib/auth/actions';
 import { setErrorRequest } from '../lib/error/actions';
 
@@ -182,6 +188,12 @@ function SignUp(props) {
               <MenuItem value="N">Salla Bosver</MenuItem>
             </Select>
           </Grid>
+        </Grid>
+        <Grid style={{ marginTop: '15px' }} item xs={12}>
+          <Checkbox value="allowExtraEmails" color="primary" />
+          <a href="https://saalla.com/policy" target="_blank">
+            saalla kullanıcı sözleşmesini okudum ve kabul ediyorum
+          </a>
         </Grid>
         <Button
           onClick={handleSubmit}

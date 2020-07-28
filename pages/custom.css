@@ -821,7 +821,5 @@ p {
 }
 
 .com_add_but {
-    margin-top: 1rem;
-    margin-right: 10px;
-    margin-bottom: 1rem;
+    margin-right: 10px !important;
 }

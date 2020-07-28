@@ -16,6 +16,7 @@ import { votePostRequest } from '../../lib/posts/actions';
 import Loader from '../../components/Loader';
 import { clearStoreRequest } from '../../lib/commonActions';
 import CreatePostTab from '../../components/CreatePostTab';
+import CreatePostBox from '../../components/CreatePostBox';
 import SocialCard from '../../components/SocialCard';
 import { parseCookies } from 'nookies';
 import { readLocalStorage } from '../../lib/helpers';
@@ -149,11 +150,20 @@ function CommunityPage(props) {
         </Row>
         <Container style={{ marginTop: '1rem' }}>
           <Row>
+            <Col
+              style={{
+                paddingBottom: '4px',
+                paddingTop: '20px'
+              }}
+              xs={12}
+              md={8}
+            >
+              <CreatePostBox />
+              {/*  <b>Populer Sallamalar</b> */}
+            </Col>
+          </Row>
+          <Row>
             <Col xs={12} md={12}>
-              <CreatePostTab
-                slug={community.slug}
-                user={readLocalStorage('user')}
-              />
               {isModeratorThis() && (
                 <div style={{ display: 'flex' }}>
                   <p>Bu topluluğun moderatörüsün.</p>
