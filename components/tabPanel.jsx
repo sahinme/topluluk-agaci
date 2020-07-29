@@ -118,8 +118,7 @@ export default function TabPanelList(props) {
     if (tabValue === 0 && postContents.post === '') return false;
     else if (tabValue === 1 && postContents.imageOrVideo === '') return false;
     else if (tabValue === 2 && postContents.link === '') return false;
-    else if ((tabValue === 3 && postContents.youtube === '') || !youtubeLink)
-      return false;
+    else if (tabValue === 3 && postContents.youtube === '') return false;
     else if (!community) return false;
     else return true;
   };
