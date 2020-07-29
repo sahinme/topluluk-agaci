@@ -338,7 +338,7 @@ function HeaderExample(props) {
               onClick={onCreateCommunity}
               variant="contained"
               color="primary"
-              className="com_add_but"
+              className={auth.data.token ? 'com_add_but_out' : 'com_add_but'}
             >
               Topluluk Aç
             </Button>

@@ -825,6 +825,12 @@ p {
     margin-right: 10px !important;
 }
 
+.com_add_but_out {
+    margin-right: 10px !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+
 iframe {
     border-radius: 10px;
 }
