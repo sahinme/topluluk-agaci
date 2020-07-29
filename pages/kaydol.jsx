@@ -61,10 +61,11 @@ function SignUp(props) {
       props.clearErrors();
     };
   }, []);
-  const [values, setValue] = useState({
+  const [payload, setPayload] = useState({
     username: '',
     emailAddress: '',
     password: '',
+    policy: false,
     gender: ''
   });
   const [errors, setErrors] = useState({ email: false, username: false });
@@ -73,19 +74,23 @@ function SignUp(props) {
     if (input.id === 'emailAddress') {
       validateEmail(input.value);
     }
-    const currentValues = values;
+    const currentValues = payload;
     currentValues[input.id] = input.value;
-    setValue(currentValues);
+    setPayload(currentValues);
   };
 
   const handleUsername = (e) => {
-    values.username = e.target.value;
-    setValue(values);
+    payload.username = e.target.value;
+    setPayload(payload);
     validateUsername(e.target.value);
   };
 
   const onselectChange = (e) => {
-    setValue({ ...values, gender: e.target.value });
+    setPayload({ ...payload, gender: e.target.value });
+  };
+
+  const handleCheck = () => {
+    setPayload({ ...payload, policy: !payload.policy });
   };
 
   const validateEmail = (email) => {
@@ -107,10 +112,10 @@ function SignUp(props) {
   const classes = useStyles();
 
   const handleSubmit = () => {
-    const payload = { ...values };
-    if (payload.gender == '') payload.gender = 'N';
+    const newPayload = { ...payload };
+    if (newPayload.gender == '') newPayload.gender = 'N';
     const { signUp } = props;
-    signUp(payload);
+    signUp(newPayload);
   };
 
   return (
@@ -179,7 +184,7 @@ function SignUp(props) {
               style={{ width: '50%' }}
               labelId="demo-simple-select-outlined-label"
               id="gender"
-              value={values.gender}
+              value={payload.gender}
               onChange={onselectChange}
               label="Age"
             >
@@ -190,7 +195,12 @@ function SignUp(props) {
           </Grid>
         </Grid>
         <Grid style={{ marginTop: '15px' }} item xs={12}>
-          <Checkbox value="allowExtraEmails" color="primary" />
+          <Checkbox
+            onClick={handleCheck}
+            id="policy"
+            name="policy"
+            color="primary"
+          />
           <a href="https://saalla.com/policy" target="_blank">
             saalla kullanıcı sözleşmesini okudum ve kabul ediyorum
           </a>
@@ -200,7 +210,12 @@ function SignUp(props) {
           fullWidth
           variant="contained"
           color="primary"
-          disabled={errors.email || errors.username || !values.emailAddress}
+          disabled={
+            errors.email ||
+            errors.username ||
+            !payload.emailAddress ||
+            !payload.policy
+          }
           className={classes.submit}
         >
           Kayıt Ol

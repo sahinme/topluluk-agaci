@@ -25,22 +25,22 @@ export default function AboutUs() {
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
-        <Grid style={{ padding: 0 }} item xs={12}>
+        <Grid style={{ padding: 0 }} item sm={12} xs={12}>
           <Paper className={classes.paper}>
             <img src="/topluluk.jpg" className={classes.image} />
           </Paper>
         </Grid>
-        <Grid style={{ padding: 0 }} item xs={12}>
+        <Grid style={{ padding: 0 }} item sm={12} xs={12}>
           <Paper className={classes.paper}>
             <img src="/topluluk-2.jpg" className={classes.image} />
           </Paper>
         </Grid>
-        <Grid style={{ padding: 0 }} item xs={12}>
+        <Grid style={{ padding: 0 }} item sm={12} xs={12}>
           <Paper className={classes.paper}>
             <img src="/moderator.jpg" className={classes.image} />
           </Paper>
         </Grid>
-        <Grid style={{ padding: 0 }} item xs={12}>
+        <Grid style={{ padding: 0 }} item sm={12} xs={12}>
           <Paper className={classes.paper}>
             <img src="/puan.jpg" className={classes.image} />
           </Paper>
