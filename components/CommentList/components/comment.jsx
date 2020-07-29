@@ -21,7 +21,7 @@ import {
   deleteCommentModeratorRequest
 } from '../../../lib/comment/actions';
 import { connect } from 'react-redux';
-import { readLocalStorage, isLogged } from '../../../lib/helpers';
+import { readLocalStorage, isLogged, urlify } from '../../../lib/helpers';
 import DeleteCommentPop from './deleteCommentPop';
 
 const useStyles = makeStyles((theme) => ({

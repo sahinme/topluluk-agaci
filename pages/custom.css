@@ -628,6 +628,10 @@ p {
       padding-left: 1rem; */
     }
 
+    .sidebar_col {
+        top: 0 !important
+    }
+
     .mobile_logo {
         margin-left: -5px;
         cursor: pointer;
@@ -833,4 +837,8 @@ p {
 
 iframe {
     border-radius: 10px;
+}
+
+.sidebar_col {
+    top: -10.5rem
 }

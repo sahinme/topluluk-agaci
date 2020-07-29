@@ -99,7 +99,6 @@ function Home(props) {
             md={8}
           >
             <CreatePostBox />
-            {/*  <b>Populer Sallamalar</b> */}
           </Col>
         </Row>
         <Row style={{ flexWrap: 'wrap-reverse' }}>
@@ -148,7 +147,7 @@ function Home(props) {
               ))}
             </InfiniteScroll>
           </Col>
-          <Col style={{ paddingBottom: '10px' }} xs={12} md={4}>
+          <Col className="sidebar_col" xs={12} md={4}>
             <div
               style={{ position: '-webkit-sticky', position: 'sticky', top: 0 }}
             >

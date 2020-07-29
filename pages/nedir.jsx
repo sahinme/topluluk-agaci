@@ -12,7 +12,8 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     textAlign: 'center',
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
+    padding: '3rem'
   },
   image: {
     width: '100%',
@@ -61,6 +62,12 @@ export default function AboutUs() {
                 <Button variant="contained" color="primary">
                   Keşfetmeye Başla
                 </Button>
+              </Link>
+              <Link href="/">
+                <img
+                  src="/logo2.png"
+                  style={{ width: '100px', cursor: 'pointer' }}
+                />
               </Link>
             </Paper>
           </Grid>
