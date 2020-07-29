@@ -166,10 +166,9 @@ function Reply(props) {
       </span>
     ) : (
       <span>
-        <Link href={`u/${username}`}>
-          {' '}
+        {/*   <Link href={`u/${username}`}>
           <a> {`@${username}  `}</a>
-        </Link>{' '}
+        </Link>{' '} */}
         <p className="comment_rep_text">{comment}</p>
         <span onClick={() => setReadMore(false)} className="comment_less_more">
           daha az

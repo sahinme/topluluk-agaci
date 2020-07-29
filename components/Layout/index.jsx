@@ -152,7 +152,10 @@ function Home(props) {
               style={{ position: '-webkit-sticky', position: 'sticky', top: 0 }}
             >
               <PopularTags />
-              {/* <SidebarAd /> */}
+              {/* <ul className="link_ul">
+                <li className="link_li">Nedir?</li>
+                <li className="link_li">Sözleşme</li>
+              </ul> */}
             </div>
           </Col>
         </Row>
