@@ -189,12 +189,12 @@ function SignUp(props) {
             </Select>
           </Grid>
         </Grid>
-        {/* <Grid style={{ marginTop: '15px' }} item xs={12}>
+        <Grid style={{ marginTop: '15px' }} item xs={12}>
           <Checkbox value="allowExtraEmails" color="primary" />
           <a href="https://saalla.com/policy" target="_blank">
             saalla kullanıcı sözleşmesini okudum ve kabul ediyorum
           </a>
-        </Grid> */}
+        </Grid>
         <Button
           onClick={handleSubmit}
           fullWidth
