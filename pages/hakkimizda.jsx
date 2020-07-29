@@ -8,12 +8,14 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1
   },
   paper: {
-    padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary
   },
   image: {
     width: '50%'
+  },
+  item_grid: {
+    padding: '0px !important'
   }
 }));
 
@@ -23,22 +25,22 @@ export default function AboutUs() {
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
-        <Grid item xs={12}>
+        <Grid style={{ padding: 0 }} item xs={12}>
           <Paper className={classes.paper}>
             <img src="/topluluk.jpg" className={classes.image} />
           </Paper>
         </Grid>
-        <Grid item xs={12}>
+        <Grid style={{ padding: 0 }} item xs={12}>
           <Paper className={classes.paper}>
             <img src="/topluluk-2.jpg" className={classes.image} />
           </Paper>
         </Grid>
-        <Grid item xs={12}>
+        <Grid style={{ padding: 0 }} item xs={12}>
           <Paper className={classes.paper}>
             <img src="/moderator.jpg" className={classes.image} />
           </Paper>
         </Grid>
-        <Grid item xs={12}>
+        <Grid style={{ padding: 0 }} item xs={12}>
           <Paper className={classes.paper}>
             <img src="/puan.jpg" className={classes.image} />
           </Paper>
