@@ -259,15 +259,28 @@ function Comment(props) {
       )}
       {item &&
         item.replies &&
-        item.replies.map((reply, index) => (
-          <Reply
-            slug={slug}
-            key={reply.id}
-            item={reply}
-            postId={props.postId}
-            commentId={item.id}
-          />
-        ))}
+        item.replies
+          .sort(function (a, b) {
+            var key1 = a.createdDateTime;
+            var key2 = b.createdDateTime;
+
+            if (key1 < key2) {
+              return -1;
+            } else if (key1 == key2) {
+              return 0;
+            } else {
+              return 1;
+            }
+          })
+          .map((reply, index) => (
+            <Reply
+              slug={slug}
+              key={reply.id}
+              item={reply}
+              postId={props.postId}
+              commentId={item.id}
+            />
+          ))}
       <Divider variant="inset" component="li" />
     </React.Fragment>
   );
