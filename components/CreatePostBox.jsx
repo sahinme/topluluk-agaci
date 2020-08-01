@@ -32,13 +32,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function CreatePostBox() {
+export default function CreatePostBox({ user, slug }) {
   const classes = useStyles();
-
   const router = useRouter();
 
   const handleClick = () => {
-    isLogged() ? router.push('/salla') : router.push('/giris-yap');
+    isLogged()
+      ? router.push(`/salla?is=${slug || ''}`)
+      : router.push('/giris-yap');
   };
   return (
     <Card onClick={handleClick} className={classes.root}>
