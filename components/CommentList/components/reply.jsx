@@ -10,6 +10,7 @@ import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutline
 import SendIcon from '@material-ui/icons/Send';
 import DeleteCommentPop from './deleteCommentPop';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import moment from 'moment';
 import { TextField, Button } from '@material-ui/core';
 import { useState } from 'react';
 import {
@@ -190,7 +191,18 @@ function Reply(props) {
     );
   };
 
-  const { item } = props;
+  const renderNameTime = (user, time) => {
+    return (
+      <div className="reply_info">
+        <Link href="/u/[username]" as={`/u/${user}`}>
+          <a> {user} </a>
+        </Link>
+        <span className="posted_by"> {moment(time).fromNow()} </span>
+      </div>
+    );
+  };
+
+  const { item, time } = props;
   const { parent } = item;
   return (
     item && (
@@ -200,7 +212,7 @@ function Reply(props) {
             <Avatar alt="User" src={item.replyUserInfo.profileImagePath} />
           </ListItemAvatar>
           <ListItemText
-            primary={item.replyUserInfo.userName}
+            primary={renderNameTime(item.replyUserInfo.userName, time)}
             secondary={
               readMore
                 ? handleContentLong(parent.parentReplyUserName, item.content)

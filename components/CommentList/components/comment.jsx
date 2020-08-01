@@ -23,6 +23,7 @@ import {
 import { connect } from 'react-redux';
 import { readLocalStorage, isLogged, urlify } from '../../../lib/helpers';
 import DeleteCommentPop from './deleteCommentPop';
+import moment from 'moment';
 
 const useStyles = makeStyles((theme) => ({
   likeIcon: {
@@ -175,26 +176,28 @@ function Comment(props) {
     );
   };
 
+  const renderNameTime = (user, time) => {
+    return (
+      <div className="reply_info">
+        <Link href="/u/[username]" as={`/u/${user}`}>
+          <a> {user} </a>
+        </Link>
+        <span className="posted_by"> {moment(time).fromNow()} </span>
+      </div>
+    );
+  };
+
   return (
     <React.Fragment key={item.id}>
       <ListItem className="comment_item" alignItems="flex-start">
         <ListItemAvatar>
-          <Avatar
-            alt="Remy Sharp"
-            src={item.commentUserInfo.profileImagePath}
-          />
+          <Avatar src={item.commentUserInfo.profileImagePath} />
         </ListItemAvatar>
         <ListItemText
-          primary={
-            <Link
-              href={`/u/${
-                item.commentUserInfo && item.commentUserInfo.userName
-              }`}
-              style={{ color: 'black' }}
-            >
-              {item.commentUserInfo && item.commentUserInfo.userName}
-            </Link>
-          }
+          primary={renderNameTime(
+            item.commentUserInfo && item.commentUserInfo.userName,
+            item.createdDateTime
+          )}
           secondary={
             readMore
               ? handleContentLong(item.content)
@@ -274,6 +277,7 @@ function Comment(props) {
           })
           .map((reply, index) => (
             <Reply
+              time={reply.createdDateTime}
               slug={slug}
               key={reply.id}
               item={reply}
