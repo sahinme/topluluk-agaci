@@ -35,12 +35,12 @@ function Home(props) {
       const payload = { data: { user, token }, error: null };
       setAuth(payload);
     }
-    const { getHomePosts, getUnauthorizedPosts } = props;
+    /* const { getHomePosts, getUnauthorizedPosts } = props;
     if (token) {
       getHomePosts({ pageNumber: 1, pageSize: 6, loderStart: true });
     } else {
       getUnauthorizedPosts({ pageNumber: 1, pageSize: 6, loderStart: true });
-    }
+    } */
     return () => {
       props.clearStore('home_posts');
     };

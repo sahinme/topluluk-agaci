@@ -1,57 +1,57 @@
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import { connect } from "react-redux";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import { Alert } from "reactstrap";
-import { loginRequest } from "../lib/auth/actions";
-import { setErrorRequest } from "../lib/error/actions";
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { connect } from 'react-redux';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import { Alert } from 'reactstrap';
+import { loginRequest } from '../lib/auth/actions';
+import { setErrorRequest } from '../lib/error/actions';
 //import Candles from "../components/candles";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(3)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
+    margin: theme.spacing(3, 0, 2)
+  }
 }));
 
 function SignIn(props) {
   useEffect(() => {
     const listener = (event) => {
-      if (event.code === "Enter" || event.code === "NumpadEnter") {
+      if (event.code === 'Enter' || event.code === 'NumpadEnter') {
         handleSubmit();
       }
     };
-    document.addEventListener("keydown", listener);
+    document.addEventListener('keydown', listener);
     return () => {
-      document.removeEventListener("keydown", listener);
+      document.removeEventListener('keydown', listener);
       props.clearErrors();
     };
   }, []);
 
   const [values, setValue] = useState({
     username: null,
-    password: null,
+    password: null
   });
 
   const handleChange = ({ currentTarget: input }) => {
@@ -78,9 +78,9 @@ function SignIn(props) {
         <Typography component="h1" variant="h5">
           Giriş Yap
         </Typography>
-        {props.errors.loginError && (
+        {props.errors.loginError ? (
           <Alert color="danger">Kullanıcı adı veya şifre yanlış!</Alert>
-        )}
+        ) : null}
 
         <Grid style={{ marginTop: 10 }} container spacing={2}>
           <Grid item xs={12}>
@@ -145,12 +145,12 @@ SignIn.getInitialProps = async ({ isServer, store }) => {
 
 const mapDispatchToProps = (dispatch) => ({
   login: (username, password) => dispatch(loginRequest(username, password)),
-  clearErrors: (errorType) => dispatch(setErrorRequest(errorType)),
+  clearErrors: (errorType) => dispatch(setErrorRequest(errorType))
 });
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  errors: state.errors,
+  errors: state.errors
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
