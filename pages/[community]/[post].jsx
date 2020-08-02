@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import { Row, Col, Container } from 'react-bootstrap';
@@ -9,15 +9,18 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { htmlToText } from '../../lib/helpers';
 import PostDetailCard from '../../components/PostDetailCard';
+import { parseCookies } from 'nookies';
 
 function PostDetail(props) {
   const { post } = props;
+  const [isMounted, setMount] = useState(false);
 
   const router = useRouter();
   useEffect(() => {
-    const { getPostDetail } = props;
+    /* const { getPostDetail } = props;
     const { query } = router;
-    getPostDetail({ slug: query.post, loaderStart: true });
+    getPostDetail({ slug: query.post, loaderStart: true }); */
+    setMount(true);
   }, []);
 
   const featuredImage = {
@@ -39,7 +42,7 @@ function PostDetail(props) {
 
   return (
     <MainLayout>
-      {post && post.community && (
+      {post && post.community && isMounted && (
         <NextSeo
           title={
             post.community.name +
@@ -106,7 +109,7 @@ function PostDetail(props) {
   );
 }
 
-/* PostDetail.getInitialProps = async (ctx) => {
+PostDetail.getInitialProps = async (ctx) => {
   await ctx.store.execSagaTasks(ctx.isServer, (dispatch) => {
     const { post } = ctx.query;
     dispatch(
@@ -114,11 +117,12 @@ function PostDetail(props) {
         slug: post,
         loaderStart: true,
         token: parseCookies(ctx).token,
+        isServer: true
       })
     );
   });
   return {};
-}; */
+};
 
 const mapDispatchToProps = (dispatch) => ({
   getPostDetail: (payload) => dispatch(getPostDetailRequest(payload)),
