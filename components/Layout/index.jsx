@@ -54,7 +54,8 @@ function Home(props) {
 
   const fetchMoreData = () => {
     const newNumber = pageNumber + 1;
-    const { getUnauthorizedPosts, getHomePosts } = props;
+		const { getUnauthorizedPosts, getHomePosts } = props;
+		console.log(auth.data.token)
     auth.data.token
       ? getHomePosts({
           pageNumber: newNumber,
@@ -86,7 +87,7 @@ function Home(props) {
         {/*  <Row style={{ marginTop: '1rem' }}>
           <Col xs={12} md={12}>
             <CreatePostTab user={auth.user} />
-           
+
           </Col>
         </Row> */}
         <Row>

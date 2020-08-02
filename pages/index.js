@@ -20,7 +20,8 @@ const mapDispatchToProps = dispatch => ({
 class Index extends React.Component {
   static async getInitialProps(ctx) {
     await ctx.store.execSagaTasks(ctx.isServer, (dispatch) => {
-      const cookies = parseCookies(ctx);
+			const cookies = parseCookies(ctx);
+			console.log('getInitialProps')
       cookies && cookies.token ?
         dispatch(
           getHomePostsRequest({
