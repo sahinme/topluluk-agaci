@@ -104,7 +104,9 @@ export default function NotificationList(props) {
             <React.Fragment>
               <ListItem
                 style={{ backgroundColor: !item.isRead && '#cacacaa6' }}
-                onClick={() => router.push(`/${item.targetName}`)}
+                onClick={() =>
+                  router.push('/[community]/[post]', `/${item.targetName}`)
+                }
                 button
               >
                 <ListItemIcon>
