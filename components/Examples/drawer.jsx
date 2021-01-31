@@ -109,7 +109,7 @@ export default function DrawerExample({
           <Link href="/">
             <img
               style={{ width: '7rem', marginRight: '1rem' }}
-              src="/saalla-red.png"
+              src={planetLogo}
               alt=""
             />
           </Link>
@@ -138,7 +138,7 @@ export default function DrawerExample({
                   <ListItem button key={item.name}>
                     <img
                       className={classes.avatarImg}
-                      src={item.logoPath || planetLogo}
+                      src={planetLogo}
                       alt=""
                     />
                     <ListItemText primary={item.name} />
