@@ -46,13 +46,13 @@ function PostDetail(props) {
         <NextSeo
           title={
             post.community.name +
-            ' salladı: ' +
+            ' yorum yaptı: ' +
             handleTitle(post.content) +
-            ' | Saalla'
+            ' | Topluluk Ağacı'
           }
           description={
             post.community.name +
-              ' salladı: ' +
+              ' yorum yaptı: ' +
               htmlToText(post.content).slice(0, 100) || ''
           }
           canonical={`https://saalla.com/${post.community.slug}/${post.slug}`}

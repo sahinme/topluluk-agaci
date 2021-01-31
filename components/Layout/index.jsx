@@ -35,12 +35,12 @@ function Home(props) {
       const payload = { data: { user, token }, error: null };
       setAuth(payload);
     }
-    /* const { getHomePosts, getUnauthorizedPosts } = props;
+    const { getHomePosts, getUnauthorizedPosts } = props;
     if (token) {
       getHomePosts({ pageNumber: 1, pageSize: 6, loderStart: true });
     } else {
       getUnauthorizedPosts({ pageNumber: 1, pageSize: 6, loderStart: true });
-    } */
+    }
     return () => {
       props.clearStore('home_posts');
     };
@@ -54,8 +54,8 @@ function Home(props) {
 
   const fetchMoreData = () => {
     const newNumber = pageNumber + 1;
-		const { getUnauthorizedPosts, getHomePosts } = props;
-		console.log(auth.data.token)
+    const { getUnauthorizedPosts, getHomePosts } = props;
+    console.log(auth.data.token);
     auth.data.token
       ? getHomePosts({
           pageNumber: newNumber,
@@ -75,7 +75,7 @@ function Home(props) {
   return (
     <div>
       <Head>
-        <title>Hep Beraber Sallıyoruz | Saalla</title>
+        <title>Topluluk Ağacı - Yeni sosyal medyanız</title>
         <meta
           name="description"
           content="Saalla, insanların ilgi alanlarına göre sallayabildikleri topluluk ağıdır. İlgilendiğiniz toplulukları bulun ve çevrimiçi bir topluluğun parçası olun!"

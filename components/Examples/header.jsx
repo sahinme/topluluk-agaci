@@ -311,7 +311,7 @@ function HeaderExample(props) {
             <img
               style={{ cursor: 'pointer' }}
               className={classes.title}
-              src="/saalla-5.png"
+              src="aa2.png"
             />
           </Link>
           <div className={classes.search}>

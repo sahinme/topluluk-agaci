@@ -41,7 +41,7 @@ function MainLayout(props) {
   return (
     <div>
       <Head>
-        <title>Hep Beraber Sallıyoruz | Saalla</title>
+        <title>Topluluk Ağacı | Yeni sosyal medyanız</title>
         <meta
           name="description"
           content="Saalla, insanların ilgi alanlarına göre sallayabildikleri topluluk ağıdır. İlgilendiğiniz toplulukları bulun ve çevrimiçi bir topluluğun parçası olun!"

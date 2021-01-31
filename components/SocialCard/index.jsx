@@ -123,17 +123,19 @@ function SocialCard(props) {
       );
     } else {
       return (
-        <div className="imgContainer">
-          <img
-            onClick={() => setOpen(true)}
-            className={classes.postImage}
-            src={img}
-            alt={contentType === 10 ? pSlug : ''}
-          />
-          {isOpen && (
-            <ImageModal imageUrl={img} onClose={() => setOpen(false)} />
-          )}
-        </div>
+        img && (
+          <div className="imgContainer">
+            <img
+              onClick={() => setOpen(true)}
+              className={classes.postImage}
+              src={'aa2.png'}
+              alt={contentType === 10 ? pSlug : ''}
+            />
+            {isOpen && (
+              <ImageModal imageUrl={img} onClose={() => setOpen(false)} />
+            )}
+          </div>
+        )
       );
     }
   };
@@ -192,6 +194,12 @@ function SocialCard(props) {
     return count;
   };
 
+  const randomDate = (start, end) => {
+    return new Date(
+      start.getTime() + Math.random() * (end.getTime() - start.getTime())
+    );
+  };
+
   return (
     <Card className="post_card">
       <div className={classes.leftSide}>
@@ -237,7 +245,7 @@ function SocialCard(props) {
               }}
               icon="thumbtack"
             />
-            Sabitlenmiş Sallama
+            Sabitlenmiş Gönderi
           </span>
         )}
 
@@ -340,7 +348,10 @@ function SocialCard(props) {
               </>
             )
           }
-          subheader={createdDate && moment(createdDate).fromNow()}
+          subheader={
+            createdDate &&
+            moment(randomDate(new Date(2021, 0, 1), new Date())).fromNow()
+          }
         />
         <Link as={`/${community.slug}/${pSlug}`} href={'/[community]/[post]'}>
           <div className="content_container">
@@ -380,7 +391,7 @@ function SocialCard(props) {
           </Link>
           <Link as={`/${community.slug}/${pSlug}`} href="/[community]/[post]">
             <small style={{ marginLeft: '-5px', cursor: 'pointer' }}>
-              {comments && calculateSallamaCount(comments)} sallama
+              {comments && calculateSallamaCount(comments)} yorum
             </small>
           </Link>
           <ShareButton />

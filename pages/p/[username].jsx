@@ -56,7 +56,7 @@ function Profile(props) {
             {profilePosts && profilePosts.length <= 0 && (
               <CustomizedSnackbars
                 onClick={() => router.push('/salla')}
-                message="Hiç gönderin yok. Hadi sallamaya başla"
+                message="Hiç gönderin yok. Hadi hemen gönderi oluştur"
                 type="warning"
                 style={{ cursor: 'pointer' }}
               />

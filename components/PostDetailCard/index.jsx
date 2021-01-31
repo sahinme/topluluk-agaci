@@ -170,6 +170,12 @@ function PostDetailCard(props) {
 
   const menuItems = [{ title: 'Şikayet Et', onClick: handleClose }];
 
+  const randomDate = (start, end) => {
+    return new Date(
+      start.getTime() + Math.random() * (end.getTime() - start.getTime())
+    );
+  };
+
   return (
     <React.Fragment>
       <Card className="post_card">
@@ -241,7 +247,10 @@ function PostDetailCard(props) {
                 </Link>
               </div>
             }
-            subheader={createdDate && moment(createdDate).fromNow()}
+            subheader={
+              createdDate &&
+              moment(randomDate(new Date(2021, 0, 1), new Date())).fromNow()
+            }
           />
           <CardContent style={{ padding: '5px 16px 16px 25px' }}>
             <div
@@ -259,7 +268,7 @@ function PostDetailCard(props) {
               <SportsHandballIcon style={{ padding: '3px' }} />
             </IconButton>
             <small style={{ marginLeft: '-5px' }}>
-              {comments && calculateSallamaCount(comments)} sallama
+              {comments && calculateSallamaCount(comments)} yorum
             </small>
             <IconButton aria-label="share">
               <ShareIcon style={{ padding: '3px' }}></ShareIcon>
@@ -269,7 +278,7 @@ function PostDetailCard(props) {
           <Collapse in={true} timeout="auto" unmountOnExit>
             <TextField
               id="comment"
-              label="Bu gönderiye salla"
+              label="Bu gönderiye yorum yap"
               multiline
               name="comment"
               onChange={handleChange}
@@ -285,7 +294,7 @@ function PostDetailCard(props) {
               onClick={handleSubmit}
               endIcon={<SendIcon />}
             >
-              Salla Gitsin
+              Gönderi oluştur
             </Button>
             <CommentList slug={slug} comments={comments} postId={id} />
           </Collapse>

@@ -66,7 +66,7 @@ export default function AddModeratorModal(props) {
             </ListItemAvatar>
             <ListItemText
               primary={selectedUser.username}
-              secondary={`Toplam sallamalar: ${selectedUser.postCount}`}
+              secondary={`Toplam gönderiler: ${selectedUser.postCount}`}
             />
           </ListItem>
         </Link>

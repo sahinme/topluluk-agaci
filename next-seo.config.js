@@ -1,4 +1,4 @@
-const title = 'Hep Beraber Sallıyoruz | Saalla ';
+const title = 'Topluluk Ağacı | Yeni sosyal medyanız ';
 const description =
   'Saalla, insanların ilgi alanlarına göre sallayabildikleri topluluk ağıdır. İlgilendiğiniz toplulukları bulun ve çevrimiçi bir topluluğun parçası olun!';
 

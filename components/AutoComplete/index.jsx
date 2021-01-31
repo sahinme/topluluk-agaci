@@ -60,7 +60,7 @@ export default function ComboBox({
         <Col style={{ display: 'flex', paddingLeft: '0px' }}>
           <img
             className={classes.avatarImg}
-            src={option.logoPath}
+            src={'aa2.png'}
             alt={option.name}
           />
           <div style={{ display: 'grid' }}>

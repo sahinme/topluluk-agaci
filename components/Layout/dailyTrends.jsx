@@ -80,7 +80,7 @@ function DailyTrends(props) {
             xs={12}
             md={8}
           >
-            <b>Populer Sallamalar</b>
+            <b>Populer Gönderiler</b>
           </Col>
         </Row>
         <Row style={{ flexWrap: 'wrap-reverse' }}>

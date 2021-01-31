@@ -159,7 +159,6 @@ function CommunityPage(props) {
               md={8}
             >
               <CreatePostBox slug={community.slug} />
-              {/*  <b>Populer Sallamalar</b> */}
             </Col>
           </Row>
           <Row>

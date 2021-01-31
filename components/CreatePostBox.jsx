@@ -50,7 +50,7 @@ export default function CreatePostBox({ user, slug }) {
           aria-label="delete" /* className={classes.margin} */
         >
           <BorderColorTwoToneIcon fontSize="default" />{' '}
-          <span className="salla_text">sallamaya başla</span>
+          <span className="salla_text">gönderi oluştur</span>
         </IconButton>
       </CardContent>
       <Divider />

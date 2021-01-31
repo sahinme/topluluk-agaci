@@ -21,7 +21,12 @@ import {
   deleteCommentModeratorRequest
 } from '../../../lib/comment/actions';
 import { connect } from 'react-redux';
-import { readLocalStorage, isLogged, urlify } from '../../../lib/helpers';
+import {
+  readLocalStorage,
+  isLogged,
+  urlify,
+  randomDate
+} from '../../../lib/helpers';
 import DeleteCommentPop from './deleteCommentPop';
 import moment from 'moment';
 
@@ -182,7 +187,10 @@ function Comment(props) {
         <Link href="/u/[username]" as={`/u/${user}`}>
           <a> {user} </a>
         </Link>
-        <span className="posted_by"> {moment(time).fromNow()} </span>
+        <span className="posted_by">
+          {' '}
+          {moment(randomDate(new Date(2021, 0, 1), new Date())).fromNow()}{' '}
+        </span>
       </div>
     );
   };
@@ -208,7 +216,7 @@ function Comment(props) {
       <div className="comment_icon_container">
         <CommentOutlinedIcon className={classes.commentIcon} />
         <a onClick={() => setOpen(!isOpen)}>
-          <p className="reply_text">{isOpen ? 'boşver' : 'salla'}</p>
+          <p className="reply_text">{isOpen ? 'boşver' : 'yorumla'}</p>
         </a>
         <FavoriteBorderOutlinedIcon
           className={
@@ -240,7 +248,7 @@ function Comment(props) {
         <div>
           <TextField
             id="comment"
-            label="Bu gönderiye salla"
+            label="Bu gönderiye yorum yap"
             multiline
             name="comment"
             onChange={handleChange}
@@ -277,7 +285,7 @@ function Comment(props) {
           })
           .map((reply, index) => (
             <Reply
-              time={reply.createdDateTime}
+              time={randomDate(new Date(2021, 0, 1), new Date())}
               slug={slug}
               key={reply.id}
               item={reply}
